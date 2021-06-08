@@ -1,0 +1,10 @@
+{
+    "name": "zheltikov/php-xhp",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Zheltikov\\PhpXhp\\": "src/"
+        }
+    },
+    "require": {}
+}
