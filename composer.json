@@ -6,5 +6,11 @@
             "Zheltikov\\PhpXhp\\": "src/"
         }
     },
-    "require": {}
+    "require": {},
+    "authors": [
+        {
+            "name": "Max Zheltikov",
+            "homepage": "https://github.com/zheltikov"
+        }
+    ]
 }
