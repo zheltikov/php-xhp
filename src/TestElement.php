@@ -2,22 +2,23 @@
 
 namespace Zheltikov\PhpXhp;
 
-class TestElement
+// use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
+use Zheltikov\PhpXhp\Core\Element;
+use Zheltikov\PhpXhp\Core\Node;
+
+class TestElement extends Element
 {
-    private string $text = '';
-
-    public function __construct(string $text = '')
+    /* protected static function __legacySerializedXHPChildrenDeclaration()
     {
-        $this->text = $text;
-    }
+        return [
+            LegacyExpressionType::ANY_QUANTITY()->getValue(),
+            null,
+            null,
+        ];
+    } */
 
-    public function render(): string
+    protected function render(): Node
     {
-        return '<p>' . \htmlspecialchars($this->text) . '</p>';
-    }
-
-    final public function __toString(): string
-    {
-        return $this->render();
+        return '<p>' . \htmlspecialchars($this->getAttribute('text')) . '</p>';
     }
 }
