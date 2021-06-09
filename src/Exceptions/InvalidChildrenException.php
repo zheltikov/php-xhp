@@ -1,7 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Exceptions;
 
+use Zheltikov\PhpXhp\Core\Node;
 use Zheltikov\PhpXhp\Exceptions\Exception;
 
 class InvalidChildrenException extends Exception
