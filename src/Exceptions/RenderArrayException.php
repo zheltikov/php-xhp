@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Exceptions;
 
 use Zheltikov\PhpXhp\Exceptions\Exception;
 
