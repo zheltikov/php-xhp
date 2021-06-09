@@ -23,6 +23,19 @@ class TestElement extends Element
 
     protected function render(): Node
     {
+        return new class extends Node {
+
+            public function toString(): string
+            {
+                // TODO: Implement toString() method.
+            }
+
+            protected function __flushSubtree(): \Zheltikov\PhpXhp\Core\Primitive
+            {
+                // TODO: Implement __flushSubtree() method.
+            }
+        };
+
         $para = new P(
             [],
             ['three']

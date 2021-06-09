@@ -87,7 +87,6 @@ abstract class Element extends Node
         }
 
         // render() must always (eventually) return primitive
-        // FIXME: mimic this
-        throw new \Facebook\XHP\CoreRenderException($this, $that);
+        throw new CoreRenderException($this, $that);
     }
 }
