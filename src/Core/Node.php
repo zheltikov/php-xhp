@@ -4,6 +4,7 @@ namespace Zheltikov\PhpXhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
 use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
+use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;

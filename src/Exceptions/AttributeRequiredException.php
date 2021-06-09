@@ -1,6 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Exceptions;
+
+use Zheltikov\PhpXhp\Core\Exception;
+use Zheltikov\PhpXhp\Core\Node;
 
 class AttributeRequiredException extends Exception
 {
