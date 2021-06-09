@@ -6,6 +6,7 @@ namespace Zheltikov\PhpXhp\Core;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
+use Zheltikov\PhpXhp\Lib\Vec;
 
 final class UseAfterRenderException extends \RuntimeException
 {

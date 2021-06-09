@@ -143,7 +143,7 @@ class ReflectionXHPAttribute
             case \Zheltikov\PhpXhp\Reflection\XHPAttributeType::TYPE_ENUM():
                 $out = 'enum {';
                 $out .= \Zheltikov\PhpXhp\Lib\Str::join(
-                    \Zheltikov\PhpXhp\Core\Vec::map(
+                    \Zheltikov\PhpXhp\Lib\Vec::map(
                         $this->getEnumValues(),
                         function ($x) {
                             return "'" . $x . "'";

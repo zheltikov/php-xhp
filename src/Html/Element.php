@@ -5,7 +5,7 @@ namespace Zheltikov\PhpXhp\Html;
 use Zheltikov\PhpXhp\Core\Primitive;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
-use Zheltikov\PhpXhp\Core\Vec;
+use Zheltikov\PhpXhp\Lib\Vec;
 use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
 
 /**

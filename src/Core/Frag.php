@@ -3,6 +3,7 @@
 namespace Zheltikov\PhpXhp\Core;
 
 use Zheltikov\PhpXhp\Lib\Str;
+use Zheltikov\PhpXhp\Lib\Vec;
 
 /**
  * An <x:frag /> is a transparent wrapper around any number of elements. When
