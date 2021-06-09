@@ -2,6 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
+use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 
@@ -23,6 +25,8 @@ class ChildValidation
     {
         static::$validateChildren = false;
     }
+
+    // -------------------------------------------------------------------------
 
     /**
      * @param mixed $x
@@ -54,5 +58,12 @@ class ChildValidation
         }
 
         return $x;
+    }
+
+    // -------------------------------------------------------------------------
+
+    public static function any_number_of(Constraint $a): AnyNumberOf
+    {
+        return new AnyNumberOf($a);
     }
 }
