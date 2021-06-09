@@ -21,7 +21,7 @@ class TestElement extends Element
     protected function render(): Node
     {
         return new P(
-            [], // ['...$' => $this], // attributes
+            ['...$' => $this], // attributes
             [ // children
                 $this->getAttribute('text'),
                 new P(

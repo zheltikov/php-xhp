@@ -36,4 +36,14 @@ class Str
     {
         return \trim($string);
     }
+
+    public static function length(string $string): int
+    {
+        return \strlen($string);
+    }
+
+    public static function slice(string $string, int $offset, ?int $length = null): string
+    {
+        return \substr($string, $offset, $length);
+    }
 }
