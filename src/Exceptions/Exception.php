@@ -1,6 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Exceptions;
+
+use Zheltikov\PhpXhp\Core\Node;
 
 class Exception extends \Exception
 {

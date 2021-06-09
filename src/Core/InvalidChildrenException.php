@@ -2,6 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\PhpXhp\Exceptions\Exception;
+
 class InvalidChildrenException extends Exception
 {
     public function __construct(Node $that, int $index)
