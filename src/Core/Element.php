@@ -2,8 +2,6 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
-// use namespace Facebook\XHP\HTML;
-
 /**
  * element defines an interface that all user-land elements should subclass
  * from. The main difference between element and primitive is that

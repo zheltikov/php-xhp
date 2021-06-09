@@ -4,6 +4,7 @@ namespace Zheltikov\PhpXhp\Html;
 
 use Zheltikov\PhpXhp\Core\Primitive;
 use Zheltikov\PhpXhp\Core\Str;
+use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
 use Zheltikov\PhpXhp\Core\Vec;
 use Zheltikov\PhpXhp\Core\XHPAttributeType;
 
@@ -22,7 +23,7 @@ abstract class Element extends Primitive
                     $buf .= ' ' . \htmlspecialchars($key);
                 } else {
                     // TODO: mimic class
-                    if ($val instanceof \Facebook\XHP\UnsafeAttributeValue_DEPRECATED) {
+                    if ($val instanceof UnsafeAttributeValue_DEPRECATED) {
                         $val_str = $val->toHTMLString();
                     } else {
                         $val_str = \htmlspecialchars((string) $val, \ENT_COMPAT);

@@ -2,16 +2,6 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
-// use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
-/* use type Facebook\XHP\{
-  ReflectionXHPAttribute,
-  ReflectionXHPChildrenDeclaration,
-  ReflectionXHPChildrenExpression,
-  XHPChildrenConstraintType,
-  XHPChildrenDeclarationType,
-  XHPChildrenExpressionType,
-}; */
-
 // <<__Sealed(primitive::class, element::class)>>
 abstract class Node implements XHPChild
 {
@@ -909,7 +899,7 @@ abstract class Node implements XHPChild
         }
 
         // TODO: mimic
-        if ($child instanceof \Facebook\XHP\UnsafeRenderable) {
+        if ($child instanceof UnsafeRenderable) {
             return $child->toHTMLString();
         }
         if (\is_iterable($child)) {
