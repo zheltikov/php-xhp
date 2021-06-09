@@ -21,12 +21,12 @@ class ReflectionXHPChildrenDeclaration
     }
 
     // <<__Memoize>>
-    public function getType(): \Zheltikov\PhpXhp\Core\XHPChildrenDeclarationType
+    public function getType(): \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType
     {
         if (\is_iterable($this->data)) {
-            return \Zheltikov\PhpXhp\Core\XHPChildrenDeclarationType::EXPRESSION();
+            return \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::EXPRESSION();
         }
-        return \Zheltikov\PhpXhp\Core\XHPChildrenDeclarationType::from($this->data);
+        return \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::from($this->data);
     }
 
     // <<__Memoize>>
@@ -53,10 +53,10 @@ class ReflectionXHPChildrenDeclaration
 
     public function __toString(): string
     {
-        if ($this->getType() === \Zheltikov\PhpXhp\Core\XHPChildrenDeclarationType::ANY_CHILDREN()) {
+        if ($this->getType() === \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::ANY_CHILDREN()) {
             return 'any';
         }
-        if ($this->getType() === \Zheltikov\PhpXhp\Core\XHPChildrenDeclarationType::NO_CHILDREN()) {
+        if ($this->getType() === \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::NO_CHILDREN()) {
             return 'empty';
         }
         return $this->getExpression()->__toString();

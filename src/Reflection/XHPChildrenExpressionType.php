@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Reflection;
 
 use MyCLabs\Enum\Enum;
 

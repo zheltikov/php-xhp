@@ -6,6 +6,9 @@ namespace Zheltikov\PhpXhp\Core;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
+use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
+use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
+use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
 
 abstract class Node implements XHPChild
 {
