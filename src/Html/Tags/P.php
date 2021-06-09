@@ -2,9 +2,11 @@
 
 namespace Zheltikov\PhpXhp\Html\Tags;
 
+use Zheltikov\PhpXhp\Html\Category\Flow;
+use Zheltikov\PhpXhp\Html\Category\Palpable;
 use Zheltikov\PhpXhp\Html\Element;
 
-class P extends Element
+class P extends Element implements Flow, Palpable
 {
     // use XHPChild\Validation;
 
