@@ -54,15 +54,13 @@ abstract class Node implements XHPChild
      * will execute something like:
      * $foo = new xhp_foo(array('attr' => 'val'), array('bar'));
      *
-     * @param array $attributes map of attributes to values
-     * @param array $children list of children
-     * @param mixed $debug_info will in the source when childValidation is enabled
+     * @param array $attributes (KeyedTraversable<string, mixed>) map of attributes to values
+     * @param array $children (Traversable<?\XHPChild>) list of children
+     * @param mixed $debug_info (dynamic) will in the source when childValidation is enabled
+     * @throws \Exception
      */
-    final public function __construct(
-        /* KeyedTraversable<string, mixed> */ array $attributes = [],
-        /* Traversable<?\XHPChild> */ array $children = [],
-        /* dynamic */ ...$debug_info
-    ) {
+    final public function __construct(array $attributes = [], array $children = [], ...$debug_info)
+    {
         Assert::invariant(
             $this->__xhpChildrenDeclaration() === self::__NO_LEGACY_CHILDREN_DECLARATION,
             'The `children` keyword is no longer supported',
@@ -414,8 +412,6 @@ abstract class Node implements XHPChild
         return Str::starts_with($key, self::SPREAD_PREFIX);
     }
 
-    // ---------------------------------------------------------------------------
-
     /**
      * Implements the XHP spread operator in expressions like:
      *   <foo attr1="bar" {...$xhp} />
@@ -427,7 +423,6 @@ abstract class Node implements XHPChild
      */
     protected final function spreadElementImpl(Node $element): void
     {
-        // TODO: implement these helper methods
         $attrs = Dict::merge(
             Dict::map(
                 Dict::filter(
@@ -444,17 +439,17 @@ abstract class Node implements XHPChild
         );
 
         foreach ($attrs as $attr_name => $value) {
-            // FIXME: this super-condition looks messy
-            if (
-                $value === null
-                || !(
-                    ReflectionXHPAttribute::isSpecial($attr_name)
-                    || (static::__xhpReflectionAttribute($attr_name) !== null)
-                )
-            ) {
+            if ($value === null) {
                 continue;
             }
 
+            if (
+                !ReflectionXHPAttribute::isSpecial($attr_name)
+                && static::__xhpReflectionAttribute($attr_name) === null
+            ) {
+                continue;
+            }
+            
             // If the receiving class has the same attribute and we had a value or
             // a default, then copy it over.
             $this->setAttribute($attr_name, $value);

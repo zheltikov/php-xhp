@@ -5,6 +5,7 @@ namespace Zheltikov\PhpXhp\Html;
 use Zheltikov\PhpXhp\Core\Primitive;
 use Zheltikov\PhpXhp\Core\Str;
 use Zheltikov\PhpXhp\Core\Vec;
+use Zheltikov\PhpXhp\Core\XHPAttributeType;
 
 abstract class Element extends Primitive
 {
@@ -49,5 +50,15 @@ abstract class Element extends Primitive
         );
         $buf .= '</' . $this->tagName . '>';
         return $buf;
+    }
+
+    // -------------------------------------------------------------------------
+
+    protected static function __xhpAttributeDeclaration(): array
+    {
+        return [
+            'class' => [XHPAttributeType::TYPE_STRING()->getValue(), null, null, false],
+            'id' => [XHPAttributeType::TYPE_STRING()->getValue(), null, null, false],
+        ];
     }
 }
