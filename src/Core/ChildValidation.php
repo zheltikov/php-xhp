@@ -66,4 +66,9 @@ class ChildValidation
     {
         return new AnyNumberOf($a);
     }
+
+    public static function any_of(Constraint $a, Constraint $b, Constraint ...$rest): AnyOf
+    {
+        return new AnyOf($a, $b, ...$rest);
+    }
 }

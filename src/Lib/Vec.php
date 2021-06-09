@@ -23,4 +23,20 @@ class Vec
     {
         return \array_reverse($source);
     }
+
+    /**
+     * @param array $array
+     * @param mixed ...$rest
+     * @return array
+     * @todo Self-implement this
+     */
+    public static function concat(array $array, array ...$rest): array
+    {
+        return \array_merge($array, ...$rest);
+    }
+
+    public static function drop(array $source, int $count): array
+    {
+        return \array_slice($source, $count);
+    }
 }
