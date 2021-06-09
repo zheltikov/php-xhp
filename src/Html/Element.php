@@ -275,76 +275,414 @@ abstract class Element extends Primitive
             ],
 
             // Javascript events
-            /*
-            string onabort,
-            string onauxclick,
-            string onblur,
-            string oncancel,
-            string oncanplay,
-            string oncanplaythrough,
-            string onchange,
-            string onclick,
-            string onclose,
-            string oncontextmenu,
-            string oncopy,
-            string oncuechange,
-            string oncut,
-            string ondblclick,
-            string ondrag,
-            string ondragend,
-            string ondragenter,
-            string ondragexit,
-            string ondragleave,
-            string ondragover,
-            string ondragstart,
-            string ondrop,
-            string ondurationchange,
-            string onemptied,
-            string onended,
-            string onerror,
-            string onfocus,
-            string onformdata,
-            string oninput,
-            string oninvalid,
-            string onkeydown,
-            string onkeypress,
-            string onkeyup,
-            string onload,
-            string onloadeddata,
-            string onloadedmetadata,
-            string onloadstart,
-            string onmousedown,
-            string onmouseenter,
-            string onmouseleave,
-            string onmousemove,
-            string onmouseout,
-            string onmouseover,
-            string onmouseup,
-            string onmousewheel,
-            string onpaste,
-            string onpause,
-            string onplay,
-            string onplaying,
-            string onprogress,
-            string onratechange,
-            string onreset,
-            string onresize,
-            string onscroll,
-            string onsecuritypolicyviolation,
-            string onseeked,
-            string onseeking,
-            string onselect,
-            string onshow,
-            string onslotchange,
-            string onstalled,
-            string onsubmit,
-            string onsuspend,
-            string ontimeupdate,
-            string ontoggle,
-            string onvolumechange,
-            string onwaiting,
-            string onwheel,
-            */
+            'onabort' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onauxclick' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onblur' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncancel' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncanplay' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncanplaythrough' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onchange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onclick' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onclose' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncontextmenu' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncopy' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncuechange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oncut' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondblclick' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondrag' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragend' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragenter' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragexit' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragleave' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragover' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondragstart' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondrop' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ondurationchange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onemptied' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onended' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onerror' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onfocus' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onformdata' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oninput' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'oninvalid' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onkeydown' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onkeypress' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onkeyup' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onload' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onloadeddata' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onloadedmetadata' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onloadstart' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmousedown' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmouseenter' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmouseleave' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmousemove' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmouseout' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmouseover' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmouseup' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onmousewheel' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onpaste' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onpause' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onplay' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onplaying' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onprogress' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onratechange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onreset' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onresize' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onscroll' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onsecuritypolicyviolation' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onseeked' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onseeking' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onselect' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onshow' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onslotchange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onstalled' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onsubmit' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onsuspend' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ontimeupdate' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'ontoggle' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onvolumechange' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onwaiting' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'onwheel' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
         ];
     }
 }
