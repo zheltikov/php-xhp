@@ -3,6 +3,8 @@
 namespace Zheltikov\PhpXhp\Core;
 
 // FIXME: extends \InvalidOperationException
+use Zheltikov\PhpXhp\Lib\Assert;
+
 final class UseAfterRenderException extends \RuntimeException
 {
     /**

@@ -7,6 +7,7 @@ use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
 use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
 use Zheltikov\PhpXhp\Exceptions\InvalidChildrenException;
 use Zheltikov\PhpXhp\Exceptions\RenderArrayException;
+use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;

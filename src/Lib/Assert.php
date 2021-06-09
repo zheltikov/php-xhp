@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Lib;
 
 /**
  * Class Assert
@@ -38,7 +38,7 @@ class Assert
             \call_user_func(static::$callback, $format, ...$values);
         } else {
             // FIXME: this may not be the best solution
-            throw new \Exception(Str::format($format, ...$values));
+            throw new \Exception(\Zheltikov\PhpXhp\Core\Str::format($format, ...$values));
         }
     }
 

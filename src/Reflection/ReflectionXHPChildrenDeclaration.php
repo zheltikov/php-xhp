@@ -34,7 +34,7 @@ class ReflectionXHPChildrenDeclaration
     {
         try {
             // FIXME: create TypeAssertionException
-            \Zheltikov\PhpXhp\Core\Assert::invariant(
+            \Zheltikov\PhpXhp\Lib\Assert::invariant(
                 \is_iterable($this->data),
                 "ReflectionXHPChildrenDeclaration's data must be a KeyedContainer"
             );

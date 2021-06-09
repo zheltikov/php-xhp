@@ -70,14 +70,14 @@ class ReflectionXHPAttribute
     public function getValueClass(): string
     {
         $t = $this->getValueType();
-        \Zheltikov\PhpXhp\Core\Assert::invariant(
+        \Zheltikov\PhpXhp\Lib\Assert::invariant(
             $t === \Zheltikov\PhpXhp\Reflection\XHPAttributeType::TYPE_OBJECT(),
             'Tried to get value class for attribute %s of type %s - needed ' . 'OBJECT',
             $this->getName(),
             \array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
         $v = $this->extraType;
-        \Zheltikov\PhpXhp\Core\Assert::invariant(
+        \Zheltikov\PhpXhp\Lib\Assert::invariant(
             \is_string($v),
             'Class name for attribute %s is not a string',
             $this->getName(),
@@ -90,14 +90,14 @@ class ReflectionXHPAttribute
     public function getEnumValues(): array
     {
         $t = $this->getValueType();
-        \Zheltikov\PhpXhp\Core\Assert::invariant(
+        \Zheltikov\PhpXhp\Lib\Assert::invariant(
             $t === \Zheltikov\PhpXhp\Reflection\XHPAttributeType::TYPE_ENUM(),
             'Tried to get enum values for attribute %s of type %s - needed ' . 'ENUM',
             $this->getName(),
             \array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
         $v = $this->extraType;
-        \Zheltikov\PhpXhp\Core\Assert::invariant(
+        \Zheltikov\PhpXhp\Lib\Assert::invariant(
             \is_iterable($v),
             'Class name for attribute %s is not an array',
             $this->getName(),

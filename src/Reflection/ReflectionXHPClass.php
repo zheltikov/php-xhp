@@ -2,7 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Reflection;
 
-use Zheltikov\PhpXhp\Core\Assert;
+use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Core\C;
 use Zheltikov\PhpXhp\Core\Node;
 
