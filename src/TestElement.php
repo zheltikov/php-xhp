@@ -28,12 +28,12 @@ class TestElement extends Element
             ['three']
         );
 
-        $xhp = new P(
-            ['...$' => $this], // attributes
+        $xhp = new Frag(
+            [],
             [ // children
                 $this->getAttribute('the_title') . ': ' . $this->getAttribute('text'),
                 new P(
-                    [],
+                    ['...$' => $this], // attributes
                     [...$this->getChildren()]
                 ),
                 new Frag(
@@ -47,8 +47,7 @@ class TestElement extends Element
                             [],
                             ['two', $para]
                         ),
-                        $para,
-                        $para,
+                        // $para, // uncomment to test UseAfterRenderException
                     ]
                 ),
             ]

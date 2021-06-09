@@ -17,7 +17,7 @@ class Frag extends Primitive
             Vec::map(
                 $this->getChildren(),
                 function ($child) {
-                    return self::renderChildAsync($child);
+                    return self::renderChild($child);
                 }
             ),
             ''
