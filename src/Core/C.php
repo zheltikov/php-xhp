@@ -2,6 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+// TODO: move this to a separate package
 class C
 {
     public static function contains_key(array $container, string $key): bool

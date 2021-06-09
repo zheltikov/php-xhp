@@ -2,6 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+// TODO: move this to a separate package
 class Vec
 {
     public static function keys(array $array): array

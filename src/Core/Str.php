@@ -2,6 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+// TODO: move this to a separate package
 class Str
 {
     public static function starts_with(string $string, string $prefix): bool
