@@ -2,7 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Html;
 
-use Zheltikov\PhpXhp\Core\ClassException;
+use Zheltikov\PhpXhp\Exceptions\ClassException;
 use Zheltikov\PhpXhp\Core\UnsafeRenderable;
 
 /**
