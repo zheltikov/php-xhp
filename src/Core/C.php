@@ -18,4 +18,9 @@ class C
     {
         return \count($container) ? \end($container) : null;
     }
+
+    public static function is_empty(array $container): bool
+    {
+        return static::count($container) === 0;
+    }
 }

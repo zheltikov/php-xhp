@@ -17,4 +17,9 @@ class Vec
         }
         return $result;
     }
+
+    public static function reverse(array $source): array
+    {
+        return \array_reverse($source);
+    }
 }

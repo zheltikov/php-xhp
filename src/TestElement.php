@@ -23,7 +23,12 @@ class TestElement extends Element
 
     protected function render(): Node
     {
-        return new P(
+        $para = new P(
+            [],
+            ['three']
+        );
+
+        $xhp = new P(
             ['...$' => $this], // attributes
             [ // children
                 $this->getAttribute('the_title') . ': ' . $this->getAttribute('text'),
@@ -40,16 +45,15 @@ class TestElement extends Element
                         ),
                         new P(
                             [],
-                            ['two']
+                            ['two', $para]
                         ),
-                        new P(
-                            [],
-                            ['three']
-                        ),
+                        $para,
+                        $para,
                     ]
                 ),
             ]
         );
+        return $xhp;
         // return '<p>' . \htmlspecialchars($this->getAttribute('text')) . '</p>';
     }
 

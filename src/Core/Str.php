@@ -44,6 +44,18 @@ class Str
 
     public static function slice(string $string, int $offset, ?int $length = null): string
     {
-        return \substr($string, $offset, $length);
+        return $length === null
+            ? \substr($string, $offset)
+            : \substr($string, $offset, $length);
+    }
+
+    public static function strip_prefix(string $string, string $prefix): string
+    {
+        if (!static::starts_with($string, $prefix)) {
+            return $string;
+        }
+
+        $length = static::length($prefix);
+        return static::slice($string, $length);
     }
 }
