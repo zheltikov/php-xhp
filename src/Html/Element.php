@@ -8,53 +8,21 @@ use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
 use Zheltikov\PhpXhp\Core\Vec;
 use Zheltikov\PhpXhp\Core\XHPAttributeType;
 
+/**
+ * This is the base library of HTML elements for use in XHP. This includes all
+ * non-deprecated tags and attributes. Elements in this file should stay as
+ * close to spec as possible. Facebook-specific extensions should go into their
+ * own elements.
+ */
 abstract class Element extends Primitive
 {
     use XHPHTMLHelpers;
 
-    protected string $tagName = '';
-
-    protected final function renderBaseAttrs(): string
-    {
-        $buf = '<' . $this->tagName;
-        foreach ($this->getAttributes() as $key => $val) {
-            if ($val !== null && $val !== false) {
-                if ($val === true) {
-                    $buf .= ' ' . \htmlspecialchars($key);
-                } else {
-                    // TODO: mimic class
-                    if ($val instanceof UnsafeAttributeValue_DEPRECATED) {
-                        $val_str = $val->toHTMLString();
-                    } else {
-                        $val_str = \htmlspecialchars((string) $val, \ENT_COMPAT);
-                    }
-
-                    $buf .= ' ' . \htmlspecialchars($key) . '="' . $val_str . '"';
-                }
-            }
-        }
-        return $buf;
-    }
-
-    // <<__Override>>
-    protected function stringify(): string
-    {
-        $buf = $this->renderBaseAttrs() . '>';
-        $buf .= Str::join(
-            Vec::map(
-                $this->getChildren(),
-                function ($child) {
-                    return self::renderChild($child);
-                }
-            ),
-            ''
-        );
-        $buf .= '</' . $this->tagName . '>';
-        return $buf;
-    }
-
-    // -------------------------------------------------------------------------
-
+    // enum { 'true', 'false' } attributes: these are actually tri-state -
+    // the implied third value is usually 'auto' or 'inherit'; for example,
+    // contenteditable defaults to 'inherit' if unspecified, so
+    // contenteditable=false is valid ans has meaning
+    
     protected static function __xhpAttributeDeclaration(): array
     {
         return [
@@ -685,5 +653,46 @@ abstract class Element extends Primitive
                 false, // required
             ],
         ];
+    }
+
+    protected string $tagName = '';
+
+    protected final function renderBaseAttrs(): string
+    {
+        $buf = '<' . $this->tagName;
+        foreach ($this->getAttributes() as $key => $val) {
+            if ($val !== null && $val !== false) {
+                if ($val === true) {
+                    $buf .= ' ' . \htmlspecialchars($key);
+                } else {
+                    // TODO: mimic class
+                    if ($val instanceof UnsafeAttributeValue_DEPRECATED) {
+                        $val_str = $val->toHTMLString();
+                    } else {
+                        $val_str = \htmlspecialchars((string) $val, \ENT_COMPAT);
+                    }
+
+                    $buf .= ' ' . \htmlspecialchars($key) . '="' . $val_str . '"';
+                }
+            }
+        }
+        return $buf;
+    }
+
+    // <<__Override>>
+    protected function stringify(): string
+    {
+        $buf = $this->renderBaseAttrs() . '>';
+        $buf .= Str::join(
+            Vec::map(
+                $this->getChildren(),
+                function ($child) {
+                    return self::renderChild($child);
+                }
+            ),
+            ''
+        );
+        $buf .= '</' . $this->tagName . '>';
+        return $buf;
     }
 }

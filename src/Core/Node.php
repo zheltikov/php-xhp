@@ -675,8 +675,7 @@ abstract class Node implements XHPChild
         }
         if ($type === XHPChildrenDeclarationType::NO_CHILDREN()) {
             if ($this->children) {
-                // TODO: mimic
-                throw new \Facebook\XHP\InvalidChildrenException($this, 0);
+                throw new InvalidChildrenException($this, 0);
             } else {
                 return;
             }
@@ -690,8 +689,7 @@ abstract class Node implements XHPChild
             if (($this->children[$ii] ?? null) instanceof AlwaysValidChild) {
                 return;
             }
-            // TODO: mimic
-            throw new \Facebook\XHP\InvalidChildrenException($this, $ii);
+            throw new InvalidChildrenException($this, $ii);
         }
     }
 
@@ -903,10 +901,7 @@ abstract class Node implements XHPChild
             return $child->toHTMLString();
         }
         if (\is_iterable($child)) {
-            // TODO: mimic
-            throw new \Facebook\XHP\RenderArrayException(
-                'Can not render traversables!'
-            );
+            throw new RenderArrayException('Can not render traversables!');
         }
 
         /* HH_FIXME[4281] stringish migration */
