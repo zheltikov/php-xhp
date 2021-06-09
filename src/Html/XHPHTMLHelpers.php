@@ -3,7 +3,7 @@
 namespace Zheltikov\PhpXhp\Html;
 
 use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Core\Str;
+use Zheltikov\PhpXhp\Lib\Str;
 
 trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
 {

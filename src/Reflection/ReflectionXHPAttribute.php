@@ -111,11 +111,11 @@ class ReflectionXHPAttribute
     // <<__Memoize>>
     public static function isSpecial(string $attr): bool
     {
-        return \Zheltikov\PhpXhp\Core\Str::length($attr) >= 6
+        return \Zheltikov\PhpXhp\Lib\Str::length($attr) >= 6
                && $attr[4] === '-'
                && \Zheltikov\PhpXhp\Lib\C::contains_key(
                 self::$specialAttributes,
-                \Zheltikov\PhpXhp\Core\Str::slice($attr, 0, 4)
+                \Zheltikov\PhpXhp\Lib\Str::slice($attr, 0, 4)
             );
     }
 
@@ -142,7 +142,7 @@ class ReflectionXHPAttribute
                 break;
             case \Zheltikov\PhpXhp\Reflection\XHPAttributeType::TYPE_ENUM():
                 $out = 'enum {';
-                $out .= \Zheltikov\PhpXhp\Core\Str::join(
+                $out .= \Zheltikov\PhpXhp\Lib\Str::join(
                     \Zheltikov\PhpXhp\Core\Vec::map(
                         $this->getEnumValues(),
                         function ($x) {

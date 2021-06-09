@@ -2,6 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\PhpXhp\Lib\Str;
+
 /**
  * An <x:frag /> is a transparent wrapper around any number of elements. When
  * you render it just the children will be rendered. When you append it to an

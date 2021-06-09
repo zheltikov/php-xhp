@@ -10,6 +10,7 @@ use Zheltikov\PhpXhp\Exceptions\RenderArrayException;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Dict;
+use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
 use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
