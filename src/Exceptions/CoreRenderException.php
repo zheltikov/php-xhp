@@ -1,12 +1,15 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Exceptions;
+
+use Zheltikov\PhpXhp\Core\Exception;
+use Zheltikov\PhpXhp\Core\Node;
 
 class CoreRenderException extends Exception
 {
     /**
      * CoreRenderException constructor.
-     * @param \Zheltikov\PhpXhp\Core\Node $that
+     * @param Node $that
      * @param mixed $rend
      */
     public function __construct(Node $that, $rend)

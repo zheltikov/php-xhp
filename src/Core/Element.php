@@ -2,6 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\PhpXhp\Exceptions\CoreRenderException;
+
 /**
  * element defines an interface that all user-land elements should subclass
  * from. The main difference between element and primitive is that
