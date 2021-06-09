@@ -3,6 +3,10 @@
 namespace Zheltikov\PhpXhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
+use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
+use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
+use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
+
 abstract class Node implements XHPChild
 {
     // Must be kept in sync with compiler
@@ -694,7 +698,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Core\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)
@@ -771,7 +775,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Core\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)

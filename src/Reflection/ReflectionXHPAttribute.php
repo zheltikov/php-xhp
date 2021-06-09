@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Reflection;
 
 class ReflectionXHPAttribute
 {
-    private XHPAttributeType $type;
+    private \Zheltikov\PhpXhp\Core\XHPAttributeType $type;
 
     /**
      * OBJECT: string (class name)
@@ -35,7 +35,7 @@ class ReflectionXHPAttribute
     public function __construct(string $name, array $decl)
     {
         $this->name = $name;
-        $this->type = XHPAttributeType::from($decl[0]);
+        $this->type = \Zheltikov\PhpXhp\Core\XHPAttributeType::from($decl[0]);
         $this->extraType = $decl[1];
         $this->defaultValue = $decl[2];
         $this->required = (bool) $decl[3];
@@ -46,7 +46,7 @@ class ReflectionXHPAttribute
         return $this->name;
     }
 
-    public function getValueType(): XHPAttributeType
+    public function getValueType(): \Zheltikov\PhpXhp\Core\XHPAttributeType
     {
         return $this->type;
     }
@@ -70,14 +70,14 @@ class ReflectionXHPAttribute
     public function getValueClass(): string
     {
         $t = $this->getValueType();
-        Assert::invariant(
-            $t === XHPAttributeType::TYPE_OBJECT(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $t === \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_OBJECT(),
             'Tried to get value class for attribute %s of type %s - needed ' . 'OBJECT',
             $this->getName(),
             \array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
         $v = $this->extraType;
-        Assert::invariant(
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
             \is_string($v),
             'Class name for attribute %s is not a string',
             $this->getName(),
@@ -90,14 +90,14 @@ class ReflectionXHPAttribute
     public function getEnumValues(): array
     {
         $t = $this->getValueType();
-        Assert::invariant(
-            $t === XHPAttributeType::TYPE_ENUM(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $t === \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_ENUM(),
             'Tried to get enum values for attribute %s of type %s - needed ' . 'ENUM',
             $this->getName(),
             \array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
         $v = $this->extraType;
-        Assert::invariant(
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
             \is_iterable($v),
             'Class name for attribute %s is not an array',
             $this->getName(),
@@ -111,36 +111,39 @@ class ReflectionXHPAttribute
     // <<__Memoize>>
     public static function isSpecial(string $attr): bool
     {
-        return Str::length($attr) >= 6
+        return \Zheltikov\PhpXhp\Core\Str::length($attr) >= 6
                && $attr[4] === '-'
-               && C::contains_key(self::$specialAttributes, Str::slice($attr, 0, 4));
+               && \Zheltikov\PhpXhp\Core\C::contains_key(
+                self::$specialAttributes,
+                \Zheltikov\PhpXhp\Core\Str::slice($attr, 0, 4)
+            );
     }
 
     public function __toString(): string
     {
         switch ($this->getValueType()) {
-            case XHPAttributeType::TYPE_STRING():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_STRING():
                 $out = 'string';
                 break;
-            case XHPAttributeType::TYPE_BOOL():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_BOOL():
                 $out = 'bool';
                 break;
-            case XHPAttributeType::TYPE_INTEGER():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_INTEGER():
                 $out = 'int';
                 break;
-            case XHPAttributeType::TYPE_ARRAY():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_ARRAY():
                 $out = 'array';
                 break;
-            case XHPAttributeType::TYPE_OBJECT():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_OBJECT():
                 $out = $this->getValueClass();
                 break;
-            case XHPAttributeType::TYPE_VAR():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_VAR():
                 $out = 'mixed';
                 break;
-            case XHPAttributeType::TYPE_ENUM():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_ENUM():
                 $out = 'enum {';
-                $out .= Str::join(
-                    Vec::map(
+                $out .= \Zheltikov\PhpXhp\Core\Str::join(
+                    \Zheltikov\PhpXhp\Core\Vec::map(
                         $this->getEnumValues(),
                         function ($x) {
                             return "'" . $x . "'";
@@ -150,7 +153,7 @@ class ReflectionXHPAttribute
                 );
                 $out .= '}';
                 break;
-            case XHPAttributeType::TYPE_FLOAT():
+            case \Zheltikov\PhpXhp\Core\XHPAttributeType::TYPE_FLOAT():
                 $out = 'float';
                 break;
         }

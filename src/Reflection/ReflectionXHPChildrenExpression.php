@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\PhpXhp\Reflection;
 
 class ReflectionXHPChildrenExpression
 {
@@ -20,9 +20,9 @@ class ReflectionXHPChildrenExpression
     }
 
     // <<__Memoize>>
-    public function getType(): XHPChildrenExpressionType
+    public function getType(): \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType
     {
-        return XHPChildrenExpressionType::from($this->data[0]);
+        return \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::from($this->data[0]);
     }
 
     // <<__Memoize>>
@@ -30,19 +30,19 @@ class ReflectionXHPChildrenExpression
     public function getSubExpressions(): array
     {
         $type = $this->getType();
-        Assert::invariant(
-            $type === XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
-            || $type === XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $type === \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
+            || $type === \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
             'Only disjunctions and sequences have two sub-expressions - in %s',
             $this->context
         );
         try {
             // FIXME: create TypeAssertionException
-            Assert::invariant(
+            \Zheltikov\PhpXhp\Core\Assert::invariant(
                 \is_iterable($this->data[1]),
                 "ReflectionXHPChildrenExpression's data[1] must be a KeyedContainer"
             );
-            Assert::invariant(
+            \Zheltikov\PhpXhp\Core\Assert::invariant(
                 \is_iterable($this->data[2]),
                 "ReflectionXHPChildrenExpression's data[2] must be a KeyedContainer"
             );
@@ -63,45 +63,45 @@ class ReflectionXHPChildrenExpression
     }
 
     // <<__Memoize>>
-    public function getConstraintType(): XHPChildrenConstraintType
+    public function getConstraintType(): \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType
     {
         $type = $this->getType();
-        Assert::invariant(
-            $type !== XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
-            && $type !== XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $type !== \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
+            && $type !== \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
             'Disjunctions and sequences do not have a constraint type - in %s',
             $this->context,
         );
-        return XHPChildrenConstraintType::from($this->data[1]);
+        return \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::from($this->data[1]);
     }
 
     // <<__Memoize>>
     public function getConstraintString(): string
     {
         $type = $this->getConstraintType();
-        Assert::invariant(
-            $type === XHPChildrenConstraintType::ELEMENT()
-            || $type === XHPChildrenConstraintType::CATEGORY(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $type === \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::ELEMENT()
+            || $type === \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::CATEGORY(),
             'Only element and category constraints have string data - in %s',
             $this->context,
         );
         $data = $this->data[2];
-        Assert::invariant(\is_string($data), 'Expected string data');
+        \Zheltikov\PhpXhp\Core\Assert::invariant(\is_string($data), 'Expected string data');
         return $data;
     }
 
     // <<__Memoize>>
     public function getSubExpression(): ReflectionXHPChildrenExpression
     {
-        Assert::invariant(
-            $this->getConstraintType() === XHPChildrenConstraintType::SUB_EXPR(),
+        \Zheltikov\PhpXhp\Core\Assert::invariant(
+            $this->getConstraintType() === \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::SUB_EXPR(),
             'Only expression constraints have a single sub-expression - in %s',
             $this->context,
         );
         $data = $this->data[2];
         try {
             // FIXME: create TypeAssertionException
-            Assert::invariant(
+            \Zheltikov\PhpXhp\Core\Assert::invariant(
                 \is_iterable($data),
                 "ReflectionXHPChildrenExpression's data must be a KeyedContainer"
             );
@@ -121,23 +121,23 @@ class ReflectionXHPChildrenExpression
     public function __toString(): string
     {
         switch ($this->getType()) {
-            case XHPChildrenExpressionType::SINGLE():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SINGLE():
                 return $this->__constraintToString();
 
-            case XHPChildrenExpressionType::ANY_NUMBER():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::ANY_NUMBER():
                 return $this->__constraintToString() . '*';
 
-            case XHPChildrenExpressionType::ZERO_OR_ONE():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::ZERO_OR_ONE():
                 return $this->__constraintToString() . '?';
 
-            case XHPChildrenExpressionType::ONE_OR_MORE():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::ONE_OR_MORE():
                 return $this->__constraintToString() . '+';
 
-            case XHPChildrenExpressionType::SUB_EXPR_SEQUENCE():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE():
                 [$e1, $e2] = $this->getSubExpressions();
                 return $e1->__toString() . ',' . $e2->__toString();
 
-            case XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION():
                 [$e1, $e2] = $this->getSubExpressions();
                 return $e1->__toString() . '|' . $e2->__toString();
         }
@@ -146,19 +146,19 @@ class ReflectionXHPChildrenExpression
     private function __constraintToString(): string
     {
         switch ($this->getConstraintType()) {
-            case XHPChildrenConstraintType::ANY():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::ANY():
                 return 'any';
 
-            case XHPChildrenConstraintType::PCDATA():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::PCDATA():
                 return 'pcdata';
 
-            case XHPChildrenConstraintType::ELEMENT():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::ELEMENT():
                 return '\\' . $this->getConstraintString();
 
-            case XHPChildrenConstraintType::CATEGORY():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::CATEGORY():
                 return '%' . $this->getConstraintString();
 
-            case XHPChildrenConstraintType::SUB_EXPR():
+            case \Zheltikov\PhpXhp\Core\XHPChildrenConstraintType::SUB_EXPR():
                 return '(' . $this->getSubExpression()->__toString() . ')';
         }
     }
