@@ -697,7 +697,7 @@ abstract class Node implements XHPChild
         );
         if (!$ret || $ii < C::count($this->children)) {
             // TODO: mimic
-            if (($this->children[$ii] ?? null) instanceof \Facebook\XHP\AlwaysValidChild) {
+            if (($this->children[$ii] ?? null) instanceof AlwaysValidChild) {
                 return;
             }
             // TODO: mimic

@@ -4,6 +4,7 @@ namespace Zheltikov\PhpXhp;
 
 // use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 use Zheltikov\PhpXhp\Core\Element;
+use Zheltikov\PhpXhp\Core\Frag;
 use Zheltikov\PhpXhp\Core\Node;
 use Zheltikov\PhpXhp\Core\XHPAttributeType;
 use Zheltikov\PhpXhp\Html\Tags\P;
@@ -29,6 +30,23 @@ class TestElement extends Element
                 new P(
                     [],
                     [...$this->getChildren()]
+                ),
+                new Frag(
+                    [],
+                    [
+                        new P(
+                            [],
+                            ['one']
+                        ),
+                        new P(
+                            [],
+                            ['two']
+                        ),
+                        new P(
+                            [],
+                            ['three']
+                        ),
+                    ]
                 ),
             ]
         );
