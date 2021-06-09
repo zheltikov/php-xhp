@@ -57,8 +57,18 @@ abstract class Element extends Primitive
     protected static function __xhpAttributeDeclaration(): array
     {
         return [
-            'class' => [XHPAttributeType::TYPE_STRING()->getValue(), null, null, false],
-            'id' => [XHPAttributeType::TYPE_STRING()->getValue(), null, null, false],
+            'class' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
+            'id' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                null, // defaultValue
+                false, // required
+            ],
         ];
     }
 }
