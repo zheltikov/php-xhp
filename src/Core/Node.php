@@ -139,11 +139,11 @@ abstract class Node implements XHPChild
     /**
      * Replaces all children in this node.
      *
-     * @param XHPChild $children single child or a Traversable of children
+     * @param XHPChild[] $children single child or a Traversable of children
      * @return $this
      * @throws UseAfterRenderException
      */
-    final public function replaceChildren(XHPChild ...$children): self
+    final public function replaceChildren(array $children): self
     {
         if ($this->__isRendered) {
             throw new UseAfterRenderException(Str::format("Can't %s after render", __FUNCTION__));
@@ -903,9 +903,12 @@ abstract class Node implements XHPChild
         return ($categories[$c] ?? null) !== null;
     }
 
-    final protected static function renderChild(
-        XHPChild $child
-    ): string {
+    /**
+     * @param \Zheltikov\PhpXhp\Core\XHPChild|\Stringable|string $child
+     * @return string
+     */
+    final protected static function renderChild($child): string
+    {
         if ($child instanceof Node) {
             return $child->toString();
         }

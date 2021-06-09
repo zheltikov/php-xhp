@@ -8,4 +8,13 @@ class Vec
     {
         return \array_keys($array);
     }
+
+    public static function map(array $source, callable $callback): array
+    {
+        $result = [];
+        foreach ($source as $value) {
+            $result[] = \call_user_func($callback, $value);
+        }
+        return $result;
+    }
 }

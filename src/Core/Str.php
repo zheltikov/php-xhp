@@ -31,4 +31,9 @@ class Str
     {
         return \implode($glue, $pieces);
     }
+
+    public static function trim(string $string): string
+    {
+        return \trim($string);
+    }
 }

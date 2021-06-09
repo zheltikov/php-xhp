@@ -5,6 +5,7 @@ namespace Zheltikov\PhpXhp;
 // use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 use Zheltikov\PhpXhp\Core\Element;
 use Zheltikov\PhpXhp\Core\Node;
+use Zheltikov\PhpXhp\Html\Tags\P;
 
 class TestElement extends Element
 {
@@ -19,6 +20,16 @@ class TestElement extends Element
 
     protected function render(): Node
     {
-        return '<p>' . \htmlspecialchars($this->getAttribute('text')) . '</p>';
+        return new P(
+            [], // ['...$' => $this], // attributes
+            [ // children
+                $this->getAttribute('text'),
+                new P(
+                    [],
+                    [...$this->getChildren()]
+                ),
+            ]
+        );
+        // return '<p>' . \htmlspecialchars($this->getAttribute('text')) . '</p>';
     }
 }
