@@ -6,7 +6,7 @@ namespace Zheltikov\PhpXhp;
 use Zheltikov\PhpXhp\Core\Element;
 use Zheltikov\PhpXhp\Core\Frag;
 use Zheltikov\PhpXhp\Core\Node;
-use Zheltikov\PhpXhp\Core\XHPAttributeType;
+use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
 use Zheltikov\PhpXhp\Html\Tags\P;
 
 class TestElement extends Element

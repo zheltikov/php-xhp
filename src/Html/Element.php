@@ -6,7 +6,7 @@ use Zheltikov\PhpXhp\Core\Primitive;
 use Zheltikov\PhpXhp\Core\Str;
 use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
 use Zheltikov\PhpXhp\Core\Vec;
-use Zheltikov\PhpXhp\Core\XHPAttributeType;
+use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
 
 /**
  * This is the base library of HTML elements for use in XHP. This includes all
@@ -22,7 +22,7 @@ abstract class Element extends Primitive
     // the implied third value is usually 'auto' or 'inherit'; for example,
     // contenteditable defaults to 'inherit' if unspecified, so
     // contenteditable=false is valid ans has meaning
-    
+
     protected static function __xhpAttributeDeclaration(): array
     {
         return [
