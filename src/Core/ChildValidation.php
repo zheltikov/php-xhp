@@ -3,6 +3,7 @@
 namespace Zheltikov\PhpXhp\Core;
 
 use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
+use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
 use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
