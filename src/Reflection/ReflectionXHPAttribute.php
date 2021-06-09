@@ -113,7 +113,7 @@ class ReflectionXHPAttribute
     {
         return \Zheltikov\PhpXhp\Core\Str::length($attr) >= 6
                && $attr[4] === '-'
-               && \Zheltikov\PhpXhp\Core\C::contains_key(
+               && \Zheltikov\PhpXhp\Lib\C::contains_key(
                 self::$specialAttributes,
                 \Zheltikov\PhpXhp\Core\Str::slice($attr, 0, 4)
             );

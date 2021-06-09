@@ -3,7 +3,7 @@
 namespace Zheltikov\PhpXhp\Reflection;
 
 use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Core\C;
+use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Core\Node;
 
 class ReflectionXHPClass
