@@ -28,16 +28,19 @@ abstract class QuantifierConstraint implements LegacyExpression
         $inner = $this->child;
         $as_leaf = $inner->legacySerializeAsLeaf();
         if ($as_leaf !== null) {
-            return [static::LEGACY_EXPRESSION_TYPE, $as_leaf[0], $as_leaf[1]];
+            return [static::LEGACY_EXPRESSION_TYPE(), $as_leaf[0], $as_leaf[1]];
         }
 
         return [
-            static::LEGACY_EXPRESSION_TYPE,
+            static::LEGACY_EXPRESSION_TYPE(),
             LegacyConstraintType::EXPRESSION,
             $inner->legacySerialize(),
         ];
     }
 
+    /**
+     * @return null
+     */
     final public function legacySerializeAsLeaf() // : null
     {
         return null;
