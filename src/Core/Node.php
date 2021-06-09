@@ -38,7 +38,7 @@ abstract class Node implements XHPChild
      */
     private array $context = [];
 
-    public ?string $source;
+    public ?string $source = null;
 
     protected function init(): void
     {
@@ -326,11 +326,11 @@ abstract class Node implements XHPChild
 
             if ($decl === null) {
                 // FIXME: mimic
-                throw new \Facebook\XHP\AttributeNotSupportedException($this, $attr);
+                throw new AttributeNotSupportedException($this, $attr);
             } else {
                 if ($decl->isRequired()) {
                     // FIXME: mimic
-                    throw new \Facebook\XHP\AttributeRequiredException($this, $attr);
+                    throw new AttributeRequiredException($this, $attr);
                 } else {
                     return $decl->getDefaultValue();
                 }
@@ -449,7 +449,7 @@ abstract class Node implements XHPChild
             ) {
                 continue;
             }
-            
+
             // If the receiving class has the same attribute and we had a value or
             // a default, then copy it over.
             $this->setAttribute($attr_name, $value);

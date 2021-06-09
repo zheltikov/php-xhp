@@ -61,7 +61,7 @@ class ReflectionXHPAttribute
         return $this->defaultValue !== null;
     }
 
-    public function getDefaultValue(): mixed
+    public function getDefaultValue() // : mixed
     {
         return $this->defaultValue;
     }

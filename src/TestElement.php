@@ -5,6 +5,7 @@ namespace Zheltikov\PhpXhp;
 // use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 use Zheltikov\PhpXhp\Core\Element;
 use Zheltikov\PhpXhp\Core\Node;
+use Zheltikov\PhpXhp\Core\XHPAttributeType;
 use Zheltikov\PhpXhp\Html\Tags\P;
 
 class TestElement extends Element
@@ -18,12 +19,13 @@ class TestElement extends Element
         ];
     } */
 
+
     protected function render(): Node
     {
         return new P(
             ['...$' => $this], // attributes
             [ // children
-                $this->getAttribute('text'),
+                $this->getAttribute('the_title') . ': ' . $this->getAttribute('text'),
                 new P(
                     [],
                     [...$this->getChildren()]
@@ -31,5 +33,17 @@ class TestElement extends Element
             ]
         );
         // return '<p>' . \htmlspecialchars($this->getAttribute('text')) . '</p>';
+    }
+
+    protected static function __xhpAttributeDeclaration(): array
+    {
+        return [
+            'the_title' => [
+                XHPAttributeType::TYPE_STRING()->getValue(), // type
+                null, // extraType
+                'Lorem Ipsum', // defaultValue
+                true, // required
+            ],
+        ];
     }
 }
