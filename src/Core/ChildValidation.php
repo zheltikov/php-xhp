@@ -12,6 +12,7 @@ use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
 use Zheltikov\PhpXhp\Core\ChildValidation\Any;
 use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
+use Zheltikov\PhpXhp\Core\ChildValidation\Category;
 
 class ChildValidation
 {
@@ -108,5 +109,11 @@ class ChildValidation
     public static function at_least_one_of(Constraint $a): AtLeastOneOf
     {
         return new AtLeastOneOf($a);
+    }
+
+    // <<__Memoize>>
+    function category(string $c): Category
+    {
+        return new Category($c);
     }
 }
