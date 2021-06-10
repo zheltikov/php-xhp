@@ -13,6 +13,7 @@ use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
 use Zheltikov\PhpXhp\Core\ChildValidation\Any;
 use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
 use Zheltikov\PhpXhp\Core\ChildValidation\Category;
+use Zheltikov\PhpXhp\Core\ChildValidation\None;
 
 class ChildValidation
 {
@@ -112,8 +113,14 @@ class ChildValidation
     }
 
     // <<__Memoize>>
-    function category(string $c): Category
+    public static function category(string $c): Category
     {
         return new Category($c);
+    }
+
+    // <<__Memoize>>
+    public static function empty(): None
+    {
+        return new None();
     }
 }
