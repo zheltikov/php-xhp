@@ -2,18 +2,22 @@
 
 namespace Zheltikov\PhpXhp\Html;
 
+use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
+use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
+
 /**
  * Subclasses of :xhp:html_singleton may not contain children. When
  * rendered they will be in singleton (<img />, <br />) form.
  */
 abstract class Singleton extends Element
 {
-    // use \Facebook\XHP\ChildValidation\Validation;
+    use Validation;
 
-    /* protected static function getChildrenDeclaration(): \Facebook\XHP\ChildValidation\Constraint
+    protected static function getChildrenDeclaration(): Constraint
     {
-        return \Facebook\XHP\ChildValidation\empty();
-    } */
+        return ChildValidation::empty();
+    }
 
     // <<__Override>>
     protected function stringify(): string

@@ -22,12 +22,6 @@ class P extends Element implements Flow, Palpable
                 ChildValidation::of_type(Phrase::class),
             )
         );
-        /* return XHPChild\any_number_of(
-            XHPChild\any_of(
-                XHPChild\pcdata(),
-                XHPChild\of_type<Category\Phrase>(),
-            ),
-        ); */
     }
 
     protected string $tagName = 'p';
