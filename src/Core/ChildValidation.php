@@ -9,6 +9,7 @@ use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
 use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
+use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
 
 class ChildValidation
 {
@@ -89,5 +90,10 @@ class ChildValidation
     public static function pcdata(): PCData
     {
         return new PCData();
+    }
+
+    public static function sequence(Constraint $a, Constraint $b, Constraint ...$rest): Sequence
+    {
+        return new Sequence($a, $b, ...$rest);
     }
 }
