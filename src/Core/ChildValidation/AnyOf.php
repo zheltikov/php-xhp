@@ -25,14 +25,14 @@ final class AnyOf implements LegacyExpression
     public function legacySerialize(): array
     {
         $it = [
-            LegacyExpressionType::EITHER(),
+            LegacyExpressionType::EITHER()->getValue(),
             $this->children[0]->legacySerialize(),
             $this->children[1]->legacySerialize(),
         ];
         $rest = Vec::drop($this->children, 2);
         while (!C::is_empty($rest)) {
             $it = [
-                LegacyExpressionType::EITHER(),
+                LegacyExpressionType::EITHER()->getValue(),
                 $it,
                 $rest[0]->legacySerialize(),
             ];

@@ -20,9 +20,10 @@ class ReflectionXHPChildrenExpression
     }
 
     // <<__Memoize>>
-    public function getType(): \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType
+    public function getType(): XHPChildrenExpressionType
     {
-        return \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::from($this->data[0]);
+        \var_dump($this->data);
+        return XHPChildrenExpressionType::from($this->data[0]);
     }
 
     // <<__Memoize>>
@@ -31,8 +32,8 @@ class ReflectionXHPChildrenExpression
     {
         $type = $this->getType();
         \Zheltikov\PhpXhp\Lib\Assert::invariant(
-            $type === \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
-            || $type === \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
+            $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
+            || $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
             'Only disjunctions and sequences have two sub-expressions - in %s',
             $this->context
         );
@@ -63,16 +64,16 @@ class ReflectionXHPChildrenExpression
     }
 
     // <<__Memoize>>
-    public function getConstraintType(): \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType
+    public function getConstraintType(): XHPChildrenConstraintType
     {
         $type = $this->getType();
         \Zheltikov\PhpXhp\Lib\Assert::invariant(
-            $type !== \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()
-            && $type !== \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION(),
+            $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
+            && $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
             'Disjunctions and sequences do not have a constraint type - in %s',
             $this->context,
         );
-        return \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::from($this->data[1]);
+        return XHPChildrenConstraintType::from($this->data[1]);
     }
 
     // <<__Memoize>>
@@ -80,8 +81,8 @@ class ReflectionXHPChildrenExpression
     {
         $type = $this->getConstraintType();
         \Zheltikov\PhpXhp\Lib\Assert::invariant(
-            $type === \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::ELEMENT()
-            || $type === \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::CATEGORY(),
+            $type->getValue() === XHPChildrenConstraintType::ELEMENT()->getValue()
+            || $type->getValue() === XHPChildrenConstraintType::CATEGORY()->getValue(),
             'Only element and category constraints have string data - in %s',
             $this->context,
         );
@@ -94,7 +95,7 @@ class ReflectionXHPChildrenExpression
     public function getSubExpression(): ReflectionXHPChildrenExpression
     {
         \Zheltikov\PhpXhp\Lib\Assert::invariant(
-            $this->getConstraintType() === \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::SUB_EXPR(),
+            $this->getConstraintType()->getValue() === XHPChildrenConstraintType::SUB_EXPR()->getValue(),
             'Only expression constraints have a single sub-expression - in %s',
             $this->context,
         );
@@ -120,24 +121,24 @@ class ReflectionXHPChildrenExpression
 
     public function __toString(): string
     {
-        switch ($this->getType()) {
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SINGLE():
+        switch ($this->getType()->getValue()) {
+            case XHPChildrenExpressionType::SINGLE()->getValue():
                 return $this->__constraintToString();
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::ANY_NUMBER():
+            case XHPChildrenExpressionType::ANY_NUMBER()->getValue():
                 return $this->__constraintToString() . '*';
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::ZERO_OR_ONE():
+            case XHPChildrenExpressionType::ZERO_OR_ONE()->getValue():
                 return $this->__constraintToString() . '?';
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::ONE_OR_MORE():
+            case XHPChildrenExpressionType::ONE_OR_MORE()->getValue():
                 return $this->__constraintToString() . '+';
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_SEQUENCE():
+            case XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue():
                 [$e1, $e2] = $this->getSubExpressions();
                 return $e1->__toString() . ',' . $e2->__toString();
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION():
+            case XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue():
                 [$e1, $e2] = $this->getSubExpressions();
                 return $e1->__toString() . '|' . $e2->__toString();
         }
@@ -145,20 +146,20 @@ class ReflectionXHPChildrenExpression
 
     private function __constraintToString(): string
     {
-        switch ($this->getConstraintType()) {
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::ANY():
+        switch ($this->getConstraintType()->getValue()) {
+            case XHPChildrenConstraintType::ANY()->getValue():
                 return 'any';
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::PCDATA():
+            case XHPChildrenConstraintType::PCDATA()->getValue():
                 return 'pcdata';
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::ELEMENT():
+            case XHPChildrenConstraintType::ELEMENT()->getValue():
                 return '\\' . $this->getConstraintString();
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::CATEGORY():
+            case XHPChildrenConstraintType::CATEGORY()->getValue():
                 return '%' . $this->getConstraintString();
 
-            case \Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType::SUB_EXPR():
+            case XHPChildrenConstraintType::SUB_EXPR()->getValue():
                 return '(' . $this->getSubExpression()->__toString() . ')';
         }
     }

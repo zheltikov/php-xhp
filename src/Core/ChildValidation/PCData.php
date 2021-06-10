@@ -8,6 +8,6 @@ final class PCData extends LeafConstraint
     // (LegacyConstraintType, mixed)
     public function legacySerializeAsLeaf(): array
     {
-        return [LegacyConstraintType::PCDATA(), null];
+        return [LegacyConstraintType::PCDATA()->getValue(), null];
     }
 }

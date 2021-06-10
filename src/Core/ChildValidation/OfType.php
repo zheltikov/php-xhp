@@ -16,7 +16,7 @@ final class OfType extends LeafConstraint
     public function legacySerializeAsLeaf(): array
     {
         return [
-            LegacyConstraintType::CLASSNAME(),
+            LegacyConstraintType::CLASSNAME()->getValue(),
             $this->classname,
         ];
     }
