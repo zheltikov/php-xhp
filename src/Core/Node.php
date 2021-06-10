@@ -879,7 +879,7 @@ abstract class Node implements XHPChild
         foreach ($this->children as $child) {
             if ($child instanceof Node) {
                 $tmp = '\\' . \get_class($child);
-                // TODO: don't call __xhpCategoryDeclaration
+                // FIXME: call to __xhpCategoryDeclaration always results in ["\0INVALID\0" => 0]
                 $categories = $child->__xhpCategoryDeclaration();
                 if (C::count($categories) > 0) {
                     $tmp .= '[%' . Str::join(Vec::keys($categories), ',%') . ']';
