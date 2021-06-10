@@ -28,7 +28,6 @@ class Vec
      * @param array $array
      * @param mixed ...$rest
      * @return array
-     * @todo Self-implement this
      */
     public static function concat(array $array, array ...$rest): array
     {

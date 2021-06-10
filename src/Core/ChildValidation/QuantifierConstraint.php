@@ -5,8 +5,6 @@ namespace Zheltikov\PhpXhp\Core\ChildValidation;
 /**
  * Class QuantifierConstraint
  * @package Zheltikov\PhpXhp\Core\ChildValidation
- *
- * @TODO: Continue work from here!!!
  */
 abstract class QuantifierConstraint implements LegacyExpression
 {

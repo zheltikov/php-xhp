@@ -44,7 +44,7 @@ class ChildValidation
             && \is_int($x[0])
             && \is_int($x[1])
             && \array_key_exists(2, $x)
-            // TODO: mimic
+
             && $x[0] === LegacyExpressionType::EXACTLY_ONE()->getValue()
             && $x[1] === LegacyConstraintType::EXPRESSION()->getValue()
         ) {
@@ -77,7 +77,7 @@ class ChildValidation
     }
 
     /**
-     * TODO: maybe passing a string is not always the best way to handle this
+     * FIXME: a string is not always the best way to handle this
      *
      * @param string $type
      * @return \Zheltikov\PhpXhp\Core\ChildValidation\OfType

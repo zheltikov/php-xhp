@@ -58,7 +58,6 @@ abstract class Element extends Node
             throw new UseAfterRenderException('Attempted to render XHP element twice');
         }
 
-        // FIXME: mimic this somehow
         if (ChildValidation::is_enabled()) {
             $this->validateChildren();
         }
@@ -78,12 +77,10 @@ abstract class Element extends Node
         $that = $this;
 
         // Flush root elements returned from render() to an primitive
-        // FIXME: this may not be correct
         while ($that instanceof Element) {
             $that = $that->__renderAndProcess();
         }
 
-        // FIXME: this may not be correct
         if ($that instanceof Primitive) {
             return $that;
         }

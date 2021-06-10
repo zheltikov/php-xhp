@@ -92,9 +92,9 @@ abstract class Node implements XHPChild
             }
         }
 
-        // FIXME: mimic this somehow
         if (ChildValidation::is_enabled()) {
             if (C::count($debug_info) >= 2) {
+                // TODO: filename:line
                 $this->source = $debug_info[0] . ':' . $debug_info[1];
             } else {
                 $this->source =
@@ -155,7 +155,7 @@ abstract class Node implements XHPChild
         // This function has been micro-optimized
         $new_children = [];
         foreach ($children as $xhp) {
-            if ($xhp instanceof Frag) { // FIXME: <<-- HERE
+            if ($xhp instanceof Frag) {
                 foreach ($xhp->children as $child) {
                     $new_children[] = $child;
                 }
@@ -325,17 +325,14 @@ abstract class Node implements XHPChild
             return $this->attributes[$attr];
         }
 
-        // FIXME: Mimic this somehow
         if (!ReflectionXHPAttribute::isSpecial($attr)) {
             // Get the declaration
             $decl = static::__xhpReflectionAttribute($attr);
 
             if ($decl === null) {
-                // FIXME: mimic
                 throw new AttributeNotSupportedException($this, $attr);
             } else {
                 if ($decl->isRequired()) {
-                    // FIXME: mimic
                     throw new AttributeRequiredException($this, $attr);
                 } else {
                     return $decl->getDefaultValue();
@@ -355,12 +352,10 @@ abstract class Node implements XHPChild
     // dict<string, ReflectionXHPAttribute>
     final public static function __xhpReflectionAttributes(): array
     {
-        // TODO: mimic this method?
         $decl = static::__xhpAttributeDeclaration();
         return Dict::map_with_key(
             $decl,
             function ($name, $attr_decl) {
-                // TODO: mimic this class
                 return new ReflectionXHPAttribute($name, $attr_decl);
             }
         );
@@ -379,7 +374,6 @@ abstract class Node implements XHPChild
     // <<__MemoizeLSB>>
     final public static function __xhpReflectionChildrenDeclaration(): ReflectionXHPChildrenDeclaration
     {
-        // TODO: mimic class
         return new ReflectionXHPChildrenDeclaration(
             static::class,
             static::__legacySerializedXHPChildrenDeclaration(),
@@ -701,7 +695,6 @@ abstract class Node implements XHPChild
             0,
         );
         if (!$ret || $ii < C::count($this->children)) {
-            // TODO: mimic
             if (($this->children[$ii] ?? null) instanceof AlwaysValidChild) {
                 return;
             }
@@ -913,7 +906,6 @@ abstract class Node implements XHPChild
             return $child->toString();
         }
 
-        // TODO: mimic
         if ($child instanceof UnsafeRenderable) {
             return $child->toHTMLString();
         }

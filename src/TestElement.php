@@ -2,7 +2,9 @@
 
 namespace Zheltikov\PhpXhp;
 
-// use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
+// use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
+// use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
+// use Zheltikov\PhpXhp\Core\ChildValidation;
 use Zheltikov\PhpXhp\Core\Element;
 use Zheltikov\PhpXhp\Core\Frag;
 use Zheltikov\PhpXhp\Core\Node;
@@ -11,31 +13,15 @@ use Zheltikov\PhpXhp\Html\Tags\P;
 
 class TestElement extends Element
 {
-    /* protected static function __legacySerializedXHPChildrenDeclaration()
-    {
-        return [
-            LegacyExpressionType::ANY_QUANTITY()->getValue(),
-            null,
-            null,
-        ];
-    } */
+    // use Validation;
 
+    /* protected static function getChildrenDeclaration(): Constraint
+    {
+        return ChildValidation::any();
+    } */
 
     protected function render(): Node
     {
-        /* return new class extends Node {
-
-            public function toString(): string
-            {
-                // TODO: Implement toString() method.
-            }
-
-            protected function __flushSubtree(): \Zheltikov\PhpXhp\Core\Primitive
-            {
-                // TODO: Implement __flushSubtree() method.
-            }
-        }; */
-
         $para = new P(
             [],
             ['three']

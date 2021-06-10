@@ -33,9 +33,8 @@ abstract class Primitive extends Node
             }
         }
         if ($awaitables) {
-            // FIXME: this may cause a memory leak
-            $awaited = $awaitables; // await Dict\from_async($awaitables);
-            foreach ($awaited as $idx => $child) {
+            // $awaited = await Dict\from_async($awaitables);
+            foreach ($awaitables as $idx => $child) {
                 $children[$idx] = $child;
             }
         }

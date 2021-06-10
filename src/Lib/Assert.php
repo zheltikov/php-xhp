@@ -38,7 +38,7 @@ class Assert
             \call_user_func(static::$callback, $format, ...$values);
         } else {
             // FIXME: this may not be the best solution
-            throw new \Exception(\Zheltikov\PhpXhp\Lib\Str::format($format, ...$values));
+            throw new \Exception(Str::format($format, ...$values));
         }
     }
 

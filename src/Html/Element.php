@@ -665,7 +665,6 @@ abstract class Element extends Primitive
                 if ($val === true) {
                     $buf .= ' ' . \htmlspecialchars($key);
                 } else {
-                    // TODO: mimic class
                     if ($val instanceof UnsafeAttributeValue_DEPRECATED) {
                         $val_str = $val->toHTMLString();
                     } else {
