@@ -460,7 +460,7 @@ abstract class Node implements XHPChild
      * Sets an attribute in this element's attribute store.
      *
      * @param string $attr attribute to set
-     * @param mixed $val value
+     * @param mixed $value value
      * @return $this
      * @throws UseAfterRenderException
      */
@@ -519,7 +519,7 @@ abstract class Node implements XHPChild
 
     /**
      * @param string $attr attribute to set
-     * @param mixed $val value
+     * @param mixed $value value
      * @return $this
      * @throws UseAfterRenderException
      * @deprecated This functionality will be removed in a future release.

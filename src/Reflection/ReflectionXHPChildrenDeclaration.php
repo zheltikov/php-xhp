@@ -2,6 +2,9 @@
 
 namespace Zheltikov\PhpXhp\Reflection;
 
+use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\PhpXhp\Lib\Assert;
+
 class ReflectionXHPChildrenDeclaration
 {
     /**
@@ -17,28 +20,28 @@ class ReflectionXHPChildrenDeclaration
     public function __construct(string $context, $data)
     {
         $this->context = $context;
-        $this->data = \Zheltikov\PhpXhp\Core\ChildValidation::normalize($data);
+        $this->data = ChildValidation::normalize($data);
     }
 
     // <<__Memoize>>
-    public function getType(): \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType
+    public function getType(): XHPChildrenDeclarationType
     {
         if (\is_iterable($this->data)) {
-            return \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::EXPRESSION();
+            return XHPChildrenDeclarationType::EXPRESSION();
         }
-        return \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::from($this->data);
+        return XHPChildrenDeclarationType::from($this->data);
     }
 
     // <<__Memoize>>
-    public function getExpression(): \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression
+    public function getExpression(): ReflectionXHPChildrenExpression
     {
         try {
             // FIXME: create TypeAssertionException
-            \Zheltikov\PhpXhp\Lib\Assert::invariant(
+            Assert::invariant(
                 \is_iterable($this->data),
                 "ReflectionXHPChildrenDeclaration's data must be a KeyedContainer"
             );
-            return new \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression(
+            return new ReflectionXHPChildrenExpression(
                 $this->context,
                 $this->data
             );
@@ -53,10 +56,10 @@ class ReflectionXHPChildrenDeclaration
 
     public function __toString(): string
     {
-        if ($this->getType() === \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::ANY_CHILDREN()) {
+        if ($this->getType() === XHPChildrenDeclarationType::ANY_CHILDREN()) {
             return 'any';
         }
-        if ($this->getType() === \Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType::NO_CHILDREN()) {
+        if ($this->getType() === XHPChildrenDeclarationType::NO_CHILDREN()) {
             return 'empty';
         }
         return $this->getExpression()->__toString();

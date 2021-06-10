@@ -2,7 +2,6 @@
 
 namespace Zheltikov\PhpXhp\Exceptions;
 
-use Zheltikov\PhpXhp\Exceptions\Exception;
 use Zheltikov\PhpXhp\Core\Node;
 
 class CoreRenderException extends Exception
