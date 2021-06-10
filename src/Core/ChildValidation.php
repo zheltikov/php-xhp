@@ -7,6 +7,8 @@ use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
 use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
+use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
+use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 
 class ChildValidation
 {
@@ -77,10 +79,15 @@ class ChildValidation
      * TODO: maybe passing a string is not always the best way to handle this
      *
      * @param string $type
-     * @return \Zheltikov\PhpXhp\Core\OfType
+     * @return \Zheltikov\PhpXhp\Core\ChildValidation\OfType
      */
     public static function of_type(string $type): OfType
     {
         return new OfType($type);
+    }
+
+    public static function pcdata(): PCData
+    {
+        return new PCData();
     }
 }
