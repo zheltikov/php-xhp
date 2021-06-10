@@ -12,5 +12,5 @@ interface Constraint
     /**
      * @return ?array
      */
-    public function legacySerializeAsLeaf(): ?array; // : ?(LegacyConstraintType, mixed);
+    public function legacySerializeAsLeaf(); // : ?array; // : ?(LegacyConstraintType, mixed);
 }
