@@ -49,12 +49,7 @@ class C
                 $first,
                 '%s',
                 $format_string === null
-                    ? Str::format(
-                    'Expected exactly one element%s.',
-                    \is_iterable($container)
-                        ? ' but got ' . static::count($container)
-                        : '',
-                )
+                    ? Str::format('Expected exactly one element but got %d.', static::count($container))
                     : \vsprintf($format_string, $format_args),
             );
             $result = $value;
