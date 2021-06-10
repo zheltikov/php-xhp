@@ -11,6 +11,7 @@ use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
 use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
 use Zheltikov\PhpXhp\Core\ChildValidation\Any;
+use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
 
 class ChildValidation
 {
@@ -102,5 +103,10 @@ class ChildValidation
     public static function any(): Any
     {
         return new Any();
+    }
+
+    public static function at_least_one_of(Constraint $a): AtLeastOneOf
+    {
+        return new AtLeastOneOf($a);
     }
 }
