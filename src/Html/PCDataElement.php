@@ -5,7 +5,7 @@ namespace Zheltikov\PhpXhp\Html;
 /**
  * Subclasses of :xhp:pcdata_elements may contain only string children.
  */
-abstract class PcdataElement extends \Zheltikov\PhpXhp\Html\Element
+abstract class PCDataElement extends \Zheltikov\PhpXhp\Html\Element
 {
     // use \Facebook\XHP\ChildValidation\Validation;
 

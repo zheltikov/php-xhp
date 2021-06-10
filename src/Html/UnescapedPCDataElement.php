@@ -19,7 +19,7 @@ use Zheltikov\PhpXhp\Core\UnsafeRenderable;
  * the element."
  */
 // <<__Sealed(script::class, style::class) >>
-abstract class UnescapedPcdataElement extends PcdataElement implements UnsafeRenderable
+abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRenderable
 {
     // <<__Override>>
     protected function stringify(): string
