@@ -47,4 +47,3 @@ final class Canvas extends Element implements Phrase, Flow, Embedded, Palpable
 
     protected string $tagName = 'canvas';
 }
-
