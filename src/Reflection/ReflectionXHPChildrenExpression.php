@@ -22,7 +22,6 @@ class ReflectionXHPChildrenExpression
     // <<__Memoize>>
     public function getType(): XHPChildrenExpressionType
     {
-        \var_dump($this->data);
         return XHPChildrenExpressionType::from($this->data[0]);
     }
 
