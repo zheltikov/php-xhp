@@ -72,4 +72,15 @@ class ChildValidation
     {
         return new AnyOf($a, $b, ...$rest);
     }
+
+    /**
+     * TODO: maybe passing a string is not always the best way to handle this
+     *
+     * @param string $type
+     * @return \Zheltikov\PhpXhp\Core\OfType
+     */
+    public static function of_type(string $type): OfType
+    {
+        return new OfType($type);
+    }
 }
