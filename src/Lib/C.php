@@ -40,7 +40,7 @@ class C
      * @return mixed
      * @throws \Exception
      */
-    function onlyx(array $container, ?string $format_string = null, ...$format_args) // : mixed
+    public static function onlyx(array $container, ?string $format_string = null, ...$format_args) // : mixed
     {
         $first = true;
         $result = null;
