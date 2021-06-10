@@ -2,9 +2,9 @@
 
 namespace Zheltikov\PhpXhp;
 
-// use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-// use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-// use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
+use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
+use Zheltikov\PhpXhp\Core\ChildValidation;
 use Zheltikov\PhpXhp\Core\Element;
 use Zheltikov\PhpXhp\Core\Frag;
 use Zheltikov\PhpXhp\Core\Node;
@@ -13,12 +13,12 @@ use Zheltikov\PhpXhp\Html\Tags\P;
 
 class TestElement extends Element
 {
-    // use Validation;
+    use Validation;
 
-    /* protected static function getChildrenDeclaration(): Constraint
+    protected static function getChildrenDeclaration(): Constraint
     {
         return ChildValidation::any();
-    } */
+    }
 
     protected function render(): Node
     {

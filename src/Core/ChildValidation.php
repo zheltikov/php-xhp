@@ -10,6 +10,7 @@ use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
 use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
 use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
+use Zheltikov\PhpXhp\Core\ChildValidation\Any;
 
 class ChildValidation
 {
@@ -95,5 +96,11 @@ class ChildValidation
     public static function sequence(Constraint $a, Constraint $b, Constraint ...$rest): Sequence
     {
         return new Sequence($a, $b, ...$rest);
+    }
+
+    // <<__Memoize>>
+    public static function any(): Any
+    {
+        return new Any();
     }
 }
