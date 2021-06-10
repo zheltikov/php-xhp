@@ -33,7 +33,7 @@ abstract class QuantifierConstraint implements LegacyExpression
 
         return [
             static::LEGACY_EXPRESSION_TYPE()->getValue(),
-            LegacyConstraintType::EXPRESSION,
+            LegacyConstraintType::EXPRESSION()->getValue(),
             $inner->legacySerialize(),
         ];
     }
