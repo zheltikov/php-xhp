@@ -6,7 +6,9 @@
             "Zheltikov\\PhpXhp\\": "src/"
         }
     },
-    "require": {},
+    "require": {
+        "myclabs/php-enum": "^1.8"
+    },
     "authors": [
         {
             "name": "Max Zheltikov",
