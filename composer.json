@@ -1,19 +1,20 @@
 {
-    "name": "zheltikov/php-xhp",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Zheltikov\\PhpXhp\\": "src/"
-        }
-    },
-    "require": {
-		"php": "^7.3",
-        "myclabs/php-enum": "^1.8"
-    },
-    "authors": [
-        {
-            "name": "Max Zheltikov",
-            "homepage": "https://github.com/zheltikov"
-        }
-    ]
+  "version": "1.0.0",
+  "name": "zheltikov/php-xhp",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Zheltikov\\PhpXhp\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.3",
+    "myclabs/php-enum": "^1.8"
+  },
+  "authors": [
+    {
+      "name": "Max Zheltikov",
+      "homepage": "https://github.com/zheltikov"
+    }
+  ]
 }
