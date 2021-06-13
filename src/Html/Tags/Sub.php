@@ -24,5 +24,8 @@ final class Sub extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'sub';
+    /**
+     * @var string
+     */
+    protected $tagName = 'sub';
 }

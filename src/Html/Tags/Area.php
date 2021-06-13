@@ -105,5 +105,8 @@ final class Area extends Singleton implements Phrase, Flow
         ];
     }
 
-    protected string $tagName = 'area';
+    /**
+     * @var string
+     */
+    protected $tagName = 'area';
 }

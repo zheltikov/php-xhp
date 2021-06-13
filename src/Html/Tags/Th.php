@@ -70,5 +70,8 @@ final class Th extends Element
         );
     }
 
-    protected string $tagName = 'th';
+    /**
+     * @var string
+     */
+    protected $tagName = 'th';
 }

@@ -24,5 +24,8 @@ final class Mark extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'mark';
+    /**
+     * @var string
+     */
+    protected $tagName = 'mark';
 }

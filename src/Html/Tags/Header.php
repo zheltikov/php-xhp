@@ -23,5 +23,8 @@ final class Header extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'header';
+    /**
+     * @var string
+     */
+    protected $tagName = 'header';
 }

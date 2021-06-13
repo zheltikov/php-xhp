@@ -24,5 +24,8 @@ final class Sup extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'sup';
+    /**
+     * @var string
+     */
+    protected $tagName = 'sup';
 }

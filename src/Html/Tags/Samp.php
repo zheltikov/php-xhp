@@ -24,5 +24,8 @@ final class Samp extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'samp';
+    /**
+     * @var string
+     */
+    protected $tagName = 'samp';
 }

@@ -12,7 +12,7 @@ class ReflectionXHPClass
      * @var string
      * classname<Node>
      */
-    private string $className;
+    private $className;
 
     public function __construct(string $className)
     {

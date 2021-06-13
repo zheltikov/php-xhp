@@ -23,5 +23,8 @@ final class Caption extends Element
         );
     }
 
-    protected string $tagName = 'caption';
+    /**
+     * @var string
+     */
+    protected $tagName = 'caption';
 }

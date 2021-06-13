@@ -111,5 +111,8 @@ final class Img extends Singleton implements Phrase, Flow, Embedded, Palpable, I
         ];
     }
 
-    protected string $tagName = 'img';
+    /**
+     * @var string
+     */
+    protected $tagName = 'img';
 }

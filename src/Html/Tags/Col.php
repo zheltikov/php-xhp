@@ -19,5 +19,8 @@ final class Col extends Singleton
         ];
     }
 
-    protected string $tagName = 'col';
+    /**
+     * @var string
+     */
+    protected $tagName = 'col';
 }

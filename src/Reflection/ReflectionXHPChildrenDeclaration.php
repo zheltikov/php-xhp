@@ -11,7 +11,10 @@ class ReflectionXHPChildrenDeclaration
      * @var mixed
      */
     private $data;
-    private string $context;
+    /**
+     * @var string
+     */
+    private $context;
 
     /**
      * @param string $context

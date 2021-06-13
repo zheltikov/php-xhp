@@ -94,5 +94,8 @@ final class Iframe extends PCDataElement implements Phrase, Flow, Interactive, E
         ];
     }
 
-    protected string $tagName = 'iframe';
+    /**
+     * @var string
+     */
+    protected $tagName = 'iframe';
 }

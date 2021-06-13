@@ -19,5 +19,8 @@ final class Head extends Element
         );
     }
 
-    protected string $tagName = 'head';
+    /**
+     * @var string
+     */
+    protected $tagName = 'head';
 }

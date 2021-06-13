@@ -28,5 +28,8 @@ final class Figure extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'figure';
+    /**
+     * @var string
+     */
+    protected $tagName = 'figure';
 }

@@ -23,5 +23,8 @@ final class Tt extends Element implements Phrase, Flow
         );
     }
 
-    protected string $tagName = 'tt';
+    /**
+     * @var string
+     */
+    protected $tagName = 'tt';
 }

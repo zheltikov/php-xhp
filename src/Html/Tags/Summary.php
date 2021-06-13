@@ -22,5 +22,8 @@ final class Summary extends Element
         );
     }
 
-    protected string $tagName = 'summary';
+    /**
+     * @var string
+     */
+    protected $tagName = 'summary';
 }

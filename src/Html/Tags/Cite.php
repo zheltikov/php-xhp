@@ -24,5 +24,8 @@ final class Cite extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'cite';
+    /**
+     * @var string
+     */
+    protected $tagName = 'cite';
 }

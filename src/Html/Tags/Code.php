@@ -24,5 +24,8 @@ final class Code extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'code';
+    /**
+     * @var string
+     */
+    protected $tagName = 'code';
 }

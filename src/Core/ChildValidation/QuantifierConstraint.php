@@ -8,7 +8,10 @@ namespace Zheltikov\PhpXhp\Core\ChildValidation;
  */
 abstract class QuantifierConstraint implements LegacyExpression
 {
-    private Constraint $child;
+    /**
+     * @var \Zheltikov\PhpXhp\Core\ChildValidation\Constraint
+     */
+    private $child;
 
     abstract public static function LEGACY_EXPRESSION_TYPE(): LegacyExpressionType;
 

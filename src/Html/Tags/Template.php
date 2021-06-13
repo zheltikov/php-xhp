@@ -12,5 +12,8 @@ final class Template extends Element implements Phrase, Metadata, Flow
     // The children declaration for this element is extraordinarily verbose so
     // I leave it to you to use it appropriately.
 
-    protected string $tagName = 'template';
+    /**
+     * @var string
+     */
+    protected $tagName = 'template';
 }

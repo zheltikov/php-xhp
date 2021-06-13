@@ -22,5 +22,8 @@ final class Figcaption extends Element
         );
     }
 
-    protected string $tagName = 'figcaption';
+    /**
+     * @var string
+     */
+    protected $tagName = 'figcaption';
 }

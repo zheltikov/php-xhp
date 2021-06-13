@@ -46,5 +46,8 @@ final class Keygen extends Singleton implements Phrase, Flow, Interactive
         ];
     }
 
-    protected string $tagName = 'keygen';
+    /**
+     * @var string
+     */
+    protected $tagName = 'keygen';
 }

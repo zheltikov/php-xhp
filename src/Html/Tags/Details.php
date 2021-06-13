@@ -38,5 +38,8 @@ final class Details extends Element implements Flow, Interactive, Sectioning, Pa
         );
     }
 
-    protected string $tagName = 'details';
+    /**
+     * @var string
+     */
+    protected $tagName = 'details';
 }

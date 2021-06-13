@@ -24,5 +24,8 @@ final class Address extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'address';
+    /**
+     * @var string
+     */
+    protected $tagName = 'address';
 }

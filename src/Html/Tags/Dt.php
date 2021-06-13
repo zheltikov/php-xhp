@@ -22,5 +22,8 @@ final class Dt extends Element
         );
     }
 
-    protected string $tagName = 'dt';
+    /**
+     * @var string
+     */
+    protected $tagName = 'dt';
 }

@@ -57,5 +57,8 @@ final class Table extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'table';
+    /**
+     * @var string
+     */
+    protected $tagName = 'table';
 }

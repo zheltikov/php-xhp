@@ -25,5 +25,8 @@ final class H3 extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'h3';
+    /**
+     * @var string
+     */
+    protected $tagName = 'h3';
 }

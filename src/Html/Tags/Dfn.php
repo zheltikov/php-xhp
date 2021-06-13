@@ -24,5 +24,8 @@ final class Dfn extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'dfn';
+    /**
+     * @var string
+     */
+    protected $tagName = 'dfn';
 }

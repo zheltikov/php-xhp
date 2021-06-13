@@ -31,5 +31,8 @@ final class Colgroup extends Element
         );
     }
 
-    protected string $tagName = 'colgroup';
+    /**
+     * @var string
+     */
+    protected $tagName = 'colgroup';
 }

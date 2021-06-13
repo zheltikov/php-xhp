@@ -90,5 +90,8 @@ final class Embed extends Element implements Phrase, Flow, Interactive, Embedded
         );
     }
 
-    protected string $tagName = 'embed';
+    /**
+     * @var string
+     */
+    protected $tagName = 'embed';
 }

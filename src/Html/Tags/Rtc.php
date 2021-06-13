@@ -22,5 +22,8 @@ class Rtc extends Element
         );
     }
 
-    protected string $tagName = 'rtc';
+    /**
+     * @var string
+     */
+    protected $tagName = 'rtc';
 }

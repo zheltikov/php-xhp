@@ -23,5 +23,8 @@ final class Main extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'main';
+    /**
+     * @var string
+     */
+    protected $tagName = 'main';
 }

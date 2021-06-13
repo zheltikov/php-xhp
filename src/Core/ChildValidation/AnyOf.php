@@ -11,7 +11,7 @@ final class AnyOf implements LegacyExpression
      * @var array
      * vec<T>
      */
-    private array $children;
+    private $children;
 
     public function __construct(Constraint $a, Constraint $b, Constraint ...$rest)
     {

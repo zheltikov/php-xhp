@@ -37,5 +37,8 @@ final class Time extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'time';
+    /**
+     * @var string
+     */
+    protected $tagName = 'time';
 }

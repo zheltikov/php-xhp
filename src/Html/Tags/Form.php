@@ -91,5 +91,8 @@ final class Form extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'form';
+    /**
+     * @var string
+     */
+    protected $tagName = 'form';
 }

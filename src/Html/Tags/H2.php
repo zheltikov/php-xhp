@@ -25,5 +25,8 @@ final class H2 extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'h2';
+    /**
+     * @var string
+     */
+    protected $tagName = 'h2';
 }

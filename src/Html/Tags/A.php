@@ -105,5 +105,8 @@ final class A extends Element implements Phrase, Flow, Interactive, Palpable
         );
     }
 
-    protected string $tagName = 'a';
+    /**
+     * @var string
+     */
+    protected $tagName = 'a';
 }

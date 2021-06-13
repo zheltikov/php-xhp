@@ -23,5 +23,8 @@ final class Footer extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'footer';
+    /**
+     * @var string
+     */
+    protected $tagName = 'footer';
 }

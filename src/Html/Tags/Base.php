@@ -26,5 +26,8 @@ final class Base extends Singleton implements Metadata
         ];
     }
 
-    protected string $tagName = 'base';
+    /**
+     * @var string
+     */
+    protected $tagName = 'base';
 }

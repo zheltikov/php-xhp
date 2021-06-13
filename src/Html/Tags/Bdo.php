@@ -24,5 +24,8 @@ final class Bdo extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'bdo';
+    /**
+     * @var string
+     */
+    protected $tagName = 'bdo';
 }

@@ -116,5 +116,8 @@ final class Video extends Element implements Phrase, Flow, Interactive, Embedded
         );
     }
 
-    protected string $tagName = 'video';
+    /**
+     * @var string
+     */
+    protected $tagName = 'video';
 }

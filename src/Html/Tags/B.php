@@ -24,5 +24,8 @@ final class B extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'b';
+    /**
+     * @var string
+     */
+    protected $tagName = 'b';
 }

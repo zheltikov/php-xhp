@@ -655,7 +655,10 @@ abstract class Element extends Primitive
         ];
     }
 
-    protected string $tagName = '';
+    /**
+     * @var string
+     */
+    protected $tagName = '';
 
     protected final function renderBaseAttrs(): string
     {

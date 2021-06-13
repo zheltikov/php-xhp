@@ -22,5 +22,8 @@ final class Legend extends Element
         );
     }
 
-    protected string $tagName = 'legend';
+    /**
+     * @var string
+     */
+    protected $tagName = 'legend';
 }

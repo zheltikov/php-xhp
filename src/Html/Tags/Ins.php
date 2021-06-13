@@ -43,5 +43,8 @@ final class Ins extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'ins';
+    /**
+     * @var string
+     */
+    protected $tagName = 'ins';
 }

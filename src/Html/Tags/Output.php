@@ -49,5 +49,8 @@ final class Output extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'output';
+    /**
+     * @var string
+     */
+    protected $tagName = 'output';
 }

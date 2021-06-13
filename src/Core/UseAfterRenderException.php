@@ -14,7 +14,7 @@ final class UseAfterRenderException extends \RuntimeException
      * @var array
      * vec<classname<Node>>
      */
-    private array $xhpPath = [];
+    private $xhpPath = [];
 
     public function __construct(string $message)
     {

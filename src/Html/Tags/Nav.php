@@ -24,5 +24,8 @@ final class Nav extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'nav';
+    /**
+     * @var string
+     */
+    protected $tagName = 'nav';
 }

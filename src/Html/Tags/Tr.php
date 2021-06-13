@@ -21,5 +21,8 @@ final class Tr extends Element
         );
     }
 
-    protected string $tagName = 'tr';
+    /**
+     * @var string
+     */
+    protected $tagName = 'tr';
 }

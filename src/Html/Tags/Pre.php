@@ -24,5 +24,8 @@ final class Pre extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'pre';
+    /**
+     * @var string
+     */
+    protected $tagName = 'pre';
 }

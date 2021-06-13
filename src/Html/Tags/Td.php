@@ -48,5 +48,8 @@ final class Td extends Element implements Sectioning
         );
     }
 
-    protected string $tagName = 'td';
+    /**
+     * @var string
+     */
+    protected $tagName = 'td';
 }

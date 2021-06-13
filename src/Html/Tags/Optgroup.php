@@ -37,5 +37,8 @@ final class Optgroup extends Element
         );
     }
 
-    protected string $tagName = 'optgroup';
+    /**
+     * @var string
+     */
+    protected $tagName = 'optgroup';
 }

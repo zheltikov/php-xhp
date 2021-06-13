@@ -18,5 +18,8 @@ final class Tfoot extends Element
         );
     }
 
-    protected string $tagName = 'tfoot';
+    /**
+     * @var string
+     */
+    protected $tagName = 'tfoot';
 }

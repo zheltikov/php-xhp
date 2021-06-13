@@ -37,5 +37,8 @@ final class Option extends PCDataElement
         ];
     }
 
-    protected string $tagName = 'option';
+    /**
+     * @var string
+     */
+    protected $tagName = 'option';
 }

@@ -23,5 +23,8 @@ final class Dl extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'dl';
+    /**
+     * @var string
+     */
+    protected $tagName = 'dl';
 }

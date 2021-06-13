@@ -85,5 +85,8 @@ final class _Object extends Element implements Phrase, Flow, Interactive, Embedd
         );
     }
 
-    protected string $tagName = 'object';
+    /**
+     * @var string
+     */
+    protected $tagName = 'object';
 }

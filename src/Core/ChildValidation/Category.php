@@ -6,7 +6,10 @@ use Zheltikov\PhpXhp\Lib\Str;
 
 final class Category extends LeafConstraint
 {
-    private string $category;
+    /**
+     * @var string
+     */
+    private $category;
 
     public function __construct(string $category)
     {

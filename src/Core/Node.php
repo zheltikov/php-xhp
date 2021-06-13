@@ -24,27 +24,33 @@ abstract class Node implements XHPChild
     // Must be kept in sync with compiler
     const SPREAD_PREFIX = '...$';
 
-    protected bool $__isRendered = false;
+    /**
+     * @var bool
+     */
+    protected $__isRendered = false;
 
     /**
      * @var array
      * dict<string, mixed>
      */
-    private array $attributes = [];
+    private $attributes = [];
 
     /**
      * @var array
      * vec<\XHPChild>
      */
-    private array $children = [];
+    private $children = [];
 
     /**
      * @var array
      * dict<string, mixed>
      */
-    private array $context = [];
+    private $context = [];
 
-    public ?string $source = null;
+    /**
+     * @var string|null
+     */
+    public $source = null;
 
     protected function init(): void
     {

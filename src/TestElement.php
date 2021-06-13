@@ -33,7 +33,7 @@ class TestElement extends Element
                 $this->getAttribute('the_title') . ': ' . $this->getAttribute('text'),
                 new P(
                     ['...$' => $this], // attributes
-                    [...$this->getChildren()]
+                    $this->getChildren() // children
                 ),
                 new Frag(
                     [],

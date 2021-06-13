@@ -24,5 +24,8 @@ final class Bdi extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'bdi';
+    /**
+     * @var string
+     */
+    protected $tagName = 'bdi';
 }

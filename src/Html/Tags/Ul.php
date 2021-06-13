@@ -21,5 +21,8 @@ final class Ul extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'ul';
+    /**
+     * @var string
+     */
+    protected $tagName = 'ul';
 }

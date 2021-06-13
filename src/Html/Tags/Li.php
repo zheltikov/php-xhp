@@ -35,5 +35,8 @@ final class Li extends Element
         );
     }
 
-    protected string $tagName = 'li';
+    /**
+     * @var string
+     */
+    protected $tagName = 'li';
 }

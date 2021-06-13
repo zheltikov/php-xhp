@@ -10,8 +10,11 @@ class ReflectionXHPChildrenExpression
      * @var array
      * KeyedContainer<arraykey, mixed>
      */
-    private array $data;
-    private string $context;
+    private $data;
+    /**
+     * @var string
+     */
+    private $context;
 
     public function __construct(
         string $context,
