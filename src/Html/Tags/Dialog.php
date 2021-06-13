@@ -31,5 +31,8 @@ final class Dialog extends Element implements Flow, Sectioning
         return ChildValidation::of_type(Flow::class);
     }
 
-    protected string $tagName = 'dialog';
+    /**
+     * @var string
+     */
+    protected $tagName = 'dialog';
 }

@@ -4,7 +4,10 @@ namespace Zheltikov\PhpXhp\Core\ChildValidation;
 
 final class OfType extends LeafConstraint
 {
-    private string $classname;
+    /**
+     * @var string
+     */
+    private $classname;
 
     public function __construct(string $classname)
     {

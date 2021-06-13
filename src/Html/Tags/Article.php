@@ -24,5 +24,8 @@ final class Article extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'article';
+    /**
+     * @var string
+     */
+    protected $tagName = 'article';
 }

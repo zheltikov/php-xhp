@@ -51,5 +51,8 @@ final class Menu extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'menu';
+    /**
+     * @var string
+     */
+    protected $tagName = 'menu';
 }

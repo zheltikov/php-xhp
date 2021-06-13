@@ -21,5 +21,8 @@ final class Datalist extends Element implements Phrase, Flow
         );
     }
 
-    protected string $tagName = 'datalist';
+    /**
+     * @var string
+     */
+    protected $tagName = 'datalist';
 }

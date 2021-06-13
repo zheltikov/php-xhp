@@ -23,5 +23,8 @@ final class Div extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'div';
+    /**
+     * @var string
+     */
+    protected $tagName = 'div';
 }

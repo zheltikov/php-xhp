@@ -120,5 +120,8 @@ final class Body extends Element implements Sectioning
         );
     }
 
-    protected string $tagName = 'body';
+    /**
+     * @var string
+     */
+    protected $tagName = 'body';
 }

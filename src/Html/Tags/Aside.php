@@ -24,5 +24,8 @@ final class Aside extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'aside';
+    /**
+     * @var string
+     */
+    protected $tagName = 'aside';
 }

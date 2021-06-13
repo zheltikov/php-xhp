@@ -18,5 +18,8 @@ final class Tbody extends Element
         );
     }
 
-    protected string $tagName = 'tbody';
+    /**
+     * @var string
+     */
+    protected $tagName = 'tbody';
 }

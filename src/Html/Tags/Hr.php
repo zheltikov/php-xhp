@@ -7,5 +7,8 @@ use Zheltikov\PhpXhp\Html\Singleton;
 
 final class Hr extends Singleton implements Flow
 {
-    protected string $tagName = 'hr';
+    /**
+     * @var string
+     */
+    protected $tagName = 'hr';
 }

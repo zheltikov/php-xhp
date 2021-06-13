@@ -25,5 +25,8 @@ final class Noscript extends Element implements Phrase, Metadata, Flow
         );
     }
 
-    protected string $tagName = 'noscript';
+    /**
+     * @var string
+     */
+    protected $tagName = 'noscript';
 }

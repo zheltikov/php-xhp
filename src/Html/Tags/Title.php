@@ -7,5 +7,8 @@ use Zheltikov\PhpXhp\Html\PCDataElement;
 
 final class Title extends PCDataElement implements Metadata
 {
-    protected string $tagName = 'title';
+    /**
+     * @var string
+     */
+    protected $tagName = 'title';
 }

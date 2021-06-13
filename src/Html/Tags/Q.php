@@ -37,5 +37,8 @@ final class Q extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'q';
+    /**
+     * @var string
+     */
+    protected $tagName = 'q';
 }

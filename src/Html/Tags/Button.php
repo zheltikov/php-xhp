@@ -106,5 +106,8 @@ final class Button extends Element implements Phrase, Flow, Interactive, Palpabl
         );
     }
 
-    protected string $tagName = 'button';
+    /**
+     * @var string
+     */
+    protected $tagName = 'button';
 }

@@ -225,5 +225,8 @@ final class Input extends Singleton implements Phrase, Flow, Interactive, Palpab
         ];
     }
 
-    protected string $tagName = 'input';
+    /**
+     * @var string
+     */
+    protected $tagName = 'input';
 }

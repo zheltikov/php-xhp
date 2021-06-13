@@ -8,5 +8,8 @@ use Zheltikov\PhpXhp\Html\Singleton;
 
 final class Wbr extends Singleton implements Phrase, Flow
 {
-    protected string $tagName = 'wbr';
+    /**
+     * @var string
+     */
+    protected $tagName = 'wbr';
 }

@@ -24,5 +24,8 @@ final class Abbr extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'abbr';
+    /**
+     * @var string
+     */
+    protected $tagName = 'abbr';
 }

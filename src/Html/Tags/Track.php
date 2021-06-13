@@ -49,5 +49,8 @@ final class Track extends Singleton
         ];
     }
 
-    protected string $tagName = 'track';
+    /**
+     * @var string
+     */
+    protected $tagName = 'track';
 }

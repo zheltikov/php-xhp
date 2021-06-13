@@ -24,5 +24,8 @@ final class Strong extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'strong';
+    /**
+     * @var string
+     */
+    protected $tagName = 'strong';
 }

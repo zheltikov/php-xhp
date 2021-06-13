@@ -93,5 +93,8 @@ final class Audio extends Element implements Phrase, Flow, Interactive, Embedded
         );
     }
 
-    protected string $tagName = 'audio';
+    /**
+     * @var string
+     */
+    protected $tagName = 'audio';
 }

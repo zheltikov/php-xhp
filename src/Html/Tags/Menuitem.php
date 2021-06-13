@@ -65,5 +65,8 @@ final class Menuitem extends Singleton
         ];
     }
 
-    protected string $tagName = 'menuitem';
+    /**
+     * @var string
+     */
+    protected $tagName = 'menuitem';
 }

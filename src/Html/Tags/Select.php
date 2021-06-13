@@ -74,5 +74,8 @@ final class Select extends Element implements Phrase, Flow, Interactive, Palpabl
         );
     }
 
-    protected string $tagName = 'select';
+    /**
+     * @var string
+     */
+    protected $tagName = 'select';
 }

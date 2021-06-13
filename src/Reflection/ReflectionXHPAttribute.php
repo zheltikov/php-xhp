@@ -9,7 +9,10 @@ use Zheltikov\PhpXhp\Lib\Vec;
 
 class ReflectionXHPAttribute
 {
-    private XHPAttributeType $type;
+    /**
+     * @var \Zheltikov\PhpXhp\Reflection\XHPAttributeType
+     */
+    private $type;
 
     /**
      * OBJECT: string (class name)
@@ -27,15 +30,18 @@ class ReflectionXHPAttribute
     /**
      * @var bool
      */
-    private bool $required;
+    private $required;
 
     /**
      * @var array
      * keyset<string>
      */
-    private static array $specialAttributes = ['data', 'aria'];
+    private static $specialAttributes = ['data', 'aria'];
 
-    private string $name;
+    /**
+     * @var string
+     */
+    private $name;
 
     public function __construct(string $name, array $decl)
     {

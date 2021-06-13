@@ -24,5 +24,8 @@ class P extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'p';
+    /**
+     * @var string
+     */
+    protected $tagName = 'p';
 }

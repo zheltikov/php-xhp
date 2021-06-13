@@ -18,7 +18,10 @@ use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
 
 class ChildValidation
 {
-    private static bool $validateChildren = true;
+    /**
+     * @var bool
+     */
+    private static $validateChildren = true;
 
     public static function is_enabled(): bool
     {

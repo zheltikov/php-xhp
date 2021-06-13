@@ -24,5 +24,8 @@ final class I extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'i';
+    /**
+     * @var string
+     */
+    protected $tagName = 'i';
 }

@@ -32,6 +32,9 @@ final class Data extends Element implements Phrase, Flow
             ChildValidation::of_type(Phrase::class)
         );
     }
-    
-    protected string $tagName = 'data';
+
+    /**
+     * @var string
+     */
+    protected $tagName = 'data';
 }

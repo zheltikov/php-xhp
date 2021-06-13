@@ -24,5 +24,8 @@ final class Span extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'span';
+    /**
+     * @var string
+     */
+    protected $tagName = 'span';
 }

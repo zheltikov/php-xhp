@@ -114,5 +114,8 @@ final class Link extends Singleton implements Phrase, Metadata, Flow
         ];
     }
 
-    protected string $tagName = 'link';
+    /**
+     * @var string
+     */
+    protected $tagName = 'link';
 }

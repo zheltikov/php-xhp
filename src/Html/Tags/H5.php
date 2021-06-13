@@ -25,5 +25,8 @@ final class H5 extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'h5';
+    /**
+     * @var string
+     */
+    protected $tagName = 'h5';
 }

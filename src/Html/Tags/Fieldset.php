@@ -52,5 +52,8 @@ final class Fieldset extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'fieldset';
+    /**
+     * @var string
+     */
+    protected $tagName = 'fieldset';
 }

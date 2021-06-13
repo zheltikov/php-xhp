@@ -51,5 +51,8 @@ final class Ol extends Element implements Flow, Palpable
         );
     }
 
-    protected string $tagName = 'ol';
+    /**
+     * @var string
+     */
+    protected $tagName = 'ol';
 }

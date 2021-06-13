@@ -42,5 +42,8 @@ final class Ruby extends Element implements Phrase, Flow
         );
     }
 
-    protected string $tagName = 'ruby';
+    /**
+     * @var string
+     */
+    protected $tagName = 'ruby';
 }

@@ -24,5 +24,8 @@ final class Kbd extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'kbd';
+    /**
+     * @var string
+     */
+    protected $tagName = 'kbd';
 }

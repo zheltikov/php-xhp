@@ -24,5 +24,8 @@ final class Em extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'em';
+    /**
+     * @var string
+     */
+    protected $tagName = 'em';
 }

@@ -37,5 +37,8 @@ final class Blockquote extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'blockquote';
+    /**
+     * @var string
+     */
+    protected $tagName = 'blockquote';
 }

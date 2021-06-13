@@ -44,5 +44,8 @@ final class Label extends Element implements Phrase, Flow, Interactive
         );
     }
 
-    protected string $tagName = 'label';
+    /**
+     * @var string
+     */
+    protected $tagName = 'label';
 }

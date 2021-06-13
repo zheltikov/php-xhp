@@ -25,5 +25,8 @@ final class H6 extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'h6';
+    /**
+     * @var string
+     */
+    protected $tagName = 'h6';
 }

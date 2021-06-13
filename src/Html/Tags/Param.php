@@ -25,5 +25,8 @@ final class Param extends PCDataElement
         ];
     }
 
-    protected string $tagName = 'param';
+    /**
+     * @var string
+     */
+    protected $tagName = 'param';
 }

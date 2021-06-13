@@ -25,5 +25,8 @@ final class H4 extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'h4';
+    /**
+     * @var string
+     */
+    protected $tagName = 'h4';
 }

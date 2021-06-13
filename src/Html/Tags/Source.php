@@ -43,5 +43,8 @@ final class Source extends Singleton
         ];
     }
 
-    protected string $tagName = 'source';
+    /**
+     * @var string
+     */
+    protected $tagName = 'source';
 }

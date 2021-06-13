@@ -37,5 +37,8 @@ final class Map extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'map';
+    /**
+     * @var string
+     */
+    protected $tagName = 'map';
 }

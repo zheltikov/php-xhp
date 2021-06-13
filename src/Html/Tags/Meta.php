@@ -54,5 +54,8 @@ final class Meta extends Singleton implements Phrase, Flow, Metadata
         ];
     }
 
-    protected string $tagName = 'meta';
+    /**
+     * @var string
+     */
+    protected $tagName = 'meta';
 }

@@ -22,5 +22,8 @@ class Rp extends Element
         );
     }
 
-    protected string $tagName = 'rp';
+    /**
+     * @var string
+     */
+    protected $tagName = 'rp';
 }

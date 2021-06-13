@@ -98,5 +98,8 @@ final class Textarea extends PCDataElement implements Phrase, Flow, Interactive,
         ];
     }
 
-    protected string $tagName = 'textarea';
+    /**
+     * @var string
+     */
+    protected $tagName = 'textarea';
 }

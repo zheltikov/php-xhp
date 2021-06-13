@@ -24,5 +24,8 @@ final class Section extends Element implements Flow, Sectioning, Palpable
         );
     }
 
-    protected string $tagName = 'section';
+    /**
+     * @var string
+     */
+    protected $tagName = 'section';
 }

@@ -68,5 +68,8 @@ final class Meter extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'meter';
+    /**
+     * @var string
+     */
+    protected $tagName = 'meter';
 }

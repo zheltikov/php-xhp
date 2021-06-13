@@ -32,5 +32,8 @@ final class Style extends UnescapedPCDataElement implements Metadata
         ];
     }
 
-    protected string $tagName = 'style';
+    /**
+     * @var string
+     */
+    protected $tagName = 'style';
 }

@@ -22,5 +22,8 @@ class Rt extends Element
         );
     }
 
-    protected string $tagName = 'rt';
+    /**
+     * @var string
+     */
+    protected $tagName = 'rt';
 }

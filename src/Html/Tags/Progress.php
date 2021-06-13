@@ -44,5 +44,8 @@ final class Progress extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'progress';
+    /**
+     * @var string
+     */
+    protected $tagName = 'progress';
 }

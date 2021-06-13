@@ -28,5 +28,8 @@ final class Hgroup extends Element implements Flow, Heading, Palpable
         );
     }
 
-    protected string $tagName = 'hgroup';
+    /**
+     * @var string
+     */
+    protected $tagName = 'hgroup';
 }

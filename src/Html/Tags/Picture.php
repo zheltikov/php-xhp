@@ -22,5 +22,8 @@ final class Picture extends Element implements Phrase, Flow, Embedded
         );
     }
 
-    protected string $tagName = 'picture';
+    /**
+     * @var string
+     */
+    protected $tagName = 'picture';
 }

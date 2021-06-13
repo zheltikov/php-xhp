@@ -18,5 +18,8 @@ final class Thead extends Element
         );
     }
 
-    protected string $tagName = 'thead';
+    /**
+     * @var string
+     */
+    protected $tagName = 'thead';
 }

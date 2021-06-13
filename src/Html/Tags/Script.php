@@ -91,5 +91,8 @@ final class Script extends UnescapedPCDataElement implements Phrase, Metadata, F
         ];
     }
 
-    protected string $tagName = 'script';
+    /**
+     * @var string
+     */
+    protected $tagName = 'script';
 }

@@ -38,5 +38,8 @@ final class Html extends Element
         );
     }
 
-    protected string $tagName = 'html';
+    /**
+     * @var string
+     */
+    protected $tagName = 'html';
 }

@@ -24,5 +24,8 @@ final class _Var extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'var';
+    /**
+     * @var string
+     */
+    protected $tagName = 'var';
 }

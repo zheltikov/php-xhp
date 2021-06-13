@@ -43,5 +43,8 @@ final class Del extends Element implements Phrase, Flow
         );
     }
 
-    protected string $tagName = 'del';
+    /**
+     * @var string
+     */
+    protected $tagName = 'del';
 }

@@ -36,5 +36,8 @@ final class Slot extends Element implements Phrase, Flow
         );
     }
 
-    protected string $tagName = 'slot';
+    /**
+     * @var string
+     */
+    protected $tagName = 'slot';
 }

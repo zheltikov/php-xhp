@@ -24,5 +24,8 @@ final class Small extends Element implements Phrase, Flow, Palpable
         );
     }
 
-    protected string $tagName = 'small';
+    /**
+     * @var string
+     */
+    protected $tagName = 'small';
 }
