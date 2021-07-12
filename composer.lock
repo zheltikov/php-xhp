@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d08a0ee469f6a45519e0fcd37cfeab6",
+    "content-hash": "8c8e5c77477e5f4dafa8cfcab3be3097",
     "packages": [
         {
             "name": "myclabs/php-enum",
@@ -65,6 +65,97 @@
                 }
             ],
             "time": "2021-02-15T16:11:48+00:00"
+        },
+        {
+            "name": "zheltikov/php-invariant",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zheltikov/php-invariant.git",
+                "reference": "1013020ee2babbcdfbb8742ab3033a6105888612"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zheltikov/php-invariant/zipball/1013020ee2babbcdfbb8742ab3033a6105888612",
+                "reference": "1013020ee2babbcdfbb8742ab3033a6105888612",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "nazar-pc/phpt-tests-runner": "^1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zheltikov\\Invariant\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Max Zheltikov",
+                    "homepage": "https://github.com/zheltikov"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/zheltikov/php-invariant/issues",
+                "source": "https://github.com/zheltikov/php-invariant/tree/1.0.0"
+            },
+            "time": "2021-07-09T18:11:44+00:00"
+        },
+        {
+            "name": "zheltikov/php-memoize",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zheltikov/php-memoize.git",
+                "reference": "22726c83243fc6b8b751adf96573c209e9c603aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/22726c83243fc6b8b751adf96573c209e9c603aa",
+                "reference": "22726c83243fc6b8b751adf96573c209e9c603aa",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4",
+                "zheltikov/php-invariant": "^1.0"
+            },
+            "require-dev": {
+                "nazar-pc/phpt-tests-runner": "^1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zheltikov\\Memoize\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Max Zheltikov",
+                    "homepage": "https://github.com/zheltikov"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/zheltikov/php-memoize/issues",
+                "source": "https://github.com/zheltikov/php-memoize/tree/1.1.0"
+            },
+            "time": "2021-07-09T19:08:22+00:00"
         }
     ],
     "packages-dev": [],

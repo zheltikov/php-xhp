@@ -9,7 +9,8 @@
   },
   "require": {
     "php": "^7.3",
-    "myclabs/php-enum": "^1.8"
+    "myclabs/php-enum": "^1.8",
+    "zheltikov/php-memoize": "^1.1"
   },
   "authors": [
     {
