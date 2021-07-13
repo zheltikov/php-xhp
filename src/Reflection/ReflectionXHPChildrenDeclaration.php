@@ -4,7 +4,6 @@ namespace Zheltikov\PhpXhp\Reflection;
 
 use Exception;
 use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Lib\Assert;
 
 use function Zheltikov\Invariant\invariant;
 use function Zheltikov\Memoize\wrap;

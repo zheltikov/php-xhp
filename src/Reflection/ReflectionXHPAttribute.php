@@ -2,7 +2,6 @@
 
 namespace Zheltikov\PhpXhp\Reflection;
 
-use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;

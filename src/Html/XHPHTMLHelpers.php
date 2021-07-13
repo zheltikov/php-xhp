@@ -2,7 +2,6 @@
 
 namespace Zheltikov\PhpXhp\Html;
 
-use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\Str;
 
 use function Zheltikov\Invariant\invariant;

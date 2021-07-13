@@ -4,7 +4,6 @@ namespace Zheltikov\PhpXhp\Reflection;
 
 use ReflectionClass;
 use Zheltikov\PhpXhp\Core\Node;
-use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 
 use function Zheltikov\Invariant\invariant;

@@ -8,7 +8,6 @@ use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
 use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
 use Zheltikov\PhpXhp\Exceptions\InvalidChildrenException;
 use Zheltikov\PhpXhp\Exceptions\RenderArrayException;
-use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Dict;
 use Zheltikov\PhpXhp\Lib\Str;

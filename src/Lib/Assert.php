@@ -2,11 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Lib;
 
-use function Zheltikov\Invariant\{
-    invariant,
-    invariant_callback_register,
-    invariant_violation,
-};
+use function Zheltikov\Invariant\{invariant, invariant_callback_register, invariant_violation,};
 
 /**
  * Class Assert

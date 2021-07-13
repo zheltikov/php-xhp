@@ -3,7 +3,6 @@
 namespace Zheltikov\PhpXhp\Core;
 
 use RuntimeException;
-use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
@@ -32,7 +31,7 @@ final class UseAfterRenderException extends RuntimeException
     {
         invariant(class_exists($node), 'Node class name must exist');
         invariant(in_array(Node::class, class_parents($node)), 'Node class name must extend Node');
-        
+
         $this->xhpPath[] = $node;
 
         // FIXME: this is a quick workaround
