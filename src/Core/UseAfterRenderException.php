@@ -2,15 +2,14 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
-use RuntimeException;
+use Zheltikov\Exceptions\InvalidOperationException;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 
 use function Zheltikov\Invariant\invariant;
 
-// FIXME: extends \InvalidOperationException
-final class UseAfterRenderException extends RuntimeException
+final class UseAfterRenderException extends InvalidOperationException
 {
     /**
      * @var array

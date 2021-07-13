@@ -5,7 +5,7 @@ namespace Zheltikov\PhpXhp\Core;
 abstract class Primitive extends Node
 {
     abstract protected function stringify(): string;
-    
+
     /**
      * @return string
      * @throws \Zheltikov\Invariant\InvariantException
