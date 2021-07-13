@@ -20,6 +20,7 @@ use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
 
+use function Zheltikov\Invariant\{invariant, invariant_violation};
 use function Zheltikov\Memoize\wrap;
 
 abstract class Node implements XHPChild
@@ -72,15 +73,16 @@ abstract class Node implements XHPChild
      * @param array $attributes (KeyedTraversable<string, mixed>) map of attributes to values
      * @param array $children (Traversable<?\XHPChild>) list of children
      * @param mixed $debug_info (dynamic) will in the source when childValidation is enabled
-     * @throws \Exception
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     final public function __construct(array $attributes = [], array $children = [], ...$debug_info)
     {
-        Assert::invariant(
+        invariant(
             $this->__xhpChildrenDeclaration() === self::__NO_LEGACY_CHILDREN_DECLARATION,
             'The `children` keyword is no longer supported',
         );
-        Assert::invariant(
+
+        invariant(
             $this->__xhpCategoryDeclaration() === self::__NO_LEGACY_CATEGORY_DECLARATION,
             'The `category` keyword is no longer supported',
         );
@@ -91,7 +93,7 @@ abstract class Node implements XHPChild
 
         foreach ($attributes as $key => $value) {
             if (self::isSpreadKey($key)) {
-                Assert::invariant(
+                invariant(
                     $value instanceof Node,
                     'Only XHP can be used with an attribute spread operator',
                 );
@@ -225,14 +227,17 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of the element.
      *
      * An exception is thrown if the element has no children.
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function getFirstChildx(): XHPChild
     {
         $child = $this->getFirstChild();
+
         if ($child !== null) {
             return $child;
         }
-        Assert::invariant_violation('%s called on element with no children', __FUNCTION__);
+
+        invariant_violation('%s called on element with no children', __FUNCTION__);
     }
 
     /**
@@ -254,15 +259,18 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of a given type.
      *
      * If no matching child is present, an exception is thrown.
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function getFirstFilteredChildx(callable $callback): XHPChild
     {
         $child = $this->getFirstFilteredChild($callback);
-        Assert::invariant(
+
+        invariant(
             $child !== null,
             '%s called with no matching child',
             __FUNCTION__,
         );
+
         return $child;
     }
 
@@ -280,14 +288,17 @@ abstract class Node implements XHPChild
      * Fetches the last direct child of the element.
      *
      * If the element has no children, an exception is thrown.
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function getLastChildx(): XHPChild
     {
         $child = $this->getLastChild();
+
         if ($child !== null) {
             return $child;
         }
-        Assert::invariant_violation('%s called on element with no children', __FUNCTION__);
+
+        invariant_violation('%s called on element with no children', __FUNCTION__);
     }
 
     /**
@@ -310,11 +321,14 @@ abstract class Node implements XHPChild
      * Fetch the last direct child of the element of a given type.
      *
      * If the element has no matching children, an exception is thrown.
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function getLastFilteredChildx(callable $callback): XHPChild
     {
         $child = $this->getLastFilteredChild($callback);
-        Assert::invariant($child !== null, '%s called with no matching child', __FUNCTION__);
+
+        invariant($child !== null, '%s called with no matching child', __FUNCTION__);
+
         return $child;
     }
 
@@ -391,13 +405,18 @@ abstract class Node implements XHPChild
         return $fn(static::class)();
     }
 
+    /**
+     * @return mixed
+     * @throws \Zheltikov\Invariant\InvariantException
+     */
     protected static function __legacySerializedXHPChildrenDeclaration() // : mixed
     {
-        Assert::invariant(
+        invariant(
             self::emptyInstance()->__xhpChildrenDeclaration() ===
             self::__NO_LEGACY_CHILDREN_DECLARATION,
             'Legacy XHP children declaration syntax is no longer supported',
         );
+
         return 1; // any children
     }
 

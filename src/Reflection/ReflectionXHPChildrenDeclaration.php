@@ -6,6 +6,7 @@ use Exception;
 use Zheltikov\PhpXhp\Core\ChildValidation;
 use Zheltikov\PhpXhp\Lib\Assert;
 
+use function Zheltikov\Invariant\invariant;
 use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPChildrenDeclaration
@@ -61,7 +62,7 @@ class ReflectionXHPChildrenDeclaration
                 function (): ReflectionXHPChildrenExpression {
                     try {
                         // FIXME: create TypeAssertionException
-                        Assert::invariant(
+                        invariant(
                             is_iterable($this->data),
                             "ReflectionXHPChildrenDeclaration's data must be a KeyedContainer"
                         );

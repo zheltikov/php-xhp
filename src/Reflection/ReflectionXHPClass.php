@@ -7,6 +7,8 @@ use Zheltikov\PhpXhp\Core\Node;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 
+use function Zheltikov\Invariant\invariant;
+
 class ReflectionXHPClass
 {
     /**
@@ -15,10 +17,14 @@ class ReflectionXHPClass
      */
     private $className;
 
+    /**
+     * @throws \Zheltikov\Invariant\InvariantException
+     */
     public function __construct(string $className)
     {
         $this->className = $className;
-        Assert::invariant(
+
+        invariant(
             class_exists($this->className)
             && in_array(Node::class, class_parents($this->className)),
             'Invalid class name: %s',
@@ -47,15 +53,20 @@ class ReflectionXHPClass
         return $class::__xhpReflectionChildrenDeclaration();
     }
 
+    /**
+     * @throws \Zheltikov\Invariant\InvariantException
+     */
     public function getAttribute(string $name): ReflectionXHPAttribute
     {
         $map = $this->getAttributes();
-        Assert::invariant(
+
+        invariant(
             C::contains_key($map, $name),
             'Tried to get attribute %s for XHP element %s, which does not exist',
             $name,
             $this->getClassName(),
         );
+
         return $map[$name];
     }
 

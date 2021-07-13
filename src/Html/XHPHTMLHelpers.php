@@ -5,6 +5,8 @@ namespace Zheltikov\PhpXhp\Html;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\Str;
 
+use function Zheltikov\Invariant\invariant;
+
 trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
 {
     // require extends x\node;
@@ -12,15 +14,17 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
     /**
      * Appends a string to the "class" attribute (space separated).
      * @return $this
-     * @throws \Exception
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function addClass(string $class): self
     {
         $current_class = $this->getAttributes()['class'] ?? '';
-        Assert::invariant(
+
+        invariant(
             is_string($current_class),
             'Attribute `class` must be string'
         );
+
         return $this->setAttribute('class', Str::trim($current_class . ' ' . $class));
     }
 

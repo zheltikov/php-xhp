@@ -8,6 +8,8 @@ use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 
+use function Zheltikov\Invariant\invariant;
+
 // FIXME: extends \InvalidOperationException
 final class UseAfterRenderException extends RuntimeException
 {
@@ -24,12 +26,13 @@ final class UseAfterRenderException extends RuntimeException
 
     /**
      * @param string $node (classname<Node>)
-     * @throws \Exception
+     * @throws \Zheltikov\Invariant\InvariantException
      */
     public function __viaXHPPath(string $node): void
     {
-        Assert::invariant(class_exists($node), 'Node class name must exist');
-        Assert::invariant(in_array(Node::class, class_parents($node)), 'Node class name must extend Node');
+        invariant(class_exists($node), 'Node class name must exist');
+        invariant(in_array(Node::class, class_parents($node)), 'Node class name must extend Node');
+        
         $this->xhpPath[] = $node;
 
         // FIXME: this is a quick workaround

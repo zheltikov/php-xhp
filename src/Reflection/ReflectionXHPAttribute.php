@@ -7,6 +7,7 @@ use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 
+use function Zheltikov\Invariant\invariant;
 use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPAttribute
@@ -90,7 +91,7 @@ class ReflectionXHPAttribute
                 function (): string {
                     $t = $this->getValueType();
 
-                    Assert::invariant(
+                    invariant(
                         $t === XHPAttributeType::TYPE_OBJECT(),
                         'Tried to get value class for attribute %s of type %s - needed OBJECT',
                         $this->getName(),
@@ -99,7 +100,7 @@ class ReflectionXHPAttribute
 
                     $v = $this->extraType;
 
-                    Assert::invariant(
+                    invariant(
                         is_string($v),
                         'Class name for attribute %s is not a string',
                         $this->getName(),
@@ -124,7 +125,7 @@ class ReflectionXHPAttribute
                 function (): array {
                     $t = $this->getValueType();
 
-                    Assert::invariant(
+                    invariant(
                         $t === XHPAttributeType::TYPE_ENUM(),
                         'Tried to get enum values for attribute %s of type %s - needed ENUM',
                         $this->getName(),
@@ -133,7 +134,7 @@ class ReflectionXHPAttribute
 
                     $v = $this->extraType;
 
-                    Assert::invariant(
+                    invariant(
                         is_iterable($v),
                         'Class name for attribute %s is not an array',
                         $this->getName(),

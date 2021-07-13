@@ -6,6 +6,7 @@ use Exception;
 use TypeAssertionException;
 use Zheltikov\PhpXhp\Lib\Assert;
 
+use function Zheltikov\Invariant\invariant;
 use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPChildrenExpression
@@ -55,7 +56,7 @@ class ReflectionXHPChildrenExpression
             $fn = wrap(
                 function (): array {
                     $type = $this->getType();
-                    Assert::invariant(
+                    invariant(
                         $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
                         || $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
                         'Only disjunctions and sequences have two sub-expressions - in %s',
@@ -63,12 +64,12 @@ class ReflectionXHPChildrenExpression
                     );
                     try {
                         // FIXME: create TypeAssertionException
-                        Assert::invariant(
+                        invariant(
                             is_iterable($this->data[1]),
                             "ReflectionXHPChildrenExpression's data[1] must be a KeyedContainer"
                         );
 
-                        Assert::invariant(
+                        invariant(
                             is_iterable($this->data[2]),
                             "ReflectionXHPChildrenExpression's data[2] must be a KeyedContainer"
                         );
@@ -105,7 +106,7 @@ class ReflectionXHPChildrenExpression
                 function (): XHPChildrenConstraintType {
                     $type = $this->getType();
 
-                    Assert::invariant(
+                    invariant(
                         $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
                         && $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
                         'Disjunctions and sequences do not have a constraint type - in %s',
@@ -131,7 +132,7 @@ class ReflectionXHPChildrenExpression
                 function (): string {
                     $type = $this->getConstraintType();
 
-                    Assert::invariant(
+                    invariant(
                         $type->getValue() === XHPChildrenConstraintType::ELEMENT()->getValue()
                         || $type->getValue() === XHPChildrenConstraintType::CATEGORY()->getValue(),
                         'Only element and category constraints have string data - in %s',
@@ -140,7 +141,7 @@ class ReflectionXHPChildrenExpression
 
                     $data = $this->data[2];
 
-                    Assert::invariant(is_string($data), 'Expected string data');
+                    invariant(is_string($data), 'Expected string data');
 
                     return $data;
                 }
@@ -159,7 +160,7 @@ class ReflectionXHPChildrenExpression
         if ($fn === null) {
             $fn = wrap(
                 function (): ReflectionXHPChildrenExpression {
-                    Assert::invariant(
+                    invariant(
                         $this->getConstraintType()->getValue() === XHPChildrenConstraintType::SUB_EXPR()->getValue(),
                         'Only expression constraints have a single sub-expression - in %s',
                         $this->context,
@@ -169,7 +170,7 @@ class ReflectionXHPChildrenExpression
 
                     try {
                         // FIXME: create TypeAssertionException
-                        Assert::invariant(
+                        invariant(
                             is_iterable($data),
                             "ReflectionXHPChildrenExpression's data must be a KeyedContainer"
                         );
