@@ -17,7 +17,7 @@ class ReflectionXHPClass
     private $className;
 
     /**
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function __construct(string $className)
     {
@@ -56,7 +56,7 @@ class ReflectionXHPClass
     }
 
     /**
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getAttribute(string $name): ReflectionXHPAttribute
     {

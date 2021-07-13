@@ -72,7 +72,7 @@ abstract class Node implements XHPChild
      * @param array $attributes (KeyedTraversable<string, mixed>) map of attributes to values
      * @param array $children (Traversable<?\XHPChild>) list of children
      * @param mixed $debug_info (dynamic) will in the source when childValidation is enabled
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final public function __construct(array $attributes = [], array $children = [], ...$debug_info)
     {
@@ -226,7 +226,7 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of the element.
      *
      * An exception is thrown if the element has no children.
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getFirstChildx(): XHPChild
     {
@@ -258,7 +258,7 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of a given type.
      *
      * If no matching child is present, an exception is thrown.
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getFirstFilteredChildx(callable $callback): XHPChild
     {
@@ -287,7 +287,7 @@ abstract class Node implements XHPChild
      * Fetches the last direct child of the element.
      *
      * If the element has no children, an exception is thrown.
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getLastChildx(): XHPChild
     {
@@ -320,7 +320,7 @@ abstract class Node implements XHPChild
      * Fetch the last direct child of the element of a given type.
      *
      * If the element has no matching children, an exception is thrown.
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getLastFilteredChildx(callable $callback): XHPChild
     {
@@ -408,7 +408,7 @@ abstract class Node implements XHPChild
 
     /**
      * @return mixed
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     protected static function __legacySerializedXHPChildrenDeclaration() // : mixed
     {

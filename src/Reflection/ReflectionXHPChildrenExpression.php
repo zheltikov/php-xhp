@@ -3,7 +3,7 @@
 namespace Zheltikov\PhpXhp\Reflection;
 
 use Exception;
-use TypeAssertionException;
+use Zheltikov\Exceptions\TypeAssertionException;
 
 use function Zheltikov\Invariant\invariant;
 use function Zheltikov\Memoize\wrap;
@@ -62,7 +62,6 @@ class ReflectionXHPChildrenExpression
                         $this->context
                     );
                     try {
-                        // FIXME: create TypeAssertionException
                         invariant(
                             is_iterable($this->data[1]),
                             "ReflectionXHPChildrenExpression's data[1] must be a KeyedContainer"
@@ -83,7 +82,6 @@ class ReflectionXHPChildrenExpression
                                 $this->data[2]
                             ),
                         ];
-                        // FIXME: create TypeAssertionException
                     } catch (TypeAssertionException $_) {
                         throw new Exception('Data is not subexpressions - in ' . $this->context);
                     }
@@ -168,7 +166,6 @@ class ReflectionXHPChildrenExpression
                     $data = $this->data[2];
 
                     try {
-                        // FIXME: create TypeAssertionException
                         invariant(
                             is_iterable($data),
                             "ReflectionXHPChildrenExpression's data must be a KeyedContainer"
@@ -178,7 +175,6 @@ class ReflectionXHPChildrenExpression
                             $this->context,
                             $data
                         );
-                        // FIXME: create TypeAssertionException
                     } catch (TypeAssertionException $_) {
                         throw new Exception(
                             'Expected a sub-expression, got a ' . (is_object($data) ? get_class($data) : gettype($data))

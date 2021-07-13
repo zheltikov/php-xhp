@@ -17,9 +17,9 @@ abstract class Element extends Node
 
     /**
      * @return string
-     * @throws \Zheltikov\Invariant\InvariantException
      * @throws \Zheltikov\PhpXhp\Exceptions\CoreRenderException
      * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final public function toString(): string
     {
@@ -39,9 +39,9 @@ abstract class Element extends Node
 
     /**
      * @return \Zheltikov\PhpXhp\Core\Primitive
-     * @throws \Zheltikov\Invariant\InvariantException
      * @throws \Zheltikov\PhpXhp\Exceptions\CoreRenderException
      * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final protected function __flushSubtree(): Primitive
     {

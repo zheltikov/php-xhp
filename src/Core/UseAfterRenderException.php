@@ -24,7 +24,7 @@ final class UseAfterRenderException extends InvalidOperationException
 
     /**
      * @param string $node (classname<Node>)
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function __viaXHPPath(string $node): void
     {

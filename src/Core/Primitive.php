@@ -8,8 +8,8 @@ abstract class Primitive extends Node
 
     /**
      * @return string
-     * @throws \Zheltikov\Invariant\InvariantException
      * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     // <<__Override>>
     final public function toString(): string
@@ -47,8 +47,8 @@ abstract class Primitive extends Node
     }
 
     /**
-     * @throws \Zheltikov\Invariant\InvariantException
      * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     // <<__Override>>
     final protected function __flushSubtree(): Primitive

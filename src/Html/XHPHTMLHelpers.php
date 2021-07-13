@@ -13,7 +13,7 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
     /**
      * Appends a string to the "class" attribute (space separated).
      * @return $this
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function addClass(string $class): self
     {

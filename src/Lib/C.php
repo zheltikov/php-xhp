@@ -40,7 +40,7 @@ class C
      * @param string|null $format_string
      * @param mixed ...$format_args
      * @return mixed
-     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public static function onlyx(array $container, ?string $format_string = null, ...$format_args) // : mixed
     {

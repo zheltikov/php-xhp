@@ -24,8 +24,8 @@ final class Doctype extends Primitive
     // <<__Override>>
 
     /**
-     * @throws \Zheltikov\Invariant\InvariantException
      * @throws \Zheltikov\PhpXhp\Exceptions\RenderArrayException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     protected function stringify(): string
     {
