@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "myclabs/php-enum",
-            "version": "1.8.0",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "46cf3d8498b095bd33727b13fd5707263af99421"
+                "reference": "b942d263c641ddb5190929ff840c68f78713e937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/46cf3d8498b095bd33727b13fd5707263af99421",
-                "reference": "46cf3d8498b095bd33727b13fd5707263af99421",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/b942d263c641ddb5190929ff840c68f78713e937",
+                "reference": "b942d263c641ddb5190929ff840c68f78713e937",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "1.*",
-                "vimeo/psalm": "^4.5.1"
+                "vimeo/psalm": "^4.6.2"
             },
             "type": "library",
             "autoload": {
@@ -52,7 +52,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/php-enum/issues",
-                "source": "https://github.com/myclabs/php-enum/tree/1.8.0"
+                "source": "https://github.com/myclabs/php-enum/tree/1.8.3"
             },
             "funding": [
                 {
@@ -64,7 +64,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-15T16:11:48+00:00"
+            "time": "2021-07-05T08:18:36+00:00"
         },
         {
             "name": "zheltikov/php-exceptions",
@@ -110,20 +110,21 @@
         },
         {
             "name": "zheltikov/php-invariant",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zheltikov/php-invariant.git",
-                "reference": "1013020ee2babbcdfbb8742ab3033a6105888612"
+                "reference": "c43ae925766ac3d4278650cbe010751377c79f4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zheltikov/php-invariant/zipball/1013020ee2babbcdfbb8742ab3033a6105888612",
-                "reference": "1013020ee2babbcdfbb8742ab3033a6105888612",
+                "url": "https://api.github.com/repos/zheltikov/php-invariant/zipball/c43ae925766ac3d4278650cbe010751377c79f4d",
+                "reference": "c43ae925766ac3d4278650cbe010751377c79f4d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4"
+                "php": "^7.4",
+                "zheltikov/php-exceptions": "^1.0"
             },
             "require-dev": {
                 "nazar-pc/phpt-tests-runner": "^1.4"
@@ -149,22 +150,22 @@
             ],
             "support": {
                 "issues": "https://github.com/zheltikov/php-invariant/issues",
-                "source": "https://github.com/zheltikov/php-invariant/tree/1.0.0"
+                "source": "https://github.com/zheltikov/php-invariant/tree/1.1.0"
             },
-            "time": "2021-07-09T18:11:44+00:00"
+            "time": "2021-07-13T09:41:35+00:00"
         },
         {
             "name": "zheltikov/php-memoize",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zheltikov/php-memoize.git",
-                "reference": "22726c83243fc6b8b751adf96573c209e9c603aa"
+                "reference": "4aa98c396ace3ea312d010d9ac7d30c7f4294913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/22726c83243fc6b8b751adf96573c209e9c603aa",
-                "reference": "22726c83243fc6b8b751adf96573c209e9c603aa",
+                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/4aa98c396ace3ea312d010d9ac7d30c7f4294913",
+                "reference": "4aa98c396ace3ea312d010d9ac7d30c7f4294913",
                 "shasum": ""
             },
             "require": {
@@ -195,9 +196,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zheltikov/php-memoize/issues",
-                "source": "https://github.com/zheltikov/php-memoize/tree/1.1.0"
+                "source": "https://github.com/zheltikov/php-memoize/tree/1.2.0"
             },
-            "time": "2021-07-09T19:08:22+00:00"
+            "time": "2021-07-13T09:53:26+00:00"
         }
     ],
     "packages-dev": [],
