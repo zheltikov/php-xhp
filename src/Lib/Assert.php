@@ -2,53 +2,49 @@
 
 namespace Zheltikov\PhpXhp\Lib;
 
-use Exception;
+use function Zheltikov\Invariant\{
+    invariant,
+    invariant_callback_register,
+    invariant_violation,
+};
 
 /**
  * Class Assert
  * @package Zheltikov\PhpXhp\Core
- * @todo Move this to a separate package
+ * @deprecated Use package `zheltikov/php-invariant` instead
  */
 class Assert
 {
     /**
-     * @var ?callable
-     */
-    private static $callback = null;
-
-    /**
      * @param mixed $condition
      * @param string $format
      * @param mixed ...$values
-     * @throws \Exception
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @deprecated Use `invariant` from `zheltikov/php-invariant` instead
      */
     public static function invariant($condition, string $format, ...$values): void
     {
-        if (!$condition) {
-            static::invariant_violation($format, ...$values);
-        }
+        invariant($condition, $format, ...$values);
     }
 
     /**
      * @param string $format
      * @param mixed ...$values
-     * @throws \Exception
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @deprecated Use `invariant_violation` from `zheltikov/php-invariant`instead.
      */
     public static function invariant_violation(string $format, ...$values): void
     {
-        if (is_callable(static::$callback)) {
-            call_user_func(static::$callback, $format, ...$values);
-        } else {
-            // FIXME: this may not be the best solution
-            throw new Exception(Str::format($format, ...$values));
-        }
+        invariant_violation($format, ...$values);
     }
 
     /**
      * @param callable $callback
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @deprecated Use `invariant_callback_register` from `zheltikov/php-invariant` instead.
      */
     public static function invariant_callback_register(callable $callback): void
     {
-        static::$callback = $callback;
+        invariant_callback_register($callback);
     }
 }
