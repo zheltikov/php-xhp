@@ -8,7 +8,7 @@ trait Validation
     // require extends x\node;
 
     abstract protected static function getChildrenDeclaration(): Constraint;
-    
+
     /**
      * @return mixed
      */

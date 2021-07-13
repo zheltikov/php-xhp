@@ -2,9 +2,10 @@
 
 namespace Zheltikov\PhpXhp\Reflection;
 
+use ReflectionClass;
+use Zheltikov\PhpXhp\Core\Node;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Core\Node;
 
 class ReflectionXHPClass
 {
@@ -18,16 +19,16 @@ class ReflectionXHPClass
     {
         $this->className = $className;
         Assert::invariant(
-            \class_exists($this->className)
-            && \in_array(Node::class, \class_parents($this->className)),
+            class_exists($this->className)
+            && in_array(Node::class, class_parents($this->className)),
             'Invalid class name: %s',
             $this->className,
         );
     }
 
-    public function getReflectionClass(): \ReflectionClass
+    public function getReflectionClass(): ReflectionClass
     {
-        return new \ReflectionClass($this->getClassName());
+        return new ReflectionClass($this->getClassName());
     }
 
     /**

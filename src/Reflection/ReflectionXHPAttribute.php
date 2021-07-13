@@ -7,6 +7,8 @@ use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 
+use function Zheltikov\Memoize\wrap;
+
 class ReflectionXHPAttribute
 {
     /**
@@ -77,57 +79,98 @@ class ReflectionXHPAttribute
         return $this->defaultValue;
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public function getValueClass(): string
     {
-        $t = $this->getValueType();
-        Assert::invariant(
-            $t === XHPAttributeType::TYPE_OBJECT(),
-            'Tried to get value class for attribute %s of type %s - needed ' . 'OBJECT',
-            $this->getName(),
-            \array_flip(XHPAttributeType::toArray())[$t->getValue()],
-        );
-        $v = $this->extraType;
-        Assert::invariant(
-            \is_string($v),
-            'Class name for attribute %s is not a string',
-            $this->getName(),
-        );
-        return $v;
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): string {
+                    $t = $this->getValueType();
+
+                    Assert::invariant(
+                        $t === XHPAttributeType::TYPE_OBJECT(),
+                        'Tried to get value class for attribute %s of type %s - needed OBJECT',
+                        $this->getName(),
+                        array_flip(XHPAttributeType::toArray())[$t->getValue()],
+                    );
+
+                    $v = $this->extraType;
+
+                    Assert::invariant(
+                        is_string($v),
+                        'Class name for attribute %s is not a string',
+                        $this->getName(),
+                    );
+
+                    return $v;
+                }
+            );
+        }
+
+        return $fn();
     }
 
-    // <<__Memoize>>
-    // keyset<string>
-    public function getEnumValues(): array
+    // TODO: test memoization
+    public function getEnumValues(): array // keyset<string>
     {
-        $t = $this->getValueType();
-        Assert::invariant(
-            $t === XHPAttributeType::TYPE_ENUM(),
-            'Tried to get enum values for attribute %s of type %s - needed ' . 'ENUM',
-            $this->getName(),
-            \array_flip(XHPAttributeType::toArray())[$t->getValue()],
-        );
-        $v = $this->extraType;
-        Assert::invariant(
-            \is_iterable($v),
-            'Class name for attribute %s is not an array',
-            $this->getName(),
-        );
-        return \array_keys(/* HH_FIXME[4110] not limited to arraykey */ $v);
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): array {
+                    $t = $this->getValueType();
+
+                    Assert::invariant(
+                        $t === XHPAttributeType::TYPE_ENUM(),
+                        'Tried to get enum values for attribute %s of type %s - needed ENUM',
+                        $this->getName(),
+                        array_flip(XHPAttributeType::toArray())[$t->getValue()],
+                    );
+
+                    $v = $this->extraType;
+
+                    Assert::invariant(
+                        is_iterable($v),
+                        'Class name for attribute %s is not an array',
+                        $this->getName(),
+                    );
+
+                    /* HH_FIXME[4110] not limited to arraykey */
+                    return array_keys($v);
+                }
+            );
+        }
+
+        return $fn();
     }
 
     /**
      * Returns true if the attribute is a data- or aria- attribute.
      */
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function isSpecial(string $attr): bool
     {
-        return Str::length($attr) >= 6
-               && $attr[4] === '-'
-               && C::contains_key(
-                self::$specialAttributes,
-                Str::slice($attr, 0, 4)
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (string $attr): bool {
+                    return Str::length($attr) >= 6
+                           && $attr[4] === '-'
+                           && C::contains_key(
+                            self::$specialAttributes,
+                            Str::slice($attr, 0, 4)
+                        );
+                }
             );
+        }
+
+        return $fn($attr);
     }
 
     public function __toString(): string
@@ -171,7 +214,7 @@ class ReflectionXHPAttribute
         }
         $out .= ' ' . $this->getName();
         if ($this->hasDefaultValue()) {
-            $out .= ' = ' . \var_export($this->getDefaultValue(), true);
+            $out .= ' = ' . var_export($this->getDefaultValue(), true);
         }
         if ($this->isRequired()) {
             $out .= ' @required';

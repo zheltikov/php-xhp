@@ -18,7 +18,7 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
     {
         $current_class = $this->getAttributes()['class'] ?? '';
         Assert::invariant(
-            \is_string($current_class),
+            is_string($current_class),
             'Attribute `class` must be string'
         );
         return $this->setAttribute('class', Str::trim($current_class . ' ' . $class));
@@ -44,7 +44,7 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
         $id = $this->getAttributes()['id'] ?? null;
         if ($id === null || $id === '') {
             // FIXME: why length is 5?
-            $id = \bin2hex(\random_bytes(5));
+            $id = bin2hex(random_bytes(5));
             $this->setAttribute('id', $id);
         }
         return (string) $id;

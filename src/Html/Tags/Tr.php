@@ -2,9 +2,9 @@
 
 namespace Zheltikov\PhpXhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
+use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
 use Zheltikov\PhpXhp\Html\Element;
 
 final class Tr extends Element

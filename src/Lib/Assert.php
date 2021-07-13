@@ -2,6 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Lib;
 
+use Exception;
+
 /**
  * Class Assert
  * @package Zheltikov\PhpXhp\Core
@@ -34,11 +36,11 @@ class Assert
      */
     public static function invariant_violation(string $format, ...$values): void
     {
-        if (\is_callable(static::$callback)) {
-            \call_user_func(static::$callback, $format, ...$values);
+        if (is_callable(static::$callback)) {
+            call_user_func(static::$callback, $format, ...$values);
         } else {
             // FIXME: this may not be the best solution
-            throw new \Exception(Str::format($format, ...$values));
+            throw new Exception(Str::format($format, ...$values));
         }
     }
 

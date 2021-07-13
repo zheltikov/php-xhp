@@ -2,19 +2,21 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\PhpXhp\Core\ChildValidation\Any;
 use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
 use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
+use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
+use Zheltikov\PhpXhp\Core\ChildValidation\Category;
 use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
 use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
+use Zheltikov\PhpXhp\Core\ChildValidation\None;
 use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
+use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
 use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
-use Zheltikov\PhpXhp\Core\ChildValidation\Any;
-use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\Category;
-use Zheltikov\PhpXhp\Core\ChildValidation\None;
-use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
+
+use function Zheltikov\Memoize\wrap;
 
 class ChildValidation
 {
@@ -48,10 +50,10 @@ class ChildValidation
     {
         if (
             // $x is (int, int, mixed)
-            \is_array($x)
-            && \is_int($x[0])
-            && \is_int($x[1])
-            && \array_key_exists(2, $x)
+            is_array($x)
+            && is_int($x[0])
+            && is_int($x[1])
+            && array_key_exists(2, $x)
 
             && $x[0] === LegacyExpressionType::EXACTLY_ONE()->getValue()
             && $x[1] === LegacyConstraintType::EXPRESSION()->getValue()
@@ -61,10 +63,10 @@ class ChildValidation
 
         if (
             // $x is (int, mixed, mixed)
-            \is_array($x)
-            && \is_int($x[0])
-            && \array_key_exists(1, $x)
-            && \array_key_exists(2, $x)
+            is_array($x)
+            && is_int($x[0])
+            && array_key_exists(1, $x)
+            && array_key_exists(2, $x)
         ) {
             return [$x[0], static::normalize($x[1]), static::normalize($x[2])];
         }
@@ -105,10 +107,21 @@ class ChildValidation
         return new Sequence($a, $b, ...$rest);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function any(): Any
     {
-        return new Any();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): Any {
+                    return new Any();
+                }
+            );
+        }
+
+        return $fn();
     }
 
     public static function at_least_one_of(Constraint $a): AtLeastOneOf
@@ -116,16 +129,38 @@ class ChildValidation
         return new AtLeastOneOf($a);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function category(string $c): Category
     {
-        return new Category($c);
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (string $c): Category {
+                    return new Category($c);
+                }
+            );
+        }
+
+        return $fn($c);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function empty(): None
     {
-        return new None();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): None {
+                    return new None();
+                }
+            );
+        }
+
+        return $fn();
     }
 
     public static function optional(Constraint $a): Optional

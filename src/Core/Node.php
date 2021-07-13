@@ -3,6 +3,7 @@
 namespace Zheltikov\PhpXhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
+use ReflectionClass;
 use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
 use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
 use Zheltikov\PhpXhp\Exceptions\InvalidChildrenException;
@@ -128,7 +129,7 @@ abstract class Node implements XHPChild
         if ($this->__isRendered) {
             throw new UseAfterRenderException(Str::format("Can't %s after render", __FUNCTION__));
         }
-        if (\is_iterable($child)) {
+        if (is_iterable($child)) {
             foreach ($child as $c) {
                 $this->appendChild($c);
             }
@@ -166,7 +167,7 @@ abstract class Node implements XHPChild
                     $new_children[] = $child;
                 }
             } else {
-                if (!\is_iterable($xhp)) {
+                if (!is_iterable($xhp)) {
                     $new_children[] = $xhp;
                 } else {
                     foreach ($xhp as $element) {
@@ -203,7 +204,7 @@ abstract class Node implements XHPChild
     {
         $children = [];
         foreach ($this->children as $child) {
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 $children[] = $child;
             }
         }
@@ -240,7 +241,7 @@ abstract class Node implements XHPChild
     public function getFirstFilteredChild(callable $callback): ?XHPChild
     {
         foreach ($this->children as $child) {
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 return $child;
             }
         }
@@ -296,7 +297,7 @@ abstract class Node implements XHPChild
     {
         for ($i = C::count($this->children) - 1; $i >= 0; --$i) {
             $child = $this->children[$i];
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 return $child;
             }
         }
@@ -399,7 +400,7 @@ abstract class Node implements XHPChild
      */
     private static function emptyInstance(): self
     {
-        return (new \ReflectionClass(static::class))
+        return (new ReflectionClass(static::class))
             ->newInstanceWithoutConstructor();
     }
 
@@ -816,7 +817,7 @@ abstract class Node implements XHPChild
                 $class = $expr->getConstraintString();
                 if (
                     C::contains_key($this->children, $index)
-                    && \is_a($this->children[$index], $class, true)
+                    && is_a($this->children[$index], $class, true)
                 ) {
                     return [true, $index + 1];
                 }
@@ -877,7 +878,7 @@ abstract class Node implements XHPChild
         $desc = [];
         foreach ($this->children as $child) {
             if ($child instanceof Node) {
-                $tmp = '\\' . \get_class($child);
+                $tmp = '\\' . get_class($child);
                 // FIXME: call to __xhpCategoryDeclaration always results in ["\0INVALID\0" => 0]
                 $categories = $child->__xhpCategoryDeclaration();
                 if (C::count($categories) > 0) {
@@ -898,7 +899,7 @@ abstract class Node implements XHPChild
             return true;
         }
         // XHP parses the category string
-        $c = \str_replace([':', '-'], ['__', '_'], $c);
+        $c = str_replace([':', '-'], ['__', '_'], $c);
         return ($categories[$c] ?? null) !== null;
     }
 
@@ -915,11 +916,11 @@ abstract class Node implements XHPChild
         if ($child instanceof UnsafeRenderable) {
             return $child->toHTMLString();
         }
-        if (\is_iterable($child)) {
+        if (is_iterable($child)) {
             throw new RenderArrayException('Can not render traversables!');
         }
 
         /* HH_FIXME[4281] stringish migration */
-        return \htmlspecialchars((string) $child);
+        return htmlspecialchars((string) $child);
     }
 }

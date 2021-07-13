@@ -3,8 +3,8 @@
 namespace Zheltikov\PhpXhp\Html;
 
 use Zheltikov\PhpXhp\Core\Primitive;
-use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
+use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
 
@@ -666,15 +666,15 @@ abstract class Element extends Primitive
         foreach ($this->getAttributes() as $key => $val) {
             if ($val !== null && $val !== false) {
                 if ($val === true) {
-                    $buf .= ' ' . \htmlspecialchars($key);
+                    $buf .= ' ' . htmlspecialchars($key);
                 } else {
                     if ($val instanceof UnsafeAttributeValue_DEPRECATED) {
                         $val_str = $val->toHTMLString();
                     } else {
-                        $val_str = \htmlspecialchars((string) $val, \ENT_COMPAT);
+                        $val_str = htmlspecialchars((string) $val, ENT_COMPAT);
                     }
 
-                    $buf .= ' ' . \htmlspecialchars($key) . '="' . $val_str . '"';
+                    $buf .= ' ' . htmlspecialchars($key) . '="' . $val_str . '"';
                 }
             }
         }

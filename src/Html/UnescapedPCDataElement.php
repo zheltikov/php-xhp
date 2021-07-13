@@ -2,8 +2,8 @@
 
 namespace Zheltikov\PhpXhp\Html;
 
-use Zheltikov\PhpXhp\Exceptions\ClassException;
 use Zheltikov\PhpXhp\Core\UnsafeRenderable;
+use Zheltikov\PhpXhp\Exceptions\ClassException;
 
 /**
  * Subclasses of unescaped_pcdata_element must contain only string children.
@@ -26,7 +26,7 @@ abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRen
     {
         $buf = $this->renderBaseAttrs() . '>';
         foreach ($this->getChildren() as $child) {
-            if (!\is_string($child)) {
+            if (!is_string($child)) {
                 throw new ClassException($this, 'Child must be a string');
             }
 

@@ -7,17 +7,17 @@ class C
 {
     public static function contains_key(array $container, string $key): bool
     {
-        return \array_key_exists($key, $container);
+        return array_key_exists($key, $container);
     }
 
     public static function count(array $container): int
     {
-        return \count($container);
+        return count($container);
     }
 
     public static function last(array $container) // : mixed
     {
-        return \count($container) ? \end($container) : null;
+        return count($container) ? end($container) : null;
     }
 
     public static function is_empty(array $container): bool
@@ -50,7 +50,7 @@ class C
                 '%s',
                 $format_string === null
                     ? Str::format('Expected exactly one element but got %d.', static::count($container))
-                    : \vsprintf($format_string, $format_args),
+                    : vsprintf($format_string, $format_args),
             );
             $result = $value;
             $first = false;
@@ -60,7 +60,7 @@ class C
             '%s',
             $format_string === null
                 ? 'Expected non-empty Traversable.'
-                : \vsprintf($format_string, $format_args),
+                : vsprintf($format_string, $format_args),
         );
         /* HH_FIXME[4110] $first is false implies $result is set to T */
         return $result;

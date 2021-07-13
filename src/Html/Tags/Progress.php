@@ -32,7 +32,7 @@ final class Progress extends Element implements Phrase, Flow, Palpable
             ],
         ];
     }
-    
+
     // Should not contain :progress
     protected static function getChildrenDeclaration(): Constraint
     {

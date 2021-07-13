@@ -2,8 +2,11 @@
 
 namespace Zheltikov\PhpXhp\Reflection;
 
+use Exception;
 use Zheltikov\PhpXhp\Core\ChildValidation;
 use Zheltikov\PhpXhp\Lib\Assert;
+
+use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPChildrenDeclaration
 {
@@ -26,35 +29,59 @@ class ReflectionXHPChildrenDeclaration
         $this->data = ChildValidation::normalize($data);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public function getType(): XHPChildrenDeclarationType
     {
-        if (\is_iterable($this->data)) {
-            return XHPChildrenDeclarationType::EXPRESSION();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): XHPChildrenDeclarationType {
+                    if (is_iterable($this->data)) {
+                        return XHPChildrenDeclarationType::EXPRESSION();
+                    }
+
+                    return XHPChildrenDeclarationType::from($this->data);
+                }
+            );
         }
-        return XHPChildrenDeclarationType::from($this->data);
+
+        return $fn();
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public function getExpression(): ReflectionXHPChildrenExpression
     {
-        try {
-            // FIXME: create TypeAssertionException
-            Assert::invariant(
-                \is_iterable($this->data),
-                "ReflectionXHPChildrenDeclaration's data must be a KeyedContainer"
-            );
-            return new ReflectionXHPChildrenExpression(
-                $this->context,
-                $this->data
-            );
-            // FIXME: create TypeAssertionException
-        } catch (/* \TypeAssertionException */ \Exception $_) {
-            throw new \Exception(
-                'Tried to get child expression for XHP class ' . $this->context
-                . ', but it does not have an expressions.'
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): ReflectionXHPChildrenExpression {
+                    try {
+                        // FIXME: create TypeAssertionException
+                        Assert::invariant(
+                            is_iterable($this->data),
+                            "ReflectionXHPChildrenDeclaration's data must be a KeyedContainer"
+                        );
+
+                        return new ReflectionXHPChildrenExpression(
+                            $this->context,
+                            $this->data
+                        );
+                        // FIXME: create TypeAssertionException
+                    } catch (/* \TypeAssertionException */ Exception $_) {
+                        throw new Exception(
+                            'Tried to get child expression for XHP class ' . $this->context
+                            . ', but it does not have an expressions.'
+                        );
+                    }
+                }
             );
         }
+
+        return $fn();
     }
 
     public function __toString(): string

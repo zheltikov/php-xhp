@@ -2,9 +2,9 @@
 
 namespace Zheltikov\PhpXhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
 use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
+use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
 use Zheltikov\PhpXhp\Core\Node;
 use Zheltikov\PhpXhp\Core\Primitive;
 use Zheltikov\PhpXhp\Lib\Str;

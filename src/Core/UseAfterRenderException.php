@@ -2,13 +2,14 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use RuntimeException;
 use Zheltikov\PhpXhp\Lib\Assert;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
 
 // FIXME: extends \InvalidOperationException
-final class UseAfterRenderException extends \RuntimeException
+final class UseAfterRenderException extends RuntimeException
 {
     /**
      * @var array
@@ -27,8 +28,8 @@ final class UseAfterRenderException extends \RuntimeException
      */
     public function __viaXHPPath(string $node): void
     {
-        Assert::invariant(\class_exists($node), 'Node class name must exist');
-        Assert::invariant(\in_array(Node::class, \class_parents($node)), 'Node class name must extend Node');
+        Assert::invariant(class_exists($node), 'Node class name must exist');
+        Assert::invariant(in_array(Node::class, class_parents($node)), 'Node class name must extend Node');
         $this->xhpPath[] = $node;
 
         // FIXME: this is a quick workaround
