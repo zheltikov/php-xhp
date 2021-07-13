@@ -20,6 +20,8 @@ use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
 
+use function Zheltikov\Memoize\wrap;
+
 abstract class Node implements XHPChild
 {
     // Must be kept in sync with compiler
@@ -355,17 +357,38 @@ abstract class Node implements XHPChild
         return static::__xhpReflectionAttributes()[$attr] ?? null;
     }
 
-    // <<__MemoizeLSB>>
-    // dict<string, ReflectionXHPAttribute>
-    final public static function __xhpReflectionAttributes(): array
+    // TODO: test lsb memoization
+    final public static function __xhpReflectionAttributes(): array // dict<string, ReflectionXHPAttribute>
     {
-        $decl = static::__xhpAttributeDeclaration();
-        return Dict::map_with_key(
-            $decl,
-            function ($name, $attr_decl) {
-                return new ReflectionXHPAttribute($name, $attr_decl);
-            }
-        );
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): callable {
+                    /** @var callable|null $fn2 */
+                    static $fn2 = null;
+
+                    if ($fn2 === null) {
+                        $fn2 = wrap(
+                            function (): array {
+                                $decl = static::__xhpAttributeDeclaration();
+                                return Dict::map_with_key(
+                                    $decl,
+                                    function ($name, $attr_decl) {
+                                        return new ReflectionXHPAttribute($name, $attr_decl);
+                                    }
+                                );
+                            }
+                        );
+                    }
+
+                    return $fn2;
+                }
+            );
+        }
+
+        return $fn(static::class)();
     }
 
     protected static function __legacySerializedXHPChildrenDeclaration() // : mixed
@@ -378,13 +401,35 @@ abstract class Node implements XHPChild
         return 1; // any children
     }
 
-    // <<__MemoizeLSB>>
+    // TODO: test lsb memoization
     final public static function __xhpReflectionChildrenDeclaration(): ReflectionXHPChildrenDeclaration
     {
-        return new ReflectionXHPChildrenDeclaration(
-            static::class,
-            static::__legacySerializedXHPChildrenDeclaration(),
-        );
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): callable {
+                    /** @var callable|null $fn2 */
+                    static $fn2 = null;
+
+                    if ($fn2 === null) {
+                        $fn2 = wrap(
+                            function (): ReflectionXHPChildrenDeclaration {
+                                return new ReflectionXHPChildrenDeclaration(
+                                    static::class,
+                                    static::__legacySerializedXHPChildrenDeclaration(),
+                                );
+                            }
+                        );
+                    }
+
+                    return $fn2;
+                }
+            );
+        }
+
+        return $fn(static::class)();
     }
 
     final public static function __xhpReflectionCategoryDeclaration(): array // keyset<string>
@@ -394,14 +439,36 @@ abstract class Node implements XHPChild
 
     // Work-around to call methods that should be static without a real
     // instance.
-    // <<__MemoizeLSB>>
-    /** @return $this
-     * @throws \ReflectionException
+    // TODO: test lsb memoization
+    /**
+     * @return $this
      */
     private static function emptyInstance(): self
     {
-        return (new ReflectionClass(static::class))
-            ->newInstanceWithoutConstructor();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        if ($fn === null) {
+            $fn = wrap(
+                function (): callable {
+                    /** @var callable|null $fn2 */
+                    static $fn2 = null;
+
+                    if ($fn2 === null) {
+                        $fn2 = wrap(
+                            function (): Node {
+                                return (new ReflectionClass(static::class))
+                                    ->newInstanceWithoutConstructor();
+                            }
+                        );
+                    }
+
+                    return $fn2;
+                }
+            );
+        }
+
+        return $fn(static::class)();
     }
 
     final public function getAttributes(): array // dict<string, mixed>
