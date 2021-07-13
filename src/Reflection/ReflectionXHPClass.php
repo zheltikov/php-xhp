@@ -31,6 +31,9 @@ class ReflectionXHPClass
         );
     }
 
+    /**
+     * @throws \ReflectionException
+     */
     public function getReflectionClass(): ReflectionClass
     {
         return new ReflectionClass($this->getClassName());

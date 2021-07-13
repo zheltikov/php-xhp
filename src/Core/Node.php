@@ -339,6 +339,8 @@ abstract class Node implements XHPChild
      *
      * @param string $attr attribute to fetch
      * @return mixed           value
+     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException
+     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeRequiredException
      */
     final public function getAttribute(string $attr) // : mixed
     {
@@ -767,6 +769,7 @@ abstract class Node implements XHPChild
     /**
      * Validates that this element's children match its children descriptor, and
      * throws an exception if that's not the case.
+     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
      */
     protected function validateChildren(): void
     {
@@ -991,6 +994,7 @@ abstract class Node implements XHPChild
     /**
      * @param \Zheltikov\PhpXhp\Core\XHPChild|\Stringable|string $child
      * @return string
+     * @throws \Zheltikov\PhpXhp\Exceptions\RenderArrayException
      */
     final protected static function renderChild($child): string
     {

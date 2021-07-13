@@ -42,6 +42,11 @@ final class ConditionalComment extends Primitive
     }
 
     // <<__Override>>
+
+    /**
+     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException
+     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeRequiredException
+     */
     protected function stringify(): string
     {
         $html = '<!--[if ' . $this->getAttribute('if') . ']>';

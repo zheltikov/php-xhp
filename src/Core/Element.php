@@ -16,7 +16,10 @@ abstract class Element extends Node
     abstract protected function render(): Node;
 
     /**
-     * @throws UseAfterRenderException
+     * @return string
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\PhpXhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
      */
     final public function toString(): string
     {
@@ -35,7 +38,10 @@ abstract class Element extends Node
     }
 
     /**
-     * @throws UseAfterRenderException
+     * @return \Zheltikov\PhpXhp\Core\Primitive
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\PhpXhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
      */
     final protected function __flushSubtree(): Primitive
     {
@@ -51,6 +57,7 @@ abstract class Element extends Node
 
     /**
      * @throws UseAfterRenderException
+     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
      */
     protected function __renderAndProcess(): Node
     {
@@ -71,6 +78,8 @@ abstract class Element extends Node
 
     /**
      * @throws UseAfterRenderException
+     * @throws \Zheltikov\PhpXhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
      */
     final protected function __flushRenderedRootElement(): Primitive
     {

@@ -22,6 +22,11 @@ final class Doctype extends Primitive
     }
 
     // <<__Override>>
+
+    /**
+     * @throws \Zheltikov\Invariant\InvariantException
+     * @throws \Zheltikov\PhpXhp\Exceptions\RenderArrayException
+     */
     protected function stringify(): string
     {
         return '<!DOCTYPE html>' . self::renderChild(C::onlyx($this->getChildren()));

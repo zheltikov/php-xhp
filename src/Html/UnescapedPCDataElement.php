@@ -21,6 +21,9 @@ use Zheltikov\PhpXhp\Exceptions\ClassException;
 // <<__Sealed(script::class, style::class) >>
 abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRenderable
 {
+    /**
+     * @throws \Zheltikov\PhpXhp\Exceptions\ClassException
+     */
     // <<__Override>>
     protected function stringify(): string
     {
@@ -36,6 +39,9 @@ abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRen
         return $buf;
     }
 
+    /**
+     * @throws \Zheltikov\PhpXhp\Exceptions\ClassException
+     */
     final public function toHTMLString(): string
     {
         return $this->stringify();
