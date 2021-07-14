@@ -4,12 +4,14 @@ namespace Zheltikov\PhpXhp\Reflection;
 
 use Exception;
 use Zheltikov\Exceptions\TypeAssertionException;
+use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\invariant;
-use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPChildrenExpression
 {
+    use Memoize\Helper;
+
     /**
      * @var array
      * KeyedContainer<arraykey, mixed>
@@ -34,15 +36,12 @@ class ReflectionXHPChildrenExpression
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): XHPChildrenExpressionType {
-                    return XHPChildrenExpressionType::from($this->data[0]);
-                }
-            );
-        }
-
-        return $fn();
+        return static::memoize(
+            $fn,
+            function (): XHPChildrenExpressionType {
+                return XHPChildrenExpressionType::from($this->data[0]);
+            }
+        );
     }
 
     // TODO: test memoization
@@ -51,45 +50,42 @@ class ReflectionXHPChildrenExpression
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): array {
-                    $type = $this->getType();
+        return static::memoize(
+            $fn,
+            function (): array {
+                $type = $this->getType();
+                invariant(
+                    $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
+                    || $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
+                    'Only disjunctions and sequences have two sub-expressions - in %s',
+                    $this->context
+                );
+                try {
                     invariant(
-                        $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
-                        || $type->getValue() === XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
-                        'Only disjunctions and sequences have two sub-expressions - in %s',
-                        $this->context
+                        is_iterable($this->data[1]),
+                        "ReflectionXHPChildrenExpression's data[1] must be a KeyedContainer"
                     );
-                    try {
-                        invariant(
-                            is_iterable($this->data[1]),
-                            "ReflectionXHPChildrenExpression's data[1] must be a KeyedContainer"
-                        );
 
-                        invariant(
-                            is_iterable($this->data[2]),
-                            "ReflectionXHPChildrenExpression's data[2] must be a KeyedContainer"
-                        );
+                    invariant(
+                        is_iterable($this->data[2]),
+                        "ReflectionXHPChildrenExpression's data[2] must be a KeyedContainer"
+                    );
 
-                        return [
-                            new ReflectionXHPChildrenExpression(
-                                $this->context,
-                                $this->data[1]
-                            ),
-                            new ReflectionXHPChildrenExpression(
-                                $this->context,
-                                $this->data[2]
-                            ),
-                        ];
-                    } catch (TypeAssertionException $_) {
-                        throw new Exception('Data is not subexpressions - in ' . $this->context);
-                    }
+                    return [
+                        new ReflectionXHPChildrenExpression(
+                            $this->context,
+                            $this->data[1]
+                        ),
+                        new ReflectionXHPChildrenExpression(
+                            $this->context,
+                            $this->data[2]
+                        ),
+                    ];
+                } catch (TypeAssertionException $_) {
+                    throw new Exception('Data is not subexpressions - in ' . $this->context);
                 }
-            );
-        }
-
-        return $fn();
+            }
+        );
     }
 
     // TODO: test memoization
@@ -98,24 +94,21 @@ class ReflectionXHPChildrenExpression
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): XHPChildrenConstraintType {
-                    $type = $this->getType();
+        return static::memoize(
+            $fn,
+            function (): XHPChildrenConstraintType {
+                $type = $this->getType();
 
-                    invariant(
-                        $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
-                        && $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
-                        'Disjunctions and sequences do not have a constraint type - in %s',
-                        $this->context,
-                    );
+                invariant(
+                    $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_SEQUENCE()->getValue()
+                    && $type->getValue() !== XHPChildrenExpressionType::SUB_EXPR_DISJUNCTION()->getValue(),
+                    'Disjunctions and sequences do not have a constraint type - in %s',
+                    $this->context,
+                );
 
-                    return XHPChildrenConstraintType::from($this->data[1]);
-                }
-            );
-        }
-
-        return $fn();
+                return XHPChildrenConstraintType::from($this->data[1]);
+            }
+        );
     }
 
     // TODO: test memoization
@@ -124,28 +117,25 @@ class ReflectionXHPChildrenExpression
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): string {
-                    $type = $this->getConstraintType();
+        return static::memoize(
+            $fn,
+            function (): string {
+                $type = $this->getConstraintType();
 
-                    invariant(
-                        $type->getValue() === XHPChildrenConstraintType::ELEMENT()->getValue()
-                        || $type->getValue() === XHPChildrenConstraintType::CATEGORY()->getValue(),
-                        'Only element and category constraints have string data - in %s',
-                        $this->context,
-                    );
+                invariant(
+                    $type->getValue() === XHPChildrenConstraintType::ELEMENT()->getValue()
+                    || $type->getValue() === XHPChildrenConstraintType::CATEGORY()->getValue(),
+                    'Only element and category constraints have string data - in %s',
+                    $this->context,
+                );
 
-                    $data = $this->data[2];
+                $data = $this->data[2];
 
-                    invariant(is_string($data), 'Expected string data');
+                invariant(is_string($data), 'Expected string data');
 
-                    return $data;
-                }
-            );
-        }
-
-        return $fn();
+                return $data;
+            }
+        );
     }
 
     // TODO: test memoization
@@ -153,39 +143,36 @@ class ReflectionXHPChildrenExpression
     {
         /** @var callable|null $fn */
         static $fn = null;
+        
+        return static::memoize(
+            $fn,
+            function (): ReflectionXHPChildrenExpression {
+                invariant(
+                    $this->getConstraintType()->getValue() === XHPChildrenConstraintType::SUB_EXPR()->getValue(),
+                    'Only expression constraints have a single sub-expression - in %s',
+                    $this->context,
+                );
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): ReflectionXHPChildrenExpression {
+                $data = $this->data[2];
+
+                try {
                     invariant(
-                        $this->getConstraintType()->getValue() === XHPChildrenConstraintType::SUB_EXPR()->getValue(),
-                        'Only expression constraints have a single sub-expression - in %s',
-                        $this->context,
+                        is_iterable($data),
+                        "ReflectionXHPChildrenExpression's data must be a KeyedContainer"
                     );
 
-                    $data = $this->data[2];
-
-                    try {
-                        invariant(
-                            is_iterable($data),
-                            "ReflectionXHPChildrenExpression's data must be a KeyedContainer"
-                        );
-
-                        return new ReflectionXHPChildrenExpression(
-                            $this->context,
-                            $data
-                        );
-                    } catch (TypeAssertionException $_) {
-                        throw new Exception(
-                            'Expected a sub-expression, got a ' . (is_object($data) ? get_class($data) : gettype($data))
-                            . ' - in ' . $this->context
-                        );
-                    }
+                    return new ReflectionXHPChildrenExpression(
+                        $this->context,
+                        $data
+                    );
+                } catch (TypeAssertionException $_) {
+                    throw new Exception(
+                        'Expected a sub-expression, got a ' . (is_object($data) ? get_class($data) : gettype($data))
+                        . ' - in ' . $this->context
+                    );
                 }
-            );
-        }
-
-        return $fn();
+            }
+        );
     }
 
     public function __toString(): string

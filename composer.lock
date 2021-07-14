@@ -110,21 +110,23 @@
         },
         {
             "name": "zheltikov/php-invariant",
-            "version": "1.1.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zheltikov/php-invariant.git",
-                "reference": "c43ae925766ac3d4278650cbe010751377c79f4d"
+                "reference": "eb974430797e135c5156b878e5601a5ef3025d2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zheltikov/php-invariant/zipball/c43ae925766ac3d4278650cbe010751377c79f4d",
-                "reference": "c43ae925766ac3d4278650cbe010751377c79f4d",
+                "url": "https://api.github.com/repos/zheltikov/php-invariant/zipball/eb974430797e135c5156b878e5601a5ef3025d2b",
+                "reference": "eb974430797e135c5156b878e5601a5ef3025d2b",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": "^7.4",
-                "zheltikov/php-exceptions": "^1.0"
+                "zheltikov/php-exceptions": "^1.0",
+                "zheltikov/php-type-assert": "^1.0"
             },
             "require-dev": {
                 "nazar-pc/phpt-tests-runner": "^1.4"
@@ -150,22 +152,22 @@
             ],
             "support": {
                 "issues": "https://github.com/zheltikov/php-invariant/issues",
-                "source": "https://github.com/zheltikov/php-invariant/tree/1.1.0"
+                "source": "https://github.com/zheltikov/php-invariant/tree/1.2.1"
             },
-            "time": "2021-07-13T09:41:35+00:00"
+            "time": "2021-07-14T15:30:22+00:00"
         },
         {
             "name": "zheltikov/php-memoize",
-            "version": "1.2.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zheltikov/php-memoize.git",
-                "reference": "4aa98c396ace3ea312d010d9ac7d30c7f4294913"
+                "reference": "9c6fa0773fd1c03552c74e049a8608198ce66ee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/4aa98c396ace3ea312d010d9ac7d30c7f4294913",
-                "reference": "4aa98c396ace3ea312d010d9ac7d30c7f4294913",
+                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/9c6fa0773fd1c03552c74e049a8608198ce66ee0",
+                "reference": "9c6fa0773fd1c03552c74e049a8608198ce66ee0",
                 "shasum": ""
             },
             "require": {
@@ -196,9 +198,56 @@
             ],
             "support": {
                 "issues": "https://github.com/zheltikov/php-memoize/issues",
-                "source": "https://github.com/zheltikov/php-memoize/tree/1.2.0"
+                "source": "https://github.com/zheltikov/php-memoize/tree/1.3.1"
             },
-            "time": "2021-07-13T09:53:26+00:00"
+            "time": "2021-07-14T15:44:57+00:00"
+        },
+        {
+            "name": "zheltikov/php-type-assert",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zheltikov/php-type-assert.git",
+                "reference": "5e3d72b852c91826b9af0ca3c10e83f6f04456eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zheltikov/php-type-assert/zipball/5e3d72b852c91826b9af0ca3c10e83f6f04456eb",
+                "reference": "5e3d72b852c91826b9af0ca3c10e83f6f04456eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3",
+                "zheltikov/php-exceptions": "^1.0",
+                "zheltikov/php-invariant": "^1.1"
+            },
+            "require-dev": {
+                "nazar-pc/phpt-tests-runner": "^1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zheltikov\\TypeAssert\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Max Zheltikov",
+                    "homepage": "https://github.com/zheltikov"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/zheltikov/php-type-assert/issues",
+                "source": "https://github.com/zheltikov/php-type-assert/tree/1.0.2"
+            },
+            "time": "2021-07-14T10:27:58+00:00"
         }
     ],
     "packages-dev": [],

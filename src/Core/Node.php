@@ -18,12 +18,14 @@ use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
 use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
+use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\{invariant, invariant_violation};
-use function Zheltikov\Memoize\wrap;
 
 abstract class Node implements XHPChild
 {
+    use Memoize\Helper;
+
     // Must be kept in sync with compiler
     const SPREAD_PREFIX = '...$';
 
@@ -378,32 +380,19 @@ abstract class Node implements XHPChild
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): callable {
-                    /** @var callable|null $fn2 */
-                    static $fn2 = null;
-
-                    if ($fn2 === null) {
-                        $fn2 = wrap(
-                            function (): array {
-                                $decl = static::__xhpAttributeDeclaration();
-                                return Dict::map_with_key(
-                                    $decl,
-                                    function ($name, $attr_decl) {
-                                        return new ReflectionXHPAttribute($name, $attr_decl);
-                                    }
-                                );
-                            }
-                        );
+        return static::memoizeLSB(
+            static::class,
+            $fn,
+            function (): array {
+                $decl = static::__xhpAttributeDeclaration();
+                return Dict::map_with_key(
+                    $decl,
+                    function ($name, $attr_decl) {
+                        return new ReflectionXHPAttribute($name, $attr_decl);
                     }
-
-                    return $fn2;
-                }
-            );
-        }
-
-        return $fn(static::class)();
+                );
+            }
+        );
     }
 
     /**
@@ -427,29 +416,16 @@ abstract class Node implements XHPChild
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): callable {
-                    /** @var callable|null $fn2 */
-                    static $fn2 = null;
-
-                    if ($fn2 === null) {
-                        $fn2 = wrap(
-                            function (): ReflectionXHPChildrenDeclaration {
-                                return new ReflectionXHPChildrenDeclaration(
-                                    static::class,
-                                    static::__legacySerializedXHPChildrenDeclaration(),
-                                );
-                            }
-                        );
-                    }
-
-                    return $fn2;
-                }
-            );
-        }
-
-        return $fn(static::class)();
+        return static::memoizeLSB(
+            static::class,
+            $fn,
+            function (): ReflectionXHPChildrenDeclaration {
+                return new ReflectionXHPChildrenDeclaration(
+                    static::class,
+                    static::__legacySerializedXHPChildrenDeclaration(),
+                );
+            }
+        );
     }
 
     final public static function __xhpReflectionCategoryDeclaration(): array // keyset<string>
@@ -467,28 +443,15 @@ abstract class Node implements XHPChild
     {
         /** @var callable|null $fn */
         static $fn = null;
-
-        if ($fn === null) {
-            $fn = wrap(
-                function (): callable {
-                    /** @var callable|null $fn2 */
-                    static $fn2 = null;
-
-                    if ($fn2 === null) {
-                        $fn2 = wrap(
-                            function (): Node {
-                                return (new ReflectionClass(static::class))
-                                    ->newInstanceWithoutConstructor();
-                            }
-                        );
-                    }
-
-                    return $fn2;
-                }
-            );
-        }
-
-        return $fn(static::class)();
+        
+        return static::memoizeLSB(
+            static::class,
+            $fn,
+            function (): Node {
+                return (new ReflectionClass(static::class))
+                    ->newInstanceWithoutConstructor();
+            }
+        );
     }
 
     final public function getAttributes(): array // dict<string, mixed>

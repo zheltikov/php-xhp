@@ -2,6 +2,7 @@
 
 namespace Zheltikov\PhpXhp\Core;
 
+use Zheltikov\Memoize\Helper;
 use Zheltikov\PhpXhp\Core\ChildValidation\Any;
 use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
 use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
@@ -15,11 +16,12 @@ use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
 use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
 use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
 use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
-
-use function Zheltikov\Memoize\wrap;
+use Zheltikov\Memoize;
 
 class ChildValidation
 {
+    use Memoize\Helper;
+
     /**
      * @var bool
      */
@@ -113,15 +115,12 @@ class ChildValidation
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): Any {
-                    return new Any();
-                }
-            );
-        }
-
-        return $fn();
+        return static::memoize(
+            $fn,
+            function (): Any {
+                return new Any();
+            }
+        );
     }
 
     public static function at_least_one_of(Constraint $a): AtLeastOneOf
@@ -135,15 +134,13 @@ class ChildValidation
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (string $c): Category {
-                    return new Category($c);
-                }
-            );
-        }
-
-        return $fn($c);
+        return static::memoize(
+            $fn,
+            function (string $c): Category {
+                return new Category($c);
+            },
+            $c
+        );
     }
 
     // TODO: test memoization
@@ -151,16 +148,13 @@ class ChildValidation
     {
         /** @var callable|null $fn */
         static $fn = null;
-
-        if ($fn === null) {
-            $fn = wrap(
-                function (): None {
-                    return new None();
-                }
-            );
-        }
-
-        return $fn();
+        
+        return static::memoize(
+            $fn,
+            function (): None {
+                return new None();
+            }
+        );
     }
 
     public static function optional(Constraint $a): Optional

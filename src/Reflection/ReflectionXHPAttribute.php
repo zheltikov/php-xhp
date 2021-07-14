@@ -5,12 +5,14 @@ namespace Zheltikov\PhpXhp\Reflection;
 use Zheltikov\PhpXhp\Lib\C;
 use Zheltikov\PhpXhp\Lib\Str;
 use Zheltikov\PhpXhp\Lib\Vec;
+use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\invariant;
-use function Zheltikov\Memoize\wrap;
 
 class ReflectionXHPAttribute
 {
+    use Memoize\Helper;
+
     /**
      * @var \Zheltikov\PhpXhp\Reflection\XHPAttributeType
      */
@@ -85,32 +87,29 @@ class ReflectionXHPAttribute
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): string {
-                    $t = $this->getValueType();
+        return static::memoize(
+            $fn,
+            function (): string {
+                $t = $this->getValueType();
 
-                    invariant(
-                        $t === XHPAttributeType::TYPE_OBJECT(),
-                        'Tried to get value class for attribute %s of type %s - needed OBJECT',
-                        $this->getName(),
-                        array_flip(XHPAttributeType::toArray())[$t->getValue()],
-                    );
+                invariant(
+                    $t === XHPAttributeType::TYPE_OBJECT(),
+                    'Tried to get value class for attribute %s of type %s - needed OBJECT',
+                    $this->getName(),
+                    array_flip(XHPAttributeType::toArray())[$t->getValue()],
+                );
 
-                    $v = $this->extraType;
+                $v = $this->extraType;
 
-                    invariant(
-                        is_string($v),
-                        'Class name for attribute %s is not a string',
-                        $this->getName(),
-                    );
+                invariant(
+                    is_string($v),
+                    'Class name for attribute %s is not a string',
+                    $this->getName(),
+                );
 
-                    return $v;
-                }
-            );
-        }
-
-        return $fn();
+                return $v;
+            }
+        );
     }
 
     // TODO: test memoization
@@ -119,33 +118,30 @@ class ReflectionXHPAttribute
         /** @var callable|null $fn */
         static $fn = null;
 
-        if ($fn === null) {
-            $fn = wrap(
-                function (): array {
-                    $t = $this->getValueType();
+        return static::memoize(
+            $fn,
+            function (): array {
+                $t = $this->getValueType();
 
-                    invariant(
-                        $t === XHPAttributeType::TYPE_ENUM(),
-                        'Tried to get enum values for attribute %s of type %s - needed ENUM',
-                        $this->getName(),
-                        array_flip(XHPAttributeType::toArray())[$t->getValue()],
-                    );
+                invariant(
+                    $t === XHPAttributeType::TYPE_ENUM(),
+                    'Tried to get enum values for attribute %s of type %s - needed ENUM',
+                    $this->getName(),
+                    array_flip(XHPAttributeType::toArray())[$t->getValue()],
+                );
 
-                    $v = $this->extraType;
+                $v = $this->extraType;
 
-                    invariant(
-                        is_iterable($v),
-                        'Class name for attribute %s is not an array',
-                        $this->getName(),
-                    );
+                invariant(
+                    is_iterable($v),
+                    'Class name for attribute %s is not an array',
+                    $this->getName(),
+                );
 
-                    /* HH_FIXME[4110] not limited to arraykey */
-                    return array_keys($v);
-                }
-            );
-        }
-
-        return $fn();
+                /* HH_FIXME[4110] not limited to arraykey */
+                return array_keys($v);
+            }
+        );
     }
 
     /**
@@ -156,21 +152,19 @@ class ReflectionXHPAttribute
     {
         /** @var callable|null $fn */
         static $fn = null;
-
-        if ($fn === null) {
-            $fn = wrap(
-                function (string $attr): bool {
-                    return Str::length($attr) >= 6
-                           && $attr[4] === '-'
-                           && C::contains_key(
-                            self::$specialAttributes,
-                            Str::slice($attr, 0, 4)
-                        );
-                }
-            );
-        }
-
-        return $fn($attr);
+        
+        return static::memoize(
+            $fn,
+            function (string $attr): bool {
+                return Str::length($attr) >= 6
+                       && $attr[4] === '-'
+                       && C::contains_key(
+                        self::$specialAttributes,
+                        Str::slice($attr, 0, 4)
+                    );
+            },
+            $attr
+        );
     }
 
     public function __toString(): string
