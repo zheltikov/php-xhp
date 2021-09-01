@@ -3,7 +3,7 @@
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
-$namespace = 'Tags\\'; // '\\Zheltikov\\PhpXhp\\Html\\Tags\\';
+$namespace = 'Zheltikov\\PhpXhp\\Html\\Tags\\';
 $tags_path = __DIR__ . '/../src/Html/Tags/';
 $files = scandir($tags_path);
 
@@ -14,7 +14,7 @@ foreach ($files as $file) {
     }
 
     $class_name = basename($file, '.php');
-    
+
     $tag_name = [];
     $tag_name_parts = preg_split("/(?=[A-Z])/", ltrim($class_name, '_'));
     foreach ($tag_name_parts as $i => $tag_name_part) {
@@ -51,14 +51,13 @@ foreach ($tag_map as $tag_name => $class_name) {
     echo str_repeat('    ', 3);
     var_export($tag_name);
     echo ' => ';
-    echo $class_name . '::class,';
-    echo "\n";
+    var_export($class_name);
+    echo ",\n";
 }
 
 echo <<<PHP
         ];
     }
 }
-
 
 PHP;
