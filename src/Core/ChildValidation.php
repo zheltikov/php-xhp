@@ -1,21 +1,21 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 use Zheltikov\Memoize\Helper;
-use Zheltikov\PhpXhp\Core\ChildValidation\Any;
-use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\Category;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
-use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
-use Zheltikov\PhpXhp\Core\ChildValidation\None;
-use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
-use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
-use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
-use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
+use Zheltikov\Xhp\Core\ChildValidation\Any;
+use Zheltikov\Xhp\Core\ChildValidation\AnyNumberOf;
+use Zheltikov\Xhp\Core\ChildValidation\AnyOf;
+use Zheltikov\Xhp\Core\ChildValidation\AtLeastOneOf;
+use Zheltikov\Xhp\Core\ChildValidation\Category;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\LegacyConstraintType;
+use Zheltikov\Xhp\Core\ChildValidation\LegacyExpressionType;
+use Zheltikov\Xhp\Core\ChildValidation\None;
+use Zheltikov\Xhp\Core\ChildValidation\OfType;
+use Zheltikov\Xhp\Core\ChildValidation\Optional;
+use Zheltikov\Xhp\Core\ChildValidation\PCData;
+use Zheltikov\Xhp\Core\ChildValidation\Sequence;
 use Zheltikov\Memoize;
 
 class ChildValidation
@@ -92,7 +92,7 @@ class ChildValidation
      * FIXME: a string is not always the best way to handle this
      *
      * @param string $type
-     * @return \Zheltikov\PhpXhp\Core\ChildValidation\OfType
+     * @return \Zheltikov\Xhp\Core\ChildValidation\OfType
      */
     public static function of_type(string $type): OfType
     {
@@ -148,7 +148,7 @@ class ChildValidation
     {
         /** @var callable|null $fn */
         static $fn = null;
-        
+
         return static::memoize(
             $fn,
             function (): None {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
 use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\invariant;
@@ -14,7 +14,7 @@ class ReflectionXHPAttribute
     use Memoize\Helper;
 
     /**
-     * @var \Zheltikov\PhpXhp\Reflection\XHPAttributeType
+     * @var \Zheltikov\Xhp\Reflection\XHPAttributeType
      */
     private $type;
 
@@ -152,7 +152,7 @@ class ReflectionXHPAttribute
     {
         /** @var callable|null $fn */
         static $fn = null;
-        
+
         return static::memoize(
             $fn,
             function (string $attr): bool {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 use Zheltikov\Exceptions\InvalidOperationException;
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
 
 use function Zheltikov\Invariant\invariant;
 
@@ -50,7 +50,7 @@ final class UseAfterRenderException extends InvalidOperationException
             Vec::map(
                 Vec::reverse($this->xhpPath),
                 function ($class) {
-                    return Str::strip_prefix($class, 'Zheltikov\\PhpXhp\\');
+                    return Str::strip_prefix($class, 'Zheltikov\\Xhp\\');
                 }
             ),
             ' -> '

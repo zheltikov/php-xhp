@@ -1,9 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
 use Exception;
-use Zheltikov\PhpXhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation;
 use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\invariant;
@@ -54,7 +54,7 @@ class ReflectionXHPChildrenDeclaration
     {
         /** @var callable|null $fn */
         static $fn = null;
-        
+
         return static::memoize(
             $fn,
             function (): ReflectionXHPChildrenExpression {

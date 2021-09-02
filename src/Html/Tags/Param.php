@@ -1,9 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Html\PCDataElement;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Html\PCDataElement;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 final class Param extends PCDataElement
 {

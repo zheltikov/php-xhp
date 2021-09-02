@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Core\Primitive;
-use Zheltikov\PhpXhp\Lib\C;
+use Zheltikov\Xhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\Validation;
+use Zheltikov\Xhp\Core\Primitive;
+use Zheltikov\Xhp\Lib\C;
 
 /**
  * Render an <html /> element within a DOCTYPE, XHP has chosen to only support
@@ -24,7 +24,7 @@ final class Doctype extends Primitive
     // <<__Override>>
 
     /**
-     * @throws \Zheltikov\PhpXhp\Exceptions\RenderArrayException
+     * @throws \Zheltikov\Xhp\Exceptions\RenderArrayException
      * @throws \Zheltikov\Exceptions\InvariantException
      */
     protected function stringify(): string

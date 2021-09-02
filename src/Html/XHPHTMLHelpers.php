@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
-use Zheltikov\PhpXhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Str;
 
 use function Zheltikov\Invariant\invariant;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Lib;
+namespace Zheltikov\Xhp\Lib;
 
 // TODO: move this to a separate package
 use function Zheltikov\Invariant\invariant;

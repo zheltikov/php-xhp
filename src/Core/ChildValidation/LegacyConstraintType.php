@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
 use MyCLabs\Enum\Enum;
 
 /**
  * Class LegacyConstraintType
- * @package Zheltikov\PhpXhp\Core\ChildValidation
+ * @package Zheltikov\Xhp\Core\ChildValidation
  *
  * @extends Enum<LegacyConstraintType>
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Category;
+namespace Zheltikov\Xhp\Html\Category;
 
 interface Heading extends Category
 {

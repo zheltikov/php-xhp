@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
-use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
+use Zheltikov\Xhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\Validation;
 
 /**
  * Subclasses of :xhp:pcdata_elements may contain only string children.

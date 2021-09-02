@@ -1,9 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
-use Zheltikov\PhpXhp\Core\UnsafeRenderable;
-use Zheltikov\PhpXhp\Exceptions\ClassException;
+use Zheltikov\Xhp\Core\UnsafeRenderable;
+use Zheltikov\Xhp\Exceptions\ClassException;
 
 /**
  * Subclasses of unescaped_pcdata_element must contain only string children.
@@ -22,7 +22,7 @@ use Zheltikov\PhpXhp\Exceptions\ClassException;
 abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRenderable
 {
     /**
-     * @throws \Zheltikov\PhpXhp\Exceptions\ClassException
+     * @throws \Zheltikov\Xhp\Exceptions\ClassException
      */
     // <<__Override>>
     protected function stringify(): string
@@ -40,7 +40,7 @@ abstract class UnescapedPCDataElement extends PCDataElement implements UnsafeRen
     }
 
     /**
-     * @throws \Zheltikov\PhpXhp\Exceptions\ClassException
+     * @throws \Zheltikov\Xhp\Exceptions\ClassException
      */
     final public function toHTMLString(): string
     {

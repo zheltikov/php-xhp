@@ -4,7 +4,7 @@
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Zheltikov\\PhpXhp\\": "src/"
+      "Zheltikov\\Xhp\\": "src/"
     }
   },
   "require": {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Html\Category\Metadata;
-use Zheltikov\PhpXhp\Html\Singleton;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Html\Category\Metadata;
+use Zheltikov\Xhp\Html\Singleton;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 final class Base extends Singleton implements Metadata
 {

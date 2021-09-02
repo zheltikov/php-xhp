@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 /**
  * INCREDIBLY DANGEROUS: Marks an object as being able to provide an HTML

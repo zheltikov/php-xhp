@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
 use ReflectionClass;
-use Zheltikov\PhpXhp\Core\Node;
-use Zheltikov\PhpXhp\Lib\C;
+use Zheltikov\Xhp\Core\Node;
+use Zheltikov\Xhp\Lib\C;
 
 use function Zheltikov\Invariant\invariant;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Exceptions;
+namespace Zheltikov\Xhp\Exceptions;
 
-use Zheltikov\PhpXhp\Core\Node;
+use Zheltikov\Xhp\Core\Node;
 
 class AttributeNotSupportedException extends Exception
 {

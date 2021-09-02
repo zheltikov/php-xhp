@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
 use Exception;
 use Zheltikov\Exceptions\TypeAssertionException;
@@ -143,7 +143,7 @@ class ReflectionXHPChildrenExpression
     {
         /** @var callable|null $fn */
         static $fn = null;
-        
+
         return static::memoize(
             $fn,
             function (): ReflectionXHPChildrenExpression {

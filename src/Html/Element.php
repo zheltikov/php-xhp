@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
-use Zheltikov\PhpXhp\Core\Primitive;
-use Zheltikov\PhpXhp\Core\UnsafeAttributeValue_DEPRECATED;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Core\Primitive;
+use Zheltikov\Xhp\Core\UnsafeAttributeValue_DEPRECATED;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 /**
  * This is the base library of HTML elements for use in XHP. This includes all

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
 /** Verify that a new child declaration matches the legacy codegen. */
 trait Validation

@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Html\Category\Flow;
-use Zheltikov\PhpXhp\Html\Element;
+use Zheltikov\Xhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\Validation;
+use Zheltikov\Xhp\Html\Category\Flow;
+use Zheltikov\Xhp\Html\Element;
 
 final class Figcaption extends Element
 {

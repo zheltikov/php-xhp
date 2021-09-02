@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 abstract class Primitive extends Node
 {
@@ -8,7 +8,7 @@ abstract class Primitive extends Node
 
     /**
      * @return string
-     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      * @throws \Zheltikov\Exceptions\InvariantException
      */
     // <<__Override>>
@@ -47,7 +47,7 @@ abstract class Primitive extends Node
     }
 
     /**
-     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      * @throws \Zheltikov\Exceptions\InvariantException
      */
     // <<__Override>>

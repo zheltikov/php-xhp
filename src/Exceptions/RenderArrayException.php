@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Exceptions;
+namespace Zheltikov\Xhp\Exceptions;
 
 class RenderArrayException extends Exception
 {

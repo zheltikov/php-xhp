@@ -1,9 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Vec;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Vec;
 
 final class Sequence implements LegacyExpression
 {

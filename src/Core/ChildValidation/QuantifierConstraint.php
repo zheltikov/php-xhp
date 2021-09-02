@@ -1,15 +1,15 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
 /**
  * Class QuantifierConstraint
- * @package Zheltikov\PhpXhp\Core\ChildValidation
+ * @package Zheltikov\Xhp\Core\ChildValidation
  */
 abstract class QuantifierConstraint implements LegacyExpression
 {
     /**
-     * @var \Zheltikov\PhpXhp\Core\ChildValidation\Constraint
+     * @var \Zheltikov\Xhp\Core\ChildValidation\Constraint
      */
     private $child;
 

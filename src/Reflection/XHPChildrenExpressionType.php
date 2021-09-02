@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
 use MyCLabs\Enum\Enum;
 
 /**
  * Class XHPChildrenExpressionType
- * @package Zheltikov\PhpXhp\Core
+ * @package Zheltikov\Xhp\Core
  *
  * @extends Enum<XHPChildrenExpressionType>
  *

@@ -1,10 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Html\Category\Metadata;
-use Zheltikov\PhpXhp\Html\UnescapedPCDataElement;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Html\Category\Metadata;
+use Zheltikov\Xhp\Html\UnescapedPCDataElement;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 final class Style extends UnescapedPCDataElement implements Metadata
 {

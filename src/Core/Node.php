@@ -1,23 +1,23 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
 use ReflectionClass;
-use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
-use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
-use Zheltikov\PhpXhp\Exceptions\InvalidChildrenException;
-use Zheltikov\PhpXhp\Exceptions\RenderArrayException;
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Dict;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
+use Zheltikov\Xhp\Exceptions\AttributeNotSupportedException;
+use Zheltikov\Xhp\Exceptions\AttributeRequiredException;
+use Zheltikov\Xhp\Exceptions\InvalidChildrenException;
+use Zheltikov\Xhp\Exceptions\RenderArrayException;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Dict;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
+use Zheltikov\Xhp\Reflection\ReflectionXHPAttribute;
+use Zheltikov\Xhp\Reflection\ReflectionXHPChildrenDeclaration;
+use Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression;
+use Zheltikov\Xhp\Reflection\XHPChildrenConstraintType;
+use Zheltikov\Xhp\Reflection\XHPChildrenDeclarationType;
+use Zheltikov\Xhp\Reflection\XHPChildrenExpressionType;
 use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\{invariant, invariant_violation};
@@ -341,8 +341,8 @@ abstract class Node implements XHPChild
      *
      * @param string $attr attribute to fetch
      * @return mixed           value
-     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException
-     * @throws \Zheltikov\PhpXhp\Exceptions\AttributeRequiredException
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeNotSupportedException
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeRequiredException
      */
     final public function getAttribute(string $attr) // : mixed
     {
@@ -443,7 +443,7 @@ abstract class Node implements XHPChild
     {
         /** @var callable|null $fn */
         static $fn = null;
-        
+
         return static::memoizeLSB(
             static::class,
             $fn,
@@ -732,7 +732,7 @@ abstract class Node implements XHPChild
     /**
      * Validates that this element's children match its children descriptor, and
      * throws an exception if that's not the case.
-     * @throws \Zheltikov\PhpXhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      */
     protected function validateChildren(): void
     {
@@ -761,7 +761,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)
@@ -838,7 +838,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)
@@ -955,9 +955,9 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Core\XHPChild|\Stringable|string $child
+     * @param \Zheltikov\Xhp\Core\XHPChild|\Stringable|string $child
      * @return string
-     * @throws \Zheltikov\PhpXhp\Exceptions\RenderArrayException
+     * @throws \Zheltikov\Xhp\Exceptions\RenderArrayException
      */
     final protected static function renderChild($child): string
     {
