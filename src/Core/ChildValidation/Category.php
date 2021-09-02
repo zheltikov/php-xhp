@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
-use Zheltikov\PhpXhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Str;
 
 final class Category extends LeafConstraint
 {

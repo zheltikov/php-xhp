@@ -1,12 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
 use MyCLabs\Enum\Enum;
 
 /**
  * Class LegacyExpressionType
- * @package Zheltikov\PhpXhp\Core\ChildValidation
+ * @package Zheltikov\Xhp\Core\ChildValidation
  *
  * @extends Enum<LegacyExpressionType>
  *

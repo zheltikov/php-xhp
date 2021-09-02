@@ -1,17 +1,17 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Html\Category\Embedded;
-use Zheltikov\PhpXhp\Html\Category\Flow;
-use Zheltikov\PhpXhp\Html\Category\Interactive;
-use Zheltikov\PhpXhp\Html\Category\Palpable;
-use Zheltikov\PhpXhp\Html\Category\Phrase;
-use Zheltikov\PhpXhp\Html\Element;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\Validation;
+use Zheltikov\Xhp\Html\Category\Embedded;
+use Zheltikov\Xhp\Html\Category\Flow;
+use Zheltikov\Xhp\Html\Category\Interactive;
+use Zheltikov\Xhp\Html\Category\Palpable;
+use Zheltikov\Xhp\Html\Category\Phrase;
+use Zheltikov\Xhp\Html\Element;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 final class Embed extends Element implements Phrase, Flow, Interactive, Embedded, Palpable
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Lib;
+namespace Zheltikov\Xhp\Lib;
 
 // TODO: move this to a separate package
 class Str
 {
     public static function starts_with(string $string, string $prefix): bool
     {
-        return \strpos($string, $prefix) === 0;
+        return strpos($string, $prefix) === 0;
     }
 
     /**
@@ -17,7 +17,7 @@ class Str
      */
     public static function format(string $format, ...$values): string
     {
-        return \sprintf($format, ...$values);
+        return sprintf($format, ...$values);
     }
 
     public static function replace(
@@ -25,29 +25,29 @@ class Str
         string $needle,
         string $replacement
     ): string {
-        return \str_replace($needle, $replacement, $haystack);
+        return str_replace($needle, $replacement, $haystack);
     }
 
     public static function join(array $pieces, string $glue): string
     {
-        return \implode($glue, $pieces);
+        return implode($glue, $pieces);
     }
 
     public static function trim(string $string): string
     {
-        return \trim($string);
+        return trim($string);
     }
 
     public static function length(string $string): int
     {
-        return \strlen($string);
+        return strlen($string);
     }
 
     public static function slice(string $string, int $offset, ?int $length = null): string
     {
         return $length === null
-            ? \substr($string, $offset)
-            : \substr($string, $offset, $length);
+            ? substr($string, $offset)
+            : substr($string, $offset, $length);
     }
 
     public static function strip_prefix(string $string, string $prefix): string

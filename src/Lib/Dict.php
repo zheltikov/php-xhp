@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Lib;
+namespace Zheltikov\Xhp\Lib;
 
 // TODO: move this to a separate package
 class Dict
@@ -9,7 +9,7 @@ class Dict
     {
         $result = [];
         foreach ($source as $key => $value) {
-            $result[$key] = \call_user_func($callback, $key, $value);
+            $result[$key] = call_user_func($callback, $key, $value);
         }
         return $result;
     }
@@ -19,7 +19,7 @@ class Dict
         return static::map_with_key(
             $source,
             function ($key, $value) use ($callback) {
-                return \call_user_func($callback, $value);
+                return call_user_func($callback, $value);
             }
         );
     }
@@ -48,7 +48,7 @@ class Dict
         $result = [];
 
         foreach ($source as $key => $value) {
-            if (\call_user_func($callback, $value)) {
+            if (call_user_func($callback, $value)) {
                 $result[$key] = $value;
             }
         }

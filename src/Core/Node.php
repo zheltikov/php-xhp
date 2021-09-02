@@ -1,26 +1,31 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
-use Zheltikov\PhpXhp\Exceptions\AttributeNotSupportedException;
-use Zheltikov\PhpXhp\Exceptions\AttributeRequiredException;
-use Zheltikov\PhpXhp\Exceptions\InvalidChildrenException;
-use Zheltikov\PhpXhp\Exceptions\RenderArrayException;
-use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Dict;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPAttribute;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenDeclaration;
-use Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenConstraintType;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenDeclarationType;
-use Zheltikov\PhpXhp\Reflection\XHPChildrenExpressionType;
+use ReflectionClass;
+use Zheltikov\Xhp\Exceptions\AttributeNotSupportedException;
+use Zheltikov\Xhp\Exceptions\AttributeRequiredException;
+use Zheltikov\Xhp\Exceptions\InvalidChildrenException;
+use Zheltikov\Xhp\Exceptions\RenderArrayException;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Dict;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
+use Zheltikov\Xhp\Reflection\ReflectionXHPAttribute;
+use Zheltikov\Xhp\Reflection\ReflectionXHPChildrenDeclaration;
+use Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression;
+use Zheltikov\Xhp\Reflection\XHPChildrenConstraintType;
+use Zheltikov\Xhp\Reflection\XHPChildrenDeclarationType;
+use Zheltikov\Xhp\Reflection\XHPChildrenExpressionType;
+use Zheltikov\Memoize;
+
+use function Zheltikov\Invariant\{invariant, invariant_violation};
 
 abstract class Node implements XHPChild
 {
+    use Memoize\Helper;
+
     // Must be kept in sync with compiler
     const SPREAD_PREFIX = '...$';
 
@@ -69,15 +74,16 @@ abstract class Node implements XHPChild
      * @param array $attributes (KeyedTraversable<string, mixed>) map of attributes to values
      * @param array $children (Traversable<?\XHPChild>) list of children
      * @param mixed $debug_info (dynamic) will in the source when childValidation is enabled
-     * @throws \Exception
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final public function __construct(array $attributes = [], array $children = [], ...$debug_info)
     {
-        Assert::invariant(
+        invariant(
             $this->__xhpChildrenDeclaration() === self::__NO_LEGACY_CHILDREN_DECLARATION,
             'The `children` keyword is no longer supported',
         );
-        Assert::invariant(
+
+        invariant(
             $this->__xhpCategoryDeclaration() === self::__NO_LEGACY_CATEGORY_DECLARATION,
             'The `category` keyword is no longer supported',
         );
@@ -88,7 +94,7 @@ abstract class Node implements XHPChild
 
         foreach ($attributes as $key => $value) {
             if (self::isSpreadKey($key)) {
-                Assert::invariant(
+                invariant(
                     $value instanceof Node,
                     'Only XHP can be used with an attribute spread operator',
                 );
@@ -128,7 +134,7 @@ abstract class Node implements XHPChild
         if ($this->__isRendered) {
             throw new UseAfterRenderException(Str::format("Can't %s after render", __FUNCTION__));
         }
-        if (\is_iterable($child)) {
+        if (is_iterable($child)) {
             foreach ($child as $c) {
                 $this->appendChild($c);
             }
@@ -166,7 +172,7 @@ abstract class Node implements XHPChild
                     $new_children[] = $child;
                 }
             } else {
-                if (!\is_iterable($xhp)) {
+                if (!is_iterable($xhp)) {
                     $new_children[] = $xhp;
                 } else {
                     foreach ($xhp as $element) {
@@ -203,7 +209,7 @@ abstract class Node implements XHPChild
     {
         $children = [];
         foreach ($this->children as $child) {
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 $children[] = $child;
             }
         }
@@ -222,14 +228,17 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of the element.
      *
      * An exception is thrown if the element has no children.
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getFirstChildx(): XHPChild
     {
         $child = $this->getFirstChild();
+
         if ($child !== null) {
             return $child;
         }
-        Assert::invariant_violation('%s called on element with no children', __FUNCTION__);
+
+        invariant_violation('%s called on element with no children', __FUNCTION__);
     }
 
     /**
@@ -240,7 +249,7 @@ abstract class Node implements XHPChild
     public function getFirstFilteredChild(callable $callback): ?XHPChild
     {
         foreach ($this->children as $child) {
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 return $child;
             }
         }
@@ -251,15 +260,18 @@ abstract class Node implements XHPChild
      * Fetch the first direct child of a given type.
      *
      * If no matching child is present, an exception is thrown.
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getFirstFilteredChildx(callable $callback): XHPChild
     {
         $child = $this->getFirstFilteredChild($callback);
-        Assert::invariant(
+
+        invariant(
             $child !== null,
             '%s called with no matching child',
             __FUNCTION__,
         );
+
         return $child;
     }
 
@@ -277,14 +289,17 @@ abstract class Node implements XHPChild
      * Fetches the last direct child of the element.
      *
      * If the element has no children, an exception is thrown.
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getLastChildx(): XHPChild
     {
         $child = $this->getLastChild();
+
         if ($child !== null) {
             return $child;
         }
-        Assert::invariant_violation('%s called on element with no children', __FUNCTION__);
+
+        invariant_violation('%s called on element with no children', __FUNCTION__);
     }
 
     /**
@@ -296,7 +311,7 @@ abstract class Node implements XHPChild
     {
         for ($i = C::count($this->children) - 1; $i >= 0; --$i) {
             $child = $this->children[$i];
-            if (\call_user_func($callback, $child)) {
+            if (call_user_func($callback, $child)) {
                 return $child;
             }
         }
@@ -307,11 +322,14 @@ abstract class Node implements XHPChild
      * Fetch the last direct child of the element of a given type.
      *
      * If the element has no matching children, an exception is thrown.
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function getLastFilteredChildx(callable $callback): XHPChild
     {
         $child = $this->getLastFilteredChild($callback);
-        Assert::invariant($child !== null, '%s called with no matching child', __FUNCTION__);
+
+        invariant($child !== null, '%s called with no matching child', __FUNCTION__);
+
         return $child;
     }
 
@@ -323,6 +341,8 @@ abstract class Node implements XHPChild
      *
      * @param string $attr attribute to fetch
      * @return mixed           value
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeNotSupportedException
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeRequiredException
      */
     final public function getAttribute(string $attr) // : mixed
     {
@@ -354,35 +374,57 @@ abstract class Node implements XHPChild
         return static::__xhpReflectionAttributes()[$attr] ?? null;
     }
 
-    // <<__MemoizeLSB>>
-    // dict<string, ReflectionXHPAttribute>
-    final public static function __xhpReflectionAttributes(): array
+    // TODO: test lsb memoization
+    final public static function __xhpReflectionAttributes(): array // dict<string, ReflectionXHPAttribute>
     {
-        $decl = static::__xhpAttributeDeclaration();
-        return Dict::map_with_key(
-            $decl,
-            function ($name, $attr_decl) {
-                return new ReflectionXHPAttribute($name, $attr_decl);
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoizeLSB(
+            static::class,
+            $fn,
+            function (): array {
+                $decl = static::__xhpAttributeDeclaration();
+                return Dict::map_with_key(
+                    $decl,
+                    function ($name, $attr_decl) {
+                        return new ReflectionXHPAttribute($name, $attr_decl);
+                    }
+                );
             }
         );
     }
 
+    /**
+     * @return mixed
+     * @throws \Zheltikov\Exceptions\InvariantException
+     */
     protected static function __legacySerializedXHPChildrenDeclaration() // : mixed
     {
-        Assert::invariant(
+        invariant(
             self::emptyInstance()->__xhpChildrenDeclaration() ===
             self::__NO_LEGACY_CHILDREN_DECLARATION,
             'Legacy XHP children declaration syntax is no longer supported',
         );
+
         return 1; // any children
     }
 
-    // <<__MemoizeLSB>>
+    // TODO: test lsb memoization
     final public static function __xhpReflectionChildrenDeclaration(): ReflectionXHPChildrenDeclaration
     {
-        return new ReflectionXHPChildrenDeclaration(
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoizeLSB(
             static::class,
-            static::__legacySerializedXHPChildrenDeclaration(),
+            $fn,
+            function (): ReflectionXHPChildrenDeclaration {
+                return new ReflectionXHPChildrenDeclaration(
+                    static::class,
+                    static::__legacySerializedXHPChildrenDeclaration(),
+                );
+            }
         );
     }
 
@@ -393,14 +435,23 @@ abstract class Node implements XHPChild
 
     // Work-around to call methods that should be static without a real
     // instance.
-    // <<__MemoizeLSB>>
-    /** @return $this
-     * @throws \ReflectionException
+    // TODO: test lsb memoization
+    /**
+     * @return $this
      */
     private static function emptyInstance(): self
     {
-        return (new \ReflectionClass(static::class))
-            ->newInstanceWithoutConstructor();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoizeLSB(
+            static::class,
+            $fn,
+            function (): Node {
+                return (new ReflectionClass(static::class))
+                    ->newInstanceWithoutConstructor();
+            }
+        );
     }
 
     final public function getAttributes(): array // dict<string, mixed>
@@ -681,6 +732,7 @@ abstract class Node implements XHPChild
     /**
      * Validates that this element's children match its children descriptor, and
      * throws an exception if that's not the case.
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      */
     protected function validateChildren(): void
     {
@@ -709,7 +761,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)
@@ -786,7 +838,7 @@ abstract class Node implements XHPChild
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Reflection\ReflectionXHPChildrenExpression $expr
+     * @param \Zheltikov\Xhp\Reflection\ReflectionXHPChildrenExpression $expr
      * @param int $index
      * @return array
      * (bool, int)
@@ -816,7 +868,7 @@ abstract class Node implements XHPChild
                 $class = $expr->getConstraintString();
                 if (
                     C::contains_key($this->children, $index)
-                    && \is_a($this->children[$index], $class, true)
+                    && is_a($this->children[$index], $class, true)
                 ) {
                     return [true, $index + 1];
                 }
@@ -877,7 +929,7 @@ abstract class Node implements XHPChild
         $desc = [];
         foreach ($this->children as $child) {
             if ($child instanceof Node) {
-                $tmp = '\\' . \get_class($child);
+                $tmp = '\\' . get_class($child);
                 // FIXME: call to __xhpCategoryDeclaration always results in ["\0INVALID\0" => 0]
                 $categories = $child->__xhpCategoryDeclaration();
                 if (C::count($categories) > 0) {
@@ -898,13 +950,14 @@ abstract class Node implements XHPChild
             return true;
         }
         // XHP parses the category string
-        $c = \str_replace([':', '-'], ['__', '_'], $c);
+        $c = str_replace([':', '-'], ['__', '_'], $c);
         return ($categories[$c] ?? null) !== null;
     }
 
     /**
-     * @param \Zheltikov\PhpXhp\Core\XHPChild|\Stringable|string $child
+     * @param \Zheltikov\Xhp\Core\XHPChild|\Stringable|string $child
      * @return string
+     * @throws \Zheltikov\Xhp\Exceptions\RenderArrayException
      */
     final protected static function renderChild($child): string
     {
@@ -915,11 +968,11 @@ abstract class Node implements XHPChild
         if ($child instanceof UnsafeRenderable) {
             return $child->toHTMLString();
         }
-        if (\is_iterable($child)) {
+        if (is_iterable($child)) {
             throw new RenderArrayException('Can not render traversables!');
         }
 
         /* HH_FIXME[4281] stringish migration */
-        return \htmlspecialchars((string) $child);
+        return htmlspecialchars((string) $child);
     }
 }

@@ -1,23 +1,27 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
-use Zheltikov\PhpXhp\Core\ChildValidation\AnyNumberOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\AnyOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation\LegacyConstraintType;
-use Zheltikov\PhpXhp\Core\ChildValidation\LegacyExpressionType;
-use Zheltikov\PhpXhp\Core\ChildValidation\OfType;
-use Zheltikov\PhpXhp\Core\ChildValidation\PCData;
-use Zheltikov\PhpXhp\Core\ChildValidation\Sequence;
-use Zheltikov\PhpXhp\Core\ChildValidation\Any;
-use Zheltikov\PhpXhp\Core\ChildValidation\AtLeastOneOf;
-use Zheltikov\PhpXhp\Core\ChildValidation\Category;
-use Zheltikov\PhpXhp\Core\ChildValidation\None;
-use Zheltikov\PhpXhp\Core\ChildValidation\Optional;
+use Zheltikov\Memoize\Helper;
+use Zheltikov\Xhp\Core\ChildValidation\Any;
+use Zheltikov\Xhp\Core\ChildValidation\AnyNumberOf;
+use Zheltikov\Xhp\Core\ChildValidation\AnyOf;
+use Zheltikov\Xhp\Core\ChildValidation\AtLeastOneOf;
+use Zheltikov\Xhp\Core\ChildValidation\Category;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\LegacyConstraintType;
+use Zheltikov\Xhp\Core\ChildValidation\LegacyExpressionType;
+use Zheltikov\Xhp\Core\ChildValidation\None;
+use Zheltikov\Xhp\Core\ChildValidation\OfType;
+use Zheltikov\Xhp\Core\ChildValidation\Optional;
+use Zheltikov\Xhp\Core\ChildValidation\PCData;
+use Zheltikov\Xhp\Core\ChildValidation\Sequence;
+use Zheltikov\Memoize;
 
 class ChildValidation
 {
+    use Memoize\Helper;
+
     /**
      * @var bool
      */
@@ -48,10 +52,10 @@ class ChildValidation
     {
         if (
             // $x is (int, int, mixed)
-            \is_array($x)
-            && \is_int($x[0])
-            && \is_int($x[1])
-            && \array_key_exists(2, $x)
+            is_array($x)
+            && is_int($x[0])
+            && is_int($x[1])
+            && array_key_exists(2, $x)
 
             && $x[0] === LegacyExpressionType::EXACTLY_ONE()->getValue()
             && $x[1] === LegacyConstraintType::EXPRESSION()->getValue()
@@ -61,10 +65,10 @@ class ChildValidation
 
         if (
             // $x is (int, mixed, mixed)
-            \is_array($x)
-            && \is_int($x[0])
-            && \array_key_exists(1, $x)
-            && \array_key_exists(2, $x)
+            is_array($x)
+            && is_int($x[0])
+            && array_key_exists(1, $x)
+            && array_key_exists(2, $x)
         ) {
             return [$x[0], static::normalize($x[1]), static::normalize($x[2])];
         }
@@ -88,7 +92,7 @@ class ChildValidation
      * FIXME: a string is not always the best way to handle this
      *
      * @param string $type
-     * @return \Zheltikov\PhpXhp\Core\ChildValidation\OfType
+     * @return \Zheltikov\Xhp\Core\ChildValidation\OfType
      */
     public static function of_type(string $type): OfType
     {
@@ -105,10 +109,18 @@ class ChildValidation
         return new Sequence($a, $b, ...$rest);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function any(): Any
     {
-        return new Any();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoize(
+            $fn,
+            function (): Any {
+                return new Any();
+            }
+        );
     }
 
     public static function at_least_one_of(Constraint $a): AtLeastOneOf
@@ -116,16 +128,33 @@ class ChildValidation
         return new AtLeastOneOf($a);
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function category(string $c): Category
     {
-        return new Category($c);
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoize(
+            $fn,
+            function (string $c): Category {
+                return new Category($c);
+            },
+            $c
+        );
     }
 
-    // <<__Memoize>>
+    // TODO: test memoization
     public static function empty(): None
     {
-        return new None();
+        /** @var callable|null $fn */
+        static $fn = null;
+
+        return static::memoize(
+            $fn,
+            function (): None {
+                return new None();
+            }
+        );
     }
 
     public static function optional(Constraint $a): Optional

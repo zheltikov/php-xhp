@@ -1,10 +1,12 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Reflection;
+namespace Zheltikov\Xhp\Reflection;
 
-use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Core\Node;
+use ReflectionClass;
+use Zheltikov\Xhp\Core\Node;
+use Zheltikov\Xhp\Lib\C;
+
+use function Zheltikov\Invariant\invariant;
 
 class ReflectionXHPClass
 {
@@ -14,20 +16,27 @@ class ReflectionXHPClass
      */
     private $className;
 
+    /**
+     * @throws \Zheltikov\Exceptions\InvariantException
+     */
     public function __construct(string $className)
     {
         $this->className = $className;
-        Assert::invariant(
-            \class_exists($this->className)
-            && \in_array(Node::class, \class_parents($this->className)),
+
+        invariant(
+            class_exists($this->className)
+            && in_array(Node::class, class_parents($this->className)),
             'Invalid class name: %s',
             $this->className,
         );
     }
 
-    public function getReflectionClass(): \ReflectionClass
+    /**
+     * @throws \ReflectionException
+     */
+    public function getReflectionClass(): ReflectionClass
     {
-        return new \ReflectionClass($this->getClassName());
+        return new ReflectionClass($this->getClassName());
     }
 
     /**
@@ -46,15 +55,20 @@ class ReflectionXHPClass
         return $class::__xhpReflectionChildrenDeclaration();
     }
 
+    /**
+     * @throws \Zheltikov\Exceptions\InvariantException
+     */
     public function getAttribute(string $name): ReflectionXHPAttribute
     {
         $map = $this->getAttributes();
-        Assert::invariant(
+
+        invariant(
             C::contains_key($map, $name),
             'Tried to get attribute %s for XHP element %s, which does not exist',
             $name,
             $this->getClassName(),
         );
+
         return $map[$name];
     }
 

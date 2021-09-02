@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core\ChildValidation;
+namespace Zheltikov\Xhp\Core\ChildValidation;
 
 final class AtLeastOneOf extends QuantifierConstraint
 {

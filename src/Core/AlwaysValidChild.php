@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 interface AlwaysValidChild
 {
-    
+
 }

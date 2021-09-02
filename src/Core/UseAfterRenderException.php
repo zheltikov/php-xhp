@@ -1,14 +1,15 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
-use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Lib\C;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
+use Zheltikov\Exceptions\InvalidOperationException;
+use Zheltikov\Xhp\Lib\C;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
 
-// FIXME: extends \InvalidOperationException
-final class UseAfterRenderException extends \RuntimeException
+use function Zheltikov\Invariant\invariant;
+
+final class UseAfterRenderException extends InvalidOperationException
 {
     /**
      * @var array
@@ -23,12 +24,13 @@ final class UseAfterRenderException extends \RuntimeException
 
     /**
      * @param string $node (classname<Node>)
-     * @throws \Exception
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function __viaXHPPath(string $node): void
     {
-        Assert::invariant(\class_exists($node), 'Node class name must exist');
-        Assert::invariant(\in_array(Node::class, \class_parents($node)), 'Node class name must extend Node');
+        invariant(class_exists($node), 'Node class name must exist');
+        invariant(in_array(Node::class, class_parents($node)), 'Node class name must extend Node');
+
         $this->xhpPath[] = $node;
 
         // FIXME: this is a quick workaround
@@ -48,7 +50,7 @@ final class UseAfterRenderException extends \RuntimeException
             Vec::map(
                 Vec::reverse($this->xhpPath),
                 function ($class) {
-                    return Str::strip_prefix($class, 'Zheltikov\\PhpXhp\\');
+                    return Str::strip_prefix($class, 'Zheltikov\\Xhp\\');
                 }
             ),
             ' -> '

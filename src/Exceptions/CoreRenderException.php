@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Exceptions;
+namespace Zheltikov\Xhp\Exceptions;
 
-use Zheltikov\PhpXhp\Core\Node;
+use Zheltikov\Xhp\Core\Node;
 
 class CoreRenderException extends Exception
 {
@@ -14,7 +14,7 @@ class CoreRenderException extends Exception
     public function __construct(Node $that, $rend)
     {
         $message = ':x:element::render must reduce an object to an :x:primitive, but `';
-        $message .= \get_class($that) . '` reduced into `' . \gettype($rend) . "`.\n\n";
+        $message .= get_class($that) . '` reduced into `' . gettype($rend) . "`.\n\n";
         $message .= $that->source;
 
         parent::__construct($message);

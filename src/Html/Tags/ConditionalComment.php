@@ -1,15 +1,15 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Core\ChildValidation\Validation;
-use Zheltikov\PhpXhp\Core\ChildValidation\Constraint;
-use Zheltikov\PhpXhp\Core\ChildValidation;
-use Zheltikov\PhpXhp\Core\Node;
-use Zheltikov\PhpXhp\Core\Primitive;
-use Zheltikov\PhpXhp\Lib\Str;
-use Zheltikov\PhpXhp\Lib\Vec;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Core\ChildValidation;
+use Zheltikov\Xhp\Core\ChildValidation\Constraint;
+use Zheltikov\Xhp\Core\ChildValidation\Validation;
+use Zheltikov\Xhp\Core\Node;
+use Zheltikov\Xhp\Core\Primitive;
+use Zheltikov\Xhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Vec;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 /**
  * Render an HTML conditional comment. You can choose whatever you like as
@@ -42,6 +42,11 @@ final class ConditionalComment extends Primitive
     }
 
     // <<__Override>>
+
+    /**
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeNotSupportedException
+     * @throws \Zheltikov\Xhp\Exceptions\AttributeRequiredException
+     */
     protected function stringify(): string
     {
         $html = '<!--[if ' . $this->getAttribute('if') . ']>';

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
-use Zheltikov\PhpXhp\Exceptions\CoreRenderException;
+use Zheltikov\Xhp\Exceptions\CoreRenderException;
 
 /**
  * element defines an interface that all user-land elements should subclass
@@ -16,7 +16,10 @@ abstract class Element extends Node
     abstract protected function render(): Node;
 
     /**
-     * @throws UseAfterRenderException
+     * @return string
+     * @throws \Zheltikov\Xhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final public function toString(): string
     {
@@ -35,7 +38,10 @@ abstract class Element extends Node
     }
 
     /**
-     * @throws UseAfterRenderException
+     * @return \Zheltikov\Xhp\Core\Primitive
+     * @throws \Zheltikov\Xhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final protected function __flushSubtree(): Primitive
     {
@@ -51,6 +57,7 @@ abstract class Element extends Node
 
     /**
      * @throws UseAfterRenderException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      */
     protected function __renderAndProcess(): Node
     {
@@ -71,6 +78,8 @@ abstract class Element extends Node
 
     /**
      * @throws UseAfterRenderException
+     * @throws \Zheltikov\Xhp\Exceptions\CoreRenderException
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
      */
     final protected function __flushRenderedRootElement(): Primitive
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Html\Category\Metadata;
-use Zheltikov\PhpXhp\Html\PCDataElement;
+use Zheltikov\Xhp\Html\Category\Metadata;
+use Zheltikov\Xhp\Html\PCDataElement;
 
 final class Title extends PCDataElement implements Metadata
 {

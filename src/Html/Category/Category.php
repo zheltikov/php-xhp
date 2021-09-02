@@ -1,8 +1,8 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Category;
+namespace Zheltikov\Xhp\Html\Category;
 
-use Zheltikov\PhpXhp\Core\XHPChild;
+use Zheltikov\Xhp\Core\XHPChild;
 
 interface Category extends XHPChild
 {

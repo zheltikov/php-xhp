@@ -1,23 +1,25 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Lib;
+namespace Zheltikov\Xhp\Lib;
 
 // TODO: move this to a separate package
+use function Zheltikov\Invariant\invariant;
+
 class C
 {
     public static function contains_key(array $container, string $key): bool
     {
-        return \array_key_exists($key, $container);
+        return array_key_exists($key, $container);
     }
 
     public static function count(array $container): int
     {
-        return \count($container);
+        return count($container);
     }
 
     public static function last(array $container) // : mixed
     {
-        return \count($container) ? \end($container) : null;
+        return count($container) ? end($container) : null;
     }
 
     public static function is_empty(array $container): bool
@@ -38,30 +40,34 @@ class C
      * @param string|null $format_string
      * @param mixed ...$format_args
      * @return mixed
-     * @throws \Exception
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public static function onlyx(array $container, ?string $format_string = null, ...$format_args) // : mixed
     {
         $first = true;
         $result = null;
+
         foreach ($container as $value) {
-            Assert::invariant(
+            invariant(
                 $first,
                 '%s',
                 $format_string === null
                     ? Str::format('Expected exactly one element but got %d.', static::count($container))
-                    : \vsprintf($format_string, $format_args),
+                    : vsprintf($format_string, $format_args),
             );
+
             $result = $value;
             $first = false;
         }
-        Assert::invariant(
+
+        invariant(
             $first === false,
             '%s',
             $format_string === null
                 ? 'Expected non-empty Traversable.'
-                : \vsprintf($format_string, $format_args),
+                : vsprintf($format_string, $format_args),
         );
+
         /* HH_FIXME[4110] $first is false implies $result is set to T */
         return $result;
     }

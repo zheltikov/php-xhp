@@ -1,13 +1,13 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html\Tags;
+namespace Zheltikov\Xhp\Html\Tags;
 
-use Zheltikov\PhpXhp\Html\Category\Flow;
-use Zheltikov\PhpXhp\Html\Category\Interactive;
-use Zheltikov\PhpXhp\Html\Category\Palpable;
-use Zheltikov\PhpXhp\Html\Category\Phrase;
-use Zheltikov\PhpXhp\Html\Singleton;
-use Zheltikov\PhpXhp\Reflection\XHPAttributeType;
+use Zheltikov\Xhp\Html\Category\Flow;
+use Zheltikov\Xhp\Html\Category\Interactive;
+use Zheltikov\Xhp\Html\Category\Palpable;
+use Zheltikov\Xhp\Html\Category\Phrase;
+use Zheltikov\Xhp\Html\Singleton;
+use Zheltikov\Xhp\Reflection\XHPAttributeType;
 
 // Iff Palpable hidden is not set
 final class Input extends Singleton implements Phrase, Flow, Interactive, Palpable

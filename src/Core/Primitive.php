@@ -1,13 +1,15 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Core;
+namespace Zheltikov\Xhp\Core;
 
 abstract class Primitive extends Node
 {
     abstract protected function stringify(): string;
 
     /**
-     * @throws UseAfterRenderException
+     * @return string
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     // <<__Override>>
     final public function toString(): string
@@ -44,6 +46,10 @@ abstract class Primitive extends Node
         $this->replaceChildren($children);
     }
 
+    /**
+     * @throws \Zheltikov\Xhp\Exceptions\InvalidChildrenException
+     * @throws \Zheltikov\Exceptions\InvariantException
+     */
     // <<__Override>>
     final protected function __flushSubtree(): Primitive
     {

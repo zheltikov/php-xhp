@@ -1,15 +1,18 @@
 {
-  "version": "1.0.1",
+  "version": "2.0.0",
   "name": "zheltikov/php-xhp",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Zheltikov\\PhpXhp\\": "src/"
+      "Zheltikov\\Xhp\\": "src/"
     }
   },
   "require": {
     "php": "^7.3",
-    "myclabs/php-enum": "^1.8"
+    "myclabs/php-enum": "^1.8",
+    "zheltikov/php-memoize": "^1.1",
+    "zheltikov/php-invariant": "^1.0",
+    "zheltikov/php-exceptions": "^1.0"
   },
   "authors": [
     {

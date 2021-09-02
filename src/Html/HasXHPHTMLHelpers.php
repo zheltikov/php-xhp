@@ -1,6 +1,6 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
 interface HasXHPHTMLHelpers
 {

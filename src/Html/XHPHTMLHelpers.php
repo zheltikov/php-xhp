@@ -1,9 +1,10 @@
 <?php
 
-namespace Zheltikov\PhpXhp\Html;
+namespace Zheltikov\Xhp\Html;
 
-use Zheltikov\PhpXhp\Lib\Assert;
-use Zheltikov\PhpXhp\Lib\Str;
+use Zheltikov\Xhp\Lib\Str;
+
+use function Zheltikov\Invariant\invariant;
 
 trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
 {
@@ -12,15 +13,17 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
     /**
      * Appends a string to the "class" attribute (space separated).
      * @return $this
-     * @throws \Exception
+     * @throws \Zheltikov\Exceptions\InvariantException
      */
     public function addClass(string $class): self
     {
         $current_class = $this->getAttributes()['class'] ?? '';
-        Assert::invariant(
-            \is_string($current_class),
+
+        invariant(
+            is_string($current_class),
             'Attribute `class` must be string'
         );
+
         return $this->setAttribute('class', Str::trim($current_class . ' ' . $class));
     }
 
@@ -44,7 +47,7 @@ trait XHPHTMLHelpers // implements HasXHPHTMLHelpers
         $id = $this->getAttributes()['id'] ?? null;
         if ($id === null || $id === '') {
             // FIXME: why length is 5?
-            $id = \bin2hex(\random_bytes(5));
+            $id = bin2hex(random_bytes(5));
             $this->setAttribute('id', $id);
         }
         return (string) $id;
