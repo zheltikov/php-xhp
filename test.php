@@ -59,11 +59,17 @@ pre.error {
     color: lightyellow;
 }
 </style>";
+
+echo sprintf(
+    'input: <pre>%s</pre><hr />',
+    var_export(htmlspecialchars($input_xhp), true)
+);
+
 echo '<body>';
-echo '<form method="get" action="test.php">';
+echo '<form method="post" action="test.php">';
 echo sprintf(
     'XHP:<br /><textarea name="input_xhp">%s</textarea><br />',
-    htmlentities($input_xhp)
+    "\n" . htmlentities($input_xhp)
 );
 echo '<button>Ok</button>';
 echo '</form>';

@@ -69,6 +69,7 @@ class Lexer
         $xhp_label = "$label([:-]$label)*";
 
         return [
+            '[ \n\r\t]+' => Tokens::TOKEN_WHITESPACE(),
             '<' => Tokens::TOKEN_ANGLE_LEFT(),
             '>' => Tokens::TOKEN_ANGLE_RIGHT(),
             '/' => Tokens::TOKEN_FORWARD_SLASH(),
