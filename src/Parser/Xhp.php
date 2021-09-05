@@ -133,6 +133,11 @@ class Xhp extends ParserAbstract
             },
             2 => function ($stackPos) {
                  $this->semValue = new Node(Type::XHP_TAG());
+                                          $this->semValue->setValue([
+                                              // TODO: how to determine the filename?
+                                              'filename' => 'unknown',
+                                              'line' => $this->lexer->getLine(),
+                                          ]);
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($this->semStack[$stackPos-(4-2)]);
                                           $this->semValue->appendChild($tag_name);

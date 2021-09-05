@@ -248,4 +248,12 @@ class Lexer
     {
         return $this->tokens;
     }
+
+    /**
+     * @return int
+     */
+    public function getLine(): int
+    {
+        return $this->line;
+    }
 }

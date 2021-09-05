@@ -10,6 +10,11 @@ root : xhp_tag                          { $$ = $1; }
 
 xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME xhp_tag_body TOKEN_ANGLE_RIGHT
                                         { $$ = new Node(Type::XHP_TAG());
+                                          $$->setValue([
+                                              // TODO: how to determine the filename?
+                                              'filename' => 'unknown',
+                                              'line' => $this->lexer->getLine(),
+                                          ]);
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($2);
                                           $$->appendChild($tag_name);
