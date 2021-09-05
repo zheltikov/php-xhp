@@ -32,10 +32,37 @@ function xhp_parse(string $code): ?Node
 
 $input_xhp = (string) ($_REQUEST['input_xhp'] ?? "<test-tag></test-tag>");
 
+echo "<style>
+body {
+    background-color: #111;
+    color: #eee;
+}
+textarea {
+    background-color: inherit;
+    color: inherit;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 90vh;
+    width: 100%;
+    height: 30vh;
+}
+button {
+    background-color: green;
+}
+pre {
+    background: #333;
+    color: #eee;
+    overflow: auto;
+}
+pre.error {
+    background: darkred;
+    color: lightyellow;
+}
+</style>";
 echo '<body>';
 echo '<form method="get" action="test.php">';
 echo sprintf(
-    'XHP:<br /><textarea name="input_xhp" style="width: 100%%; height: 30vh;">%s</textarea><br />',
+    'XHP:<br /><textarea name="input_xhp">%s</textarea><br />',
     htmlentities($input_xhp)
 );
 echo '<button>Ok</button>';
@@ -49,12 +76,9 @@ try {
     $result = $e;
 }
 
-echo sprintf(
-    '<pre style="overflow: auto; %s">',
-    $parse_error
-        ? 'background: tomato; color: lightyellow;'
-        : 'background: grey; color: #eee;'
-);
+echo $parse_error
+    ? '<pre class="error">'
+    : '<pre>';
 print_r($result);
 echo '</pre>';
 echo '</body>';
