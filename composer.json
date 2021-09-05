@@ -14,6 +14,9 @@
     "zheltikov/php-invariant": "^1.0",
     "zheltikov/php-exceptions": "^1.0"
   },
+  "require-dev": {
+    "ircmaxell/php-yacc": "^0.0.7"
+  },
   "authors": [
     {
       "name": "Max Zheltikov",
