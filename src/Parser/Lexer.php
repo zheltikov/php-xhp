@@ -65,8 +65,18 @@ class Lexer
      */
     public static function getTokenDefinitions(): array
     {
+        $label = "[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*";
+        $xhp_label = "$label([:-]$label)*";
+
         return [
-            // TODO: ...
+            '<' => Tokens::TOKEN_ANGLE_LEFT(),
+            '>' => Tokens::TOKEN_ANGLE_RIGHT(),
+            '/' => Tokens::TOKEN_FORWARD_SLASH(),
+            '{' => Tokens::TOKEN_CURLY_START(),
+            '}' => Tokens::TOKEN_CURLY_END(),
+            '\.\.\.' => Tokens::TOKEN_ELLIPSIS(),
+            '=' => Tokens::TOKEN_EQUALS(),
+            $xhp_label => Tokens::TOKEN_TAG_NAME(),
         ];
     }
 
