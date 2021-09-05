@@ -25,12 +25,21 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME optional_whitespace xhp_tag_body
 
 xhp_tag_body : TOKEN_FORWARD_SLASH      { $$ = new Node(Type::XHP_TAG_BODY()); }
 
-             | TOKEN_ANGLE_RIGHT TOKEN_ANGLE_LEFT TOKEN_FORWARD_SLASH TOKEN_TAG_NAME
+             | TOKEN_ANGLE_RIGHT xhp_children TOKEN_ANGLE_LEFT
+               TOKEN_FORWARD_SLASH TOKEN_TAG_NAME
                                         { $$ = new Node(Type::XHP_TAG_BODY());
                                           $$->setValue([
-                                              'closing_tag_name' => $4,
-                                          ]); }
+                                              'closing_tag_name' => $5,
+                                          ]);
+                                          $$->appendChild($2); }
             ;
+
+xhp_children : xhp_children xhp_child   { $$ = $1; $$->appendChild($2); }
+             | /* empty */              { $$ = new Node(Type::CHILD_LIST()); }
+             ;
+
+xhp_child : xhp_tag                     { $$ = $1; }
+          ;
 
 many_whitespace : many_whitespace TOKEN_WHITESPACE
                                         { $$ = $1;

@@ -143,6 +143,8 @@ class Lexer
                 'offset' => $token->getOffset(),
                 'position' => $token->getPosition(),
                 'value' => $token->getValue(),
+                // TODO: calculate this somehow based on `offset`
+                'line' => null,
             ];
         }, $tokens);
     }
