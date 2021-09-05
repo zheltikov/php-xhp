@@ -18,8 +18,8 @@ namespace Zheltikov\Xhp\Parser;
  */
 class #(-p) extends ParserAbstract
 {
-    /** @var mixed */
-    protected $semValue;
+    /** @var Node|null */
+    protected ?Node $semValue;
 
     protected int $tokenToSymbolMapSize = #(YYMAXLEX);
     protected int $actionTableSize = #(YYLAST);

@@ -12,8 +12,8 @@ namespace Zheltikov\Xhp\Parser;
  */
 class Xhp extends ParserAbstract
 {
-    /** @var mixed */
-    protected $semValue;
+    /** @var Node|null */
+    protected ?Node $semValue;
 
     protected int $tokenToSymbolMapSize = 269;
     protected int $actionTableSize = 12;
@@ -132,19 +132,20 @@ class Xhp extends ParserAbstract
                  $this->semValue = $this->semStack[$stackPos-(1-1)];
             },
             2 => function ($stackPos) {
-                 $this->semValue = new XhpTag();
-                                          $this->semValue->setName($this->semStack[$stackPos-(4-2)]);
-                                          $this->semValue->setBody($this->semStack[$stackPos-(4-3)]);
+                 $this->semValue = new Node(Type::XHP_TAG());
+                                          $tag_name = new Node(Type::XHP_TAG_NAME());
+                                          $tag_name->setValue($this->semStack[$stackPos-(4-2)]);
+                                          $this->semValue->appendChild($tag_name);
+                                          $this->semValue->appendChild($this->semStack[$stackPos-(4-3)]);
             },
             3 => function ($stackPos) {
-                 $this->semValue = new XhpTagBody();
-                                          $this->semValue->setAttributes(null);
+                 $this->semValue = new Node(Type::XHP_TAG_BODY());
             },
             4 => function ($stackPos) {
-                 $this->semValue = new XhpTagBody();
-                                          $this->semValue->setAttributes(null);
-                                          $this->semValue->setChildren(null);
-                                          $this->semValue->setClosingTagName($this->semStack[$stackPos-(4-4)]);
+                 $this->semValue = new Node(Type::XHP_TAG_BODY());
+                                          $this->semValue->setValue([
+                                              'closing_tag_name' => $this->semStack[$stackPos-(4-4)],
+                                          ]);
             },
         ];
     }
