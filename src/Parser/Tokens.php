@@ -22,4 +22,5 @@ final class Tokens extends Enum
     private const TOKEN_ELLIPSIS = 266;
     private const TOKEN_EQUALS = 267;
     private const TOKEN_TAG_NAME = 268;
+    private const TOKEN_XHP_TEXT = 269;
 }

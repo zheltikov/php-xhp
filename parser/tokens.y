@@ -12,3 +12,4 @@
 %token TOKEN_ELLIPSIS
 %token TOKEN_EQUALS
 %token TOKEN_TAG_NAME
+%token TOKEN_XHP_TEXT

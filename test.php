@@ -1,5 +1,7 @@
 <?php
 
+ini_set('memory_limit', '1024M');
+
 use Zheltikov\Xhp\Parser\Lexer;
 use Zheltikov\Xhp\Parser\Node;
 use Zheltikov\Xhp\Parser\Xhp;
@@ -32,7 +34,11 @@ function xhp_parse(string $code): ?Node
 
 $input_xhp = (string) ($_REQUEST['input_xhp'] ?? "<test-tag></test-tag>");
 
+echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>';
 echo "<style>
+* {
+    outline: none;
+}
 body {
     background-color: #111;
     color: #eee;
@@ -66,13 +72,56 @@ echo sprintf(
 );
 
 echo '<body>';
-echo '<form method="post" action="test.php">';
+
+$form_id = base_convert(rand(), 10, 36);
+$textarea_id = base_convert(rand(), 10, 36);
+
+echo sprintf('<form method="get" action="test.php" id="%s">', $form_id);
 echo sprintf(
-    'XHP:<br /><textarea name="input_xhp">%s</textarea><br />',
+    'XHP:<br /><textarea name="input_xhp" autofocus id="%s">%s</textarea><br />',
+    $textarea_id,
     "\n" . htmlentities($input_xhp)
 );
 echo '<button>Ok</button>';
 echo '</form>';
+
+echo sprintf(
+    "<script>
+$(() => {
+    const form = $('form#%s');
+    $(document).keydown(event => {
+        if (event.ctrlKey && event.keyCode === 13) {
+            form.trigger('submit');
+        }
+    });
+    
+    const textarea = $('textarea#%s');
+    textarea.keydown(function (event) {
+        if (event.keyCode === 9) { // tab was pressed
+            // get caret position/selection
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            
+            const \$this = $(this);
+            const value = \$this.val();
+            
+            // set textarea value to: text before caret + tab + text after caret
+            \$this.val(value.substring(0, start)
+                + \"\t\"
+                + value.substring(end));
+            
+            // put caret at right position again (add one for the tab)
+            this.selectionStart = this.selectionEnd = start + 1;
+            
+            // prevent the focus lose
+            event.preventDefault();
+        }
+    });
+});
+</script>",
+    $form_id,
+    $textarea_id,
+);
 
 $parse_error = false;
 try {
@@ -85,6 +134,12 @@ try {
 echo $parse_error
     ? '<pre class="error">'
     : '<pre>';
-print_r($result);
+echo $parse_error
+    ? print_r($result, true)
+    : json_encode(
+        $result,
+        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+    );
 echo '</pre>';
+
 echo '</body>';
