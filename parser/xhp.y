@@ -39,6 +39,7 @@ xhp_children : xhp_children xhp_child   { $$ = $1; $$->appendChild($2); }
              ;
 
 xhp_child : xhp_tag                     { $$ = $1; }
+          | TOKEN_WHITESPACE            { $$ = new Node(Type::WHITESPACE(), $1); }
           ;
 
 many_whitespace : many_whitespace TOKEN_WHITESPACE
@@ -46,6 +47,9 @@ many_whitespace : many_whitespace TOKEN_WHITESPACE
                                           $$->setValue($1->getValue() . $2); }
                 | TOKEN_WHITESPACE  { $$ = new Node(Type::WHITESPACE(), $1); }
                 ;
+
+required_whitespace : many_whitespace   { $$ = $1; }
+                    ;
 
 optional_whitespace : /* empty */       { $$ = new Node(Type::WHITESPACE(), ''); }
                     | many_whitespace   { $$ = $1; }

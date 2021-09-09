@@ -111,6 +111,7 @@ class Node implements JsonSerializable
 
         if ($this->getValue() !== null) {
             $data['value'] = $this->getValue();
+            // $data['__value__gettype'] = gettype($this->getValue());
         }
 
         if ($this->hasChildren()) {

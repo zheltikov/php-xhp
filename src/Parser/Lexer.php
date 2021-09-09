@@ -98,7 +98,7 @@ class Lexer
         $this->filePos = 0;
 
         $this->tokens = $this->token_get_all($code);
-        //var_dump($this->tokens);
+        // echo '<pre>' . htmlspecialchars(var_export($this->tokens, !0)) . '</pre>';
         $this->postprocessTokens();
     }
 
@@ -144,7 +144,6 @@ class Lexer
                 'offset' => $token->getOffset(),
                 'position' => $token->getPosition(),
                 'value' => $token->getValue(),
-                // TODO: calculate this somehow based on `offset`
                 'line' => $this->calculateTokenLineNumber($code, $token),
             ];
         }, $tokens);
@@ -157,8 +156,22 @@ class Lexer
      */
     protected function calculateTokenLineNumber(string $code, Token $token): int
     {
-        // TODO: ...
-        return -1;
+        $offset = $token->getOffset();
+        $before_token = substr($code, 0, $offset);
+        // echo htmlspecialchars(json_encode($before_token)) . '<br />';
+        $normalized_newlines = preg_replace('/\\r\\n?/', "\n", $before_token);
+        $length = strlen($normalized_newlines);
+        // echo htmlspecialchars(json_encode($normalized_newlines)) . '<br />';
+        $line = 1;
+        for ($i = 0; $i < $length; $i++) {
+            $char = $normalized_newlines[$i];
+            // echo htmlspecialchars(json_encode('-->>' . $char)) . '<br />';
+            if ($char === "\n") {
+                $line++;
+            }
+        }
+        // echo htmlspecialchars(json_encode($line)) . '<br /><br />';
+        return $line;
     }
 
     /**
@@ -223,11 +236,11 @@ class Lexer
                 $value = $token['value'];
                 $id = $token['code'];
 
-                $this->line += substr_count($value, "\n");
-                $this->filePos += strlen($value);
+                $this->line = $token['line'];
+                $this->filePos = $token['offset'];
             } else {
-                $this->line += substr_count($token['value'], "\n");
-                $this->filePos += strlen($token['value']);
+                $this->line = $token['line'];
+                $this->filePos = $token['offset'];
 
                 continue;
             }
