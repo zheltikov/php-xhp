@@ -136,7 +136,7 @@ class Lexer
 
         $valid_tokens = Tokens::values();
 
-        return array_map(function (Token $token) use ($valid_tokens): array {
+        return array_map(function (Token $token) use ($code, $valid_tokens): array {
             return [
                 'code' => $valid_tokens[$token->getName()]->getValue(),
                 'name' => $token->getName(),
@@ -144,9 +144,20 @@ class Lexer
                 'position' => $token->getPosition(),
                 'value' => $token->getValue(),
                 // TODO: calculate this somehow based on `offset`
-                'line' => null,
+                'line' => $this->calculateTokenLineNumber($code, $token),
             ];
         }, $tokens);
+    }
+
+    /**
+     * @param string $code
+     * @param \Tmilos\Lexer\Token $token
+     * @return int
+     */
+    protected function calculateTokenLineNumber(string $code, Token $token): int
+    {
+        // TODO: ...
+        return -1;
     }
 
     /**
