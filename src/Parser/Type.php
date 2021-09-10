@@ -10,6 +10,7 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<Type>
  *
+ * @method Type WHITESPACE()
  * @method Type XHP_TAG()
  * @method Type XHP_TAG_NAME()
  * @method Type XHP_TAG_BODY()

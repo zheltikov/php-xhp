@@ -17,6 +17,11 @@ class Node implements JsonSerializable
     protected array $children;
 
     /**
+     * @var \Zheltikov\Xhp\Parser\Node|null
+     */
+    protected ?Node $parent;
+
+    /**
      * @var mixed
      */
     protected $value;
@@ -40,6 +45,7 @@ class Node implements JsonSerializable
     {
         if ($child !== null) {
             $this->children[] = $child;
+            $child->setParent($this);
         }
 
         return $this;
@@ -53,6 +59,7 @@ class Node implements JsonSerializable
     {
         if ($child !== null) {
             array_unshift($this->children, $child);
+            $child->setParent($this);
         }
 
         return $this;
@@ -79,6 +86,24 @@ class Node implements JsonSerializable
     public function &getChildren(): array
     {
         return $this->children;
+    }
+
+    /**
+     * @param \Zheltikov\Xhp\Parser\Node|null $parent
+     * @return $this
+     */
+    public function setParent(?Node $parent = null): self
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    /**
+     * @return \Zheltikov\Xhp\Parser\Node|null
+     */
+    public function &getParent(): ?Node
+    {
+        return $this->parent;
     }
 
     /**
@@ -187,12 +212,48 @@ class Node implements JsonSerializable
      */
     public function deleteChild(Node $child): self
     {
+        $unset_parent = false;
         $new_children = [];
 
         foreach ($this->children as $_child) {
             if ($child !== $_child) {
                 $new_children[] = $_child;
+            } else {
+                $unset_parent = true;
             }
+        }
+
+        if ($unset_parent) {
+            $child->setParent(null);
+        }
+
+        $this->children = $new_children;
+
+        return $this;
+    }
+
+    /**
+     * @param \Zheltikov\Xhp\Parser\Node $child
+     * @param \Zheltikov\Xhp\Parser\Node $new_child
+     * @return $this
+     */
+    public function replaceChild(Node $child, Node $new_child): self
+    {
+        $unset_parent = false;
+        $new_children = [];
+
+        foreach ($this->children as $_child) {
+            if ($child !== $_child) {
+                $new_children[] = $_child;
+            } else {
+                $new_children[] = $new_child;
+                $new_child->setParent($this);
+                $unset_parent = true;
+            }
+        }
+
+        if ($unset_parent) {
+            $child->setParent(null);
         }
 
         $this->children = $new_children;
@@ -292,5 +353,33 @@ class Node implements JsonSerializable
         }
 
         return $this;
+    }
+
+    /**
+     * @return \Zheltikov\Xhp\Parser\Node|null
+     */
+    public function &nextSibling(): ?Node
+    {
+        $next_sibling = null;
+
+        if ($this->getParent() === null) {
+            return $next_sibling;
+        }
+
+        $siblings = $this->getParent()->getChildren();
+        $take_next = false;
+
+        foreach ($siblings as $sibling) {
+            if ($take_next) {
+                $next_sibling = $sibling;
+                break;
+            }
+
+            if ($sibling === $this) {
+                $take_next = true;
+            }
+        }
+
+        return $next_sibling;
     }
 }

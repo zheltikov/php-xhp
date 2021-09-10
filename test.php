@@ -4,6 +4,7 @@ ini_set('memory_limit', '1024M');
 
 use Zheltikov\Xhp\Parser\Lexer;
 use Zheltikov\Xhp\Parser\Node;
+use Zheltikov\Xhp\Parser\Optimizer;
 use Zheltikov\Xhp\Parser\Xhp;
 
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -56,7 +57,7 @@ button {
     background-color: green;
 }
 pre {
-    background: #333;
+    background: #222;
     color: #eee;
     overflow: auto;
 }
@@ -75,6 +76,7 @@ echo '<body>';
 
 $form_id = base_convert(rand(), 10, 36);
 $textarea_id = base_convert(rand(), 10, 36);
+$pre_id = base_convert(rand(), 10, 36);
 
 echo sprintf('<form method="get" action="test.php" id="%s">', $form_id);
 echo sprintf(
@@ -87,6 +89,11 @@ echo '</form>';
 
 echo sprintf(
     "<script>
+function render_pre(data) {
+    const pre = $('pre#%s');
+    pre.text(JSON.stringify(data, null, 2));
+}
+
 $(() => {
     const form = $('form#%s');
     $(document).keydown(event => {
@@ -119,6 +126,7 @@ $(() => {
     });
 });
 </script>",
+    $pre_id,
     $form_id,
     $textarea_id,
 );
@@ -126,22 +134,25 @@ $(() => {
 $parse_error = false;
 try {
     $result = xhp_parse($input_xhp);
+    $optimizer = new Optimizer();
+    $optimizer->setRootNode($result);
+    $optimizer->execute();
+    $result = $optimizer->getRootNode();
 } catch (Throwable $e) {
     $parse_error = true;
     $result = $e;
 }
 
-echo $parse_error
-    ? '<pre class="error">'
-    : '<pre>';
-echo htmlspecialchars(
-    $parse_error
-        ? print_r($result, true)
-        : json_encode(
-        $result,
-        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-    )
-);
-echo '</pre>';
+$js = '';
+if ($parse_error) {
+    echo sprintf('<pre id="%s" class="error">', $pre_id);
+    echo htmlspecialchars(print_r($result, true));
+    echo '</pre>';
+} else {
+    echo sprintf('<pre id="%s"></pre>', $pre_id);
+    $js = sprintf('render_pre(%s);', json_encode($result));
+}
+
+echo '<script>' . $js . '</script>';
 
 echo '</body>';
