@@ -71,6 +71,7 @@ class Optimizer
 
             $this->joinXhpTexts();
             $this->convertWhitespaceToXhpText();
+            $this->removeTrimmableXhpTexts();
 
             if ($this->isDebug()) {
                 echo 'Optimized:   ', $serialize(), "\n";
@@ -118,6 +119,21 @@ class Optimizer
             $new_node = new Node(Type::XHP_TEXT(), $node->getValue());
             $parent->replaceChild($node, $new_node);
             unset($node);
+        }
+    }
+
+    /**
+     *
+     */
+    protected function removeTrimmableXhpTexts(): void
+    {
+        $nodes = $this->root_node->streamDeepByType(Type::XHP_TEXT());
+
+        foreach ($nodes as &$node) {
+            if (trim($node->getValue()) === '') {
+                // FIXME: wtf?
+                $node->setValue(' ');
+            }
         }
     }
 
