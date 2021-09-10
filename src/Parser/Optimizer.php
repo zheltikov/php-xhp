@@ -91,9 +91,9 @@ class Optimizer
      */
     protected function joinXhpTextAndFurtherStuff(): void
     {
-        $node =& $this->root_node->getFirstByType(Type::XHP_TEXT());
+        $nodes = $this->root_node->streamDeepByType(Type::XHP_TEXT());
 
-        if ($node !== null) {
+        foreach ($nodes as &$node) {
             $parent =& $node->getParent();
             $next_sibling =& $node->nextSibling();
 
@@ -114,9 +114,9 @@ class Optimizer
      */
     protected function convertWhitespaceToXhpText(): void
     {
-        $node =& $this->root_node->getFirstByType(Type::WHITESPACE());
+        $nodes = $this->root_node->streamDeepByType(Type::WHITESPACE());
 
-        if ($node !== null) {
+        foreach ($nodes as &$node) {
             $parent =& $node->getParent();
             $new_node = new Node(Type::XHP_TEXT(), $node->getValue());
             $parent->replaceChild($node, $new_node);

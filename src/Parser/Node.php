@@ -171,6 +171,27 @@ class Node implements JsonSerializable
     }
 
     /**
+     * @param \Zheltikov\Xhp\Parser\Type $type
+     * @return \Generator
+     */
+    public function &streamDeepByType(Type $type): \Generator
+    {
+        /** @var \Zheltikov\Xhp\Parser\Node $child */
+        foreach ($this->children as &$child) {
+            if ($child->getType()->equals($type)) {
+                yield $child;
+            }
+
+            if ($child->hasChildren()) {
+                $result = $child->streamDeepByType($type);
+                foreach ($result as &$value) {
+                    yield $value;
+                }
+            }
+        }
+    }
+
+    /**
      * @return \Zheltikov\Xhp\Parser\Type
      */
     public function getType(): Type
