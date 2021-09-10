@@ -15,6 +15,7 @@ use MyCLabs\Enum\Enum;
  * @method Type XHP_TAG_BODY()
  * @method Type CHILD_LIST()
  * @method Type XHP_TEXT()
+ * @method Type XHP_ENTITY()
  *
  */
 final class Type extends Enum
@@ -25,4 +26,5 @@ final class Type extends Enum
     private const XHP_TAG_BODY = 'xhp_tag_body';
     private const CHILD_LIST = 'child_list';
     private const XHP_TEXT = 'xhp_text';
+    private const XHP_ENTITY = 'xhp_entity';
 }

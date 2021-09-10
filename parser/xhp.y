@@ -41,7 +41,11 @@ xhp_children : xhp_children xhp_child   { $$ = $1; $$->appendChild($2); }
 xhp_child : xhp_tag                     { $$ = $1; }
           | TOKEN_WHITESPACE            { $$ = new Node(Type::WHITESPACE(), $1); }
           | xhp_text                    { $$ = $1; }
+          | xhp_entity                  { $$ = $1; }
           ;
+
+xhp_entity : TOKEN_XHP_ENTITY           { $$ = new Node(Type::XHP_ENTITY(), $1); }
+           ;
 
 xhp_text : TOKEN_XHP_TEXT               { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_TAG_NAME               { $$ = new Node(Type::XHP_TEXT(), $1); }

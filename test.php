@@ -134,12 +134,14 @@ try {
 echo $parse_error
     ? '<pre class="error">'
     : '<pre>';
-echo $parse_error
-    ? print_r($result, true)
-    : json_encode(
+echo htmlspecialchars(
+    $parse_error
+        ? print_r($result, true)
+        : json_encode(
         $result,
         JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-    );
+    )
+);
 echo '</pre>';
 
 echo '</body>';

@@ -13,3 +13,4 @@
 %token TOKEN_EQUALS
 %token TOKEN_TAG_NAME
 %token TOKEN_XHP_TEXT
+%token TOKEN_XHP_ENTITY

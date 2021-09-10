@@ -78,6 +78,7 @@ class Lexer
             '\.\.\.' => Tokens::TOKEN_ELLIPSIS(),
             '=' => Tokens::TOKEN_EQUALS(),
             $xhp_label => Tokens::TOKEN_TAG_NAME(),
+            "&(#[0-9]+|#x[0-9a-fA-F]+|$xhp_label);" => Tokens::TOKEN_XHP_ENTITY(),
             '.+?' => Tokens::TOKEN_XHP_TEXT(),
         ];
     }
