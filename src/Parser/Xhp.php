@@ -166,6 +166,23 @@ class Xhp extends ParserAbstract
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($this->semStack[$stackPos-(5-2)]);
                                           $this->semValue->appendChild($tag_name);
+                                          $closing_tag_name = $this->semStack[$stackPos-(5-4)]->getValue();
+                                          if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
+                                              throw new \RuntimeException('Expected `closing_tag_name` not found!');
+                                          }
+                                          $closing_tag_name = $closing_tag_name['closing_tag_name'];
+                                          if ($closing_tag_name !== $this->semStack[$stackPos-(5-2)]) {
+                                              throw new \RuntimeException(
+                                                  sprintf(
+                                                      'Closing tag name mismatch: <%s>%s</%s>',
+                                                      $this->semStack[$stackPos-(5-2)],
+                                                      $this->semStack[$stackPos-(5-4)]->hasChildren()
+                                                      && $this->semStack[$stackPos-(5-4)]->getChildAt(0)->hasChildren()
+                                                          ? '...' : '',
+                                                      $closing_tag_name
+                                                  )
+                                              );
+                                          }
                                           $this->semValue->appendChild($this->semStack[$stackPos-(5-4)]);
             },
             3 => function ($stackPos) {

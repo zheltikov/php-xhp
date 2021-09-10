@@ -20,6 +20,23 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME optional_whitespace xhp_tag_body
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($2);
                                           $$->appendChild($tag_name);
+                                          $closing_tag_name = $4->getValue();
+                                          if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
+                                              throw new \RuntimeException('Expected `closing_tag_name` not found!');
+                                          }
+                                          $closing_tag_name = $closing_tag_name['closing_tag_name'];
+                                          if ($closing_tag_name !== $2) {
+                                              throw new \RuntimeException(
+                                                  sprintf(
+                                                      'Closing tag name mismatch: <%s>%s</%s>',
+                                                      $2,
+                                                      $4->hasChildren()
+                                                      && $4->getChildAt(0)->hasChildren()
+                                                          ? '...' : '',
+                                                      $closing_tag_name
+                                                  )
+                                              );
+                                          }
                                           $$->appendChild($4); }
         ;
 
