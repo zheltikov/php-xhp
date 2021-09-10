@@ -69,7 +69,7 @@ class Optimizer
 
             // TODO: add correct handling of child-less Nodes, but with a value set
 
-            $this->joinXhpTextAndFurtherStuff();
+            $this->joinXhpTexts();
             $this->convertWhitespaceToXhpText();
 
             if ($this->isDebug()) {
@@ -89,7 +89,7 @@ class Optimizer
     /**
      *
      */
-    protected function joinXhpTextAndFurtherStuff(): void
+    protected function joinXhpTexts(): void
     {
         $nodes = $this->root_node->streamDeepByType(Type::XHP_TEXT());
 
@@ -98,10 +98,7 @@ class Optimizer
             $next_sibling =& $node->nextSibling();
 
             if ($next_sibling !== null) {
-                if (
-                    $next_sibling->getType()->equals(Type::WHITESPACE())
-                    || $next_sibling->getType()->equals(Type::XHP_TEXT())
-                ) {
+                if ($next_sibling->getType()->equals(Type::XHP_TEXT())) {
                     $node->setValue($node->getValue() . $next_sibling->getValue());
                     $parent->deleteChild($next_sibling);
                 }
