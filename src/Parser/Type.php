@@ -17,6 +17,7 @@ use MyCLabs\Enum\Enum;
  * @method Type CHILD_LIST()
  * @method Type XHP_TEXT()
  * @method Type XHP_ENTITY()
+ * @method Type INJECTED()
  *
  */
 final class Type extends Enum
@@ -28,4 +29,5 @@ final class Type extends Enum
     private const CHILD_LIST = 'child_list';
     private const XHP_TEXT = 'xhp_text';
     private const XHP_ENTITY = 'xhp_entity';
+    private const INJECTED = 'injected';
 }

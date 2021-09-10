@@ -77,6 +77,13 @@ class Lexer
             '}' => Tokens::TOKEN_CURLY_END(),
             '\.\.\.' => Tokens::TOKEN_ELLIPSIS(),
             '=' => Tokens::TOKEN_EQUALS(),
+
+            '"([^"]*)"' => Tokens::TOKEN_STRING_DQ(),
+            "'([^']*)'" => Tokens::TOKEN_STRING_SQ(),
+
+            '[-+]?([0-9]+[.][0-9]*)|([0-9]*[.][0-9]+)' => Tokens::TOKEN_RAW_FLOAT(),
+            '[-+]?\d+' => Tokens::TOKEN_RAW_INTEGER(),
+
             $xhp_label => Tokens::TOKEN_TAG_NAME(),
             "&(#[0-9]+|#x[0-9a-fA-F]+|$xhp_label);" => Tokens::TOKEN_XHP_ENTITY(),
             '.+?' => Tokens::TOKEN_XHP_TEXT(),

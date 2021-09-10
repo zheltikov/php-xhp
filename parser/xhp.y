@@ -59,13 +59,28 @@ xhp_child : xhp_tag                     { $$ = $1; }
           | TOKEN_WHITESPACE            { $$ = new Node(Type::WHITESPACE(), $1); }
           | xhp_text                    { $$ = $1; }
           | xhp_entity                  { $$ = $1; }
+          | injected                    { $$ = $1; }
           ;
+
+injected : TOKEN_CURLY_START TOKEN_STRING_DQ TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), substr($2, 1, -1)); }
+         | TOKEN_CURLY_START TOKEN_STRING_SQ TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), substr($2, 1, -1)); }
+         | TOKEN_CURLY_START TOKEN_RAW_FLOAT TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), floatval($2)); }
+         | TOKEN_CURLY_START TOKEN_RAW_INTEGER TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), intval($2)); }
+         ;
 
 xhp_entity : TOKEN_XHP_ENTITY           { $$ = new Node(Type::XHP_ENTITY(), $1); }
            ;
 
 xhp_text : TOKEN_XHP_TEXT               { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_TAG_NAME               { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_STRING_DQ              { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_STRING_SQ              { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_RAW_FLOAT              { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_RAW_INTEGER            { $$ = new Node(Type::XHP_TEXT(), $1); }
          ;
 
 many_whitespace : many_whitespace TOKEN_WHITESPACE

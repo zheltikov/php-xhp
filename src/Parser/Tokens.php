@@ -24,4 +24,8 @@ final class Tokens extends Enum
     private const TOKEN_TAG_NAME = 268;
     private const TOKEN_XHP_TEXT = 269;
     private const TOKEN_XHP_ENTITY = 270;
+    private const TOKEN_STRING_DQ = 271;
+    private const TOKEN_STRING_SQ = 272;
+    private const TOKEN_RAW_FLOAT = 273;
+    private const TOKEN_RAW_INTEGER = 274;
 }
