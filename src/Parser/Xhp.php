@@ -16,7 +16,7 @@ class Xhp extends ParserAbstract
     protected ?Node $semValue;
 
     protected int $tokenToSymbolMapSize = 270;
-    protected int $actionTableSize = 15;
+    protected int $actionTableSize = 17;
     protected int $gotoTableSize = 4;
 
     protected int $invalidSymbol = 15;
@@ -35,14 +35,14 @@ class Xhp extends ParserAbstract
         "TOKEN_ANGLE_RIGHT",
         "TOKEN_FORWARD_SLASH",
         "TOKEN_TAG_NAME",
+        "TOKEN_XHP_TEXT",
         "TOKEN_EOF",
         "TOKEN_NS_SEPARATOR",
         "TOKEN_ERROR",
         "TOKEN_CURLY_START",
         "TOKEN_CURLY_END",
         "TOKEN_ELLIPSIS",
-        "TOKEN_EQUALS",
-        "TOKEN_XHP_TEXT"
+        "TOKEN_EQUALS"
     ];
 
     protected array $tokenToSymbol = [
@@ -71,27 +71,27 @@ class Xhp extends ParserAbstract
            15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
            15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
            15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-           15,   15,   15,   15,   15,   15,    1,    7,    8,    2,
-            9,    3,    4,    5,   10,   11,   12,   13,    6,   14
+           15,   15,   15,   15,   15,   15,    1,    8,    9,    2,
+           10,    3,    4,    5,   11,   12,   13,   14,    6,    7
     ];
 
     protected array $action = [
-           21,    3,    0,   12,   16,   23,   22,    5,    9,    0,
-           15,    0,   11,    0,   17
+           21,    3,    9,    0,   24,   23,   12,   16,   26,   25,
+           11,    0,   15,    0,    0,    5,   17
     ];
 
     protected array $actionCheck = [
-            2,    3,    0,    4,    5,    2,    2,    6,    3,   -1,
-            4,   -1,    5,   -1,    6
+            2,    3,    3,    0,    6,    7,    4,    5,    2,    2,
+            5,   -1,    4,   -1,   -1,    6,    6
     ];
 
     protected array $actionBase = [
-            3,   -2,   -1,    7,    3,    3,    5,    2,    4,    1,
-            6,    8,    0,    0,    0,    0,    1
+            6,   -2,    2,    5,    6,    6,   -1,    3,    7,    9,
+            8,   10,    0,    0,    0,    0,    9
     ];
 
     protected array $actionDefault = [
-           12,32767,32767,32767,   12,   12,32767,32767,   13,32767,
+           15,32767,32767,32767,   15,   15,32767,32767,   16,32767,
         32767,32767,    6
     ];
 
@@ -104,21 +104,21 @@ class Xhp extends ParserAbstract
     ];
 
     protected array $gotoBase = [
-            0,    0,   -4,   -3,    0,    0,    0,    0,    0
+            0,    0,   -4,   -3,    0,    0,    0,    0,    0,    0
     ];
 
     protected array $gotoDefault = [
-        -32768,    7,    6,   20,   10,    1,   18,    8,-32768
+        -32768,    7,    6,   20,   10,    1,   18,   22,    8,-32768
     ];
 
     protected array $ruleToNonTerminal = [
-            0,    1,    3,    4,    4,    5,    5,    6,    6,    7,
-            7,    8,    2,    2
+            0,    1,    3,    4,    4,    5,    5,    6,    6,    6,
+            7,    7,    8,    8,    9,    2,    2
     ];
 
     protected array $ruleToLength = [
-            1,    3,    5,    1,    5,    2,    0,    1,    1,    2,
-            1,    1,    0,    1
+            1,    3,    5,    1,    5,    2,    0,    1,    1,    1,
+            1,    1,    2,    1,    1,    0,    1
     ];
 
     protected array $productions = [
@@ -131,6 +131,9 @@ class Xhp extends ParserAbstract
         "xhp_children : /* empty */",
         "xhp_child : xhp_tag",
         "xhp_child : TOKEN_WHITESPACE",
+        "xhp_child : xhp_text",
+        "xhp_text : TOKEN_XHP_TEXT",
+        "xhp_text : TOKEN_TAG_NAME",
         "many_whitespace : many_whitespace TOKEN_WHITESPACE",
         "many_whitespace : TOKEN_WHITESPACE",
         "required_whitespace : many_whitespace",
@@ -182,19 +185,28 @@ class Xhp extends ParserAbstract
                  $this->semValue = new Node(Type::WHITESPACE(), $this->semStack[$stackPos-(1-1)]);
             },
             9 => function ($stackPos) {
+                 $this->semValue = $this->semStack[$stackPos-(1-1)];
+            },
+            10 => function ($stackPos) {
+                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+            },
+            11 => function ($stackPos) {
+                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+            },
+            12 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(2-1)];
                                           $this->semValue->setValue($this->semStack[$stackPos-(2-1)]->getValue() . $this->semStack[$stackPos-(2-2)]);
             },
-            10 => function ($stackPos) {
+            13 => function ($stackPos) {
                  $this->semValue = new Node(Type::WHITESPACE(), $this->semStack[$stackPos-(1-1)]);
             },
-            11 => function ($stackPos) {
+            14 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(1-1)];
             },
-            12 => function ($stackPos) {
+            15 => function ($stackPos) {
                  $this->semValue = new Node(Type::WHITESPACE(), '');
             },
-            13 => function ($stackPos) {
+            16 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(1-1)];
             },
         ];
