@@ -28,4 +28,7 @@ final class Tokens extends Enum
     private const TOKEN_STRING_SQ = 272;
     private const TOKEN_RAW_FLOAT = 273;
     private const TOKEN_RAW_INTEGER = 274;
+    private const TOKEN_NULL = 275;
+    private const TOKEN_TRUE = 276;
+    private const TOKEN_FALSE = 277;
 }

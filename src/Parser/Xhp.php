@@ -15,17 +15,17 @@ class Xhp extends ParserAbstract
     /** @var Node|null */
     protected ?Node $semValue;
 
-    protected int $tokenToSymbolMapSize = 275;
-    protected int $actionTableSize = 32;
+    protected int $tokenToSymbolMapSize = 278;
+    protected int $actionTableSize = 38;
     protected int $gotoTableSize = 4;
 
-    protected int $invalidSymbol = 20;
+    protected int $invalidSymbol = 23;
     protected int $errorSymbol = 1;
     protected int $defaultAction = -32766;
     protected int $unexpectedTokenRule = 32767;
 
     protected int $YY2TBLSTATE = 5;
-    protected int $numNonLeafStates = 18;
+    protected int $numNonLeafStates = 21;
 
     protected array $symbolToName = [
         "EOF",
@@ -43,6 +43,9 @@ class Xhp extends ParserAbstract
         "TOKEN_STRING_SQ",
         "TOKEN_RAW_FLOAT",
         "TOKEN_RAW_INTEGER",
+        "TOKEN_NULL",
+        "TOKEN_TRUE",
+        "TOKEN_FALSE",
         "TOKEN_EOF",
         "TOKEN_NS_SEPARATOR",
         "TOKEN_ERROR",
@@ -51,63 +54,64 @@ class Xhp extends ParserAbstract
     ];
 
     protected array $tokenToSymbol = [
-            0,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
-           20,   20,   20,   20,   20,   20,    1,   15,   16,    2,
-           17,    3,    4,    5,    6,    7,   18,   19,    8,    9,
-           10,   11,   12,   13,   14
+            0,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+           23,   23,   23,   23,   23,   23,    1,   18,   19,    2,
+           20,    3,    4,    5,    6,    7,   21,   22,    8,    9,
+           10,   11,   12,   13,   14,   15,   16,   17
     ];
 
     protected array $action = [
-           26,    4,   10,    0,    2,   20,   36,   35,   34,   37,
-           38,   39,   40,   13,   14,   15,   16,   17,   21,   42,
-           41,   12,   30,    0,    0,    0,   31,   32,   33,    0,
-            6,   22
+           29,    4,   10,    0,    2,   23,   42,   41,   40,   43,
+           44,   45,   46,   13,   14,   15,   16,   17,   18,   19,
+           20,   24,   48,   47,   12,   33,    0,    0,    0,   34,
+           35,   36,   37,   38,   39,    0,    6,   25
     ];
 
     protected array $actionCheck = [
             2,    3,    3,    0,    6,    4,    8,    9,   10,   11,
-           12,   13,   14,   11,   12,   13,   14,    4,    5,    2,
-            2,    5,    7,   -1,   -1,   -1,    7,    7,    7,   -1,
-            8,    8
+           12,   13,   14,   11,   12,   13,   14,   15,   16,   17,
+            4,    5,    2,    2,    5,    7,   -1,   -1,   -1,    7,
+            7,    7,    7,    7,    7,   -1,    8,    8
     ];
 
     protected array $actionBase = [
-           17,   -2,    2,   13,   16,   17,   17,   -1,    3,   18,
-           22,    1,   23,   15,   19,   20,   21,    0,    0,    0,
-            0,    0,   22
+           20,   -2,    2,   16,   19,   20,   20,   -1,    3,   21,
+           28,    1,   29,   18,   22,   23,   24,   25,   26,   27,
+            0,    0,    0,    0,    0,   28
     ];
 
     protected array $actionDefault = [
-           26,32767,32767,32767,32767,   26,   26,32767,32767,   27,
-        32767,32767,32767,32767,32767,32767,32767,    6
+           29,32767,32767,32767,32767,   29,   29,32767,32767,   30,
+        32767,32767,32767,32767,32767,32767,32767,32767,32767,32767,
+            6
     ];
 
     protected array $goto = [
-           19,    3,    0,    5
+           22,    3,    0,    5
     ];
 
     protected array $gotoCheck = [
@@ -120,20 +124,22 @@ class Xhp extends ParserAbstract
     ];
 
     protected array $gotoDefault = [
-        -32768,    8,    7,   25,   11,    1,   23,   27,   28,   29,
+        -32768,    8,    7,   28,   11,    1,   26,   30,   31,   32,
             9,-32768
     ];
 
     protected array $ruleToNonTerminal = [
             0,    1,    3,    4,    4,    5,    5,    6,    6,    6,
-            6,    6,    9,    9,    9,    9,    8,    7,    7,    7,
-            7,    7,    7,   10,   10,   11,    2,    2
+            6,    6,    9,    9,    9,    9,    9,    9,    9,    8,
+            7,    7,    7,    7,    7,    7,   10,   10,   11,    2,
+            2
     ];
 
     protected array $ruleToLength = [
             1,    3,    5,    1,    5,    2,    0,    1,    1,    1,
-            1,    1,    3,    3,    3,    3,    1,    1,    1,    1,
-            1,    1,    1,    2,    1,    1,    0,    1
+            1,    1,    3,    3,    3,    3,    3,    3,    3,    1,
+            1,    1,    1,    1,    1,    1,    2,    1,    1,    0,
+            1
     ];
 
     protected array $productions = [
@@ -153,6 +159,9 @@ class Xhp extends ParserAbstract
         "injected : TOKEN_CURLY_START TOKEN_STRING_SQ TOKEN_CURLY_END",
         "injected : TOKEN_CURLY_START TOKEN_RAW_FLOAT TOKEN_CURLY_END",
         "injected : TOKEN_CURLY_START TOKEN_RAW_INTEGER TOKEN_CURLY_END",
+        "injected : TOKEN_CURLY_START TOKEN_NULL TOKEN_CURLY_END",
+        "injected : TOKEN_CURLY_START TOKEN_TRUE TOKEN_CURLY_END",
+        "injected : TOKEN_CURLY_START TOKEN_FALSE TOKEN_CURLY_END",
         "xhp_entity : TOKEN_XHP_ENTITY",
         "xhp_text : TOKEN_XHP_TEXT",
         "xhp_text : TOKEN_TAG_NAME",
@@ -249,16 +258,16 @@ class Xhp extends ParserAbstract
                  $this->semValue = new Node(Type::INJECTED(), intval($this->semStack[$stackPos-(3-2)]));
             },
             16 => function ($stackPos) {
-                 $this->semValue = new Node(Type::XHP_ENTITY(), $this->semStack[$stackPos-(1-1)]);
+                 $this->semValue = new Node(Type::INJECTED(), null);
             },
             17 => function ($stackPos) {
-                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+                 $this->semValue = new Node(Type::INJECTED(), true);
             },
             18 => function ($stackPos) {
-                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+                 $this->semValue = new Node(Type::INJECTED(), false);
             },
             19 => function ($stackPos) {
-                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+                 $this->semValue = new Node(Type::XHP_ENTITY(), $this->semStack[$stackPos-(1-1)]);
             },
             20 => function ($stackPos) {
                  $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
@@ -270,19 +279,28 @@ class Xhp extends ParserAbstract
                  $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
             },
             23 => function ($stackPos) {
+                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+            },
+            24 => function ($stackPos) {
+                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+            },
+            25 => function ($stackPos) {
+                 $this->semValue = new Node(Type::XHP_TEXT(), $this->semStack[$stackPos-(1-1)]);
+            },
+            26 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(2-1)];
                                           $this->semValue->setValue($this->semStack[$stackPos-(2-1)]->getValue() . $this->semStack[$stackPos-(2-2)]);
             },
-            24 => function ($stackPos) {
+            27 => function ($stackPos) {
                  $this->semValue = new Node(Type::WHITESPACE(), $this->semStack[$stackPos-(1-1)]);
             },
-            25 => function ($stackPos) {
+            28 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(1-1)];
             },
-            26 => function ($stackPos) {
+            29 => function ($stackPos) {
                  $this->semValue = new Node(Type::WHITESPACE(), '');
             },
-            27 => function ($stackPos) {
+            30 => function ($stackPos) {
                  $this->semValue = $this->semStack[$stackPos-(1-1)];
             },
         ];

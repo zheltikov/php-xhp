@@ -70,6 +70,12 @@ injected : TOKEN_CURLY_START TOKEN_STRING_DQ TOKEN_CURLY_END
                                         { $$ = new Node(Type::INJECTED(), floatval($2)); }
          | TOKEN_CURLY_START TOKEN_RAW_INTEGER TOKEN_CURLY_END
                                         { $$ = new Node(Type::INJECTED(), intval($2)); }
+         | TOKEN_CURLY_START TOKEN_NULL TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), null); }
+         | TOKEN_CURLY_START TOKEN_TRUE TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), true); }
+         | TOKEN_CURLY_START TOKEN_FALSE TOKEN_CURLY_END
+                                        { $$ = new Node(Type::INJECTED(), false); }
          ;
 
 xhp_entity : TOKEN_XHP_ENTITY           { $$ = new Node(Type::XHP_ENTITY(), $1); }

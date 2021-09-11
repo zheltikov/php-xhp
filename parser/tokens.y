@@ -18,3 +18,6 @@
 %token TOKEN_STRING_SQ
 %token TOKEN_RAW_FLOAT
 %token TOKEN_RAW_INTEGER
+%token TOKEN_NULL
+%token TOKEN_TRUE
+%token TOKEN_FALSE
