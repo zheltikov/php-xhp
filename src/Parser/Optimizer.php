@@ -71,6 +71,7 @@ class Optimizer
 
             $this->joinXhpTexts();
             $this->convertWhitespaceToXhpText();
+            // FIXME: this sometimes doesn't work as expected
             $this->removeTrimmableXhpTexts();
 
             if ($this->isDebug()) {

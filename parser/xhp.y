@@ -87,6 +87,10 @@ xhp_text : TOKEN_XHP_TEXT               { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_STRING_SQ              { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_RAW_FLOAT              { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_RAW_INTEGER            { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_NULL                   { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_TRUE                   { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_FALSE                  { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_FORWARD_SLASH          { $$ = new Node(Type::XHP_TEXT(), $1); }
          ;
 
 many_whitespace : many_whitespace TOKEN_WHITESPACE
