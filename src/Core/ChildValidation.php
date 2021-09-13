@@ -2,7 +2,6 @@
 
 namespace Zheltikov\Xhp\Core;
 
-use Zheltikov\Memoize\Helper;
 use Zheltikov\Xhp\Core\ChildValidation\Any;
 use Zheltikov\Xhp\Core\ChildValidation\AnyNumberOf;
 use Zheltikov\Xhp\Core\ChildValidation\AnyOf;
@@ -112,15 +111,7 @@ class ChildValidation
     // TODO: test memoization
     public static function any(): Any
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoize(
-            $fn,
-            function (): Any {
-                return new Any();
-            }
-        );
+        return new Any();
     }
 
     public static function at_least_one_of(Constraint $a): AtLeastOneOf
@@ -131,30 +122,13 @@ class ChildValidation
     // TODO: test memoization
     public static function category(string $c): Category
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoize(
-            $fn,
-            function (string $c): Category {
-                return new Category($c);
-            },
-            $c
-        );
+        return new Category($c);
     }
 
     // TODO: test memoization
     public static function empty(): None
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoize(
-            $fn,
-            function (): None {
-                return new None();
-            }
-        );
+        return new None();
     }
 
     public static function optional(Constraint $a): Optional

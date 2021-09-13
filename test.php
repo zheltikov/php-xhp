@@ -1,7 +1,8 @@
 <?php
 
-ini_set('memory_limit', '1024M');
+ini_set('memory_limit', '2048M');
 
+use Zheltikov\Xhp\Parser\Converter;
 use Zheltikov\Xhp\Parser\Lexer;
 use Zheltikov\Xhp\Parser\Node;
 use Zheltikov\Xhp\Parser\Optimizer;
@@ -89,8 +90,8 @@ echo '</form>';
 
 echo sprintf(
     "<script>
-function render_pre(data) {
-    const pre = $('pre#%s');
+function render_pre(data, pre_id) {
+    const pre = $('pre#' + pre_id);
     pre.text(JSON.stringify(data, null, 2));
 }
 
@@ -126,7 +127,6 @@ $(() => {
     });
 });
 </script>",
-    $pre_id,
     $form_id,
     $textarea_id,
 );
@@ -150,9 +150,39 @@ if ($parse_error) {
     echo '</pre>';
 } else {
     echo sprintf('<pre id="%s"></pre>', $pre_id);
-    $js = sprintf('render_pre(%s);', json_encode($result));
+    $js = sprintf('render_pre(%s, %s);', json_encode($result), json_encode($pre_id));
+}
+
+echo '<hr />';
+
+if (!$parse_error) {
+    try {
+        $pre_id_2 = base_convert(rand(), 10, 36);
+        echo sprintf('<pre id="%s"></pre>', $pre_id_2);
+
+        $converter = new Converter();
+        $converter->setRootNode($result);
+        $converter->execute();
+        /** @var \Zheltikov\Xhp\Core\Node $converted */
+        $converted = $converter->getResult();
+
+        $js .= sprintf(
+            'render_pre(%s, %s);',
+            json_encode($converted),
+            json_encode($pre_id_2)
+        );
+
+        echo '<pre>' . htmlspecialchars(
+                var_export($converted->toString(), true)
+            ) . '</pre>';
+    } catch (Throwable $e) {
+        echo '<pre class="error">';
+        echo htmlspecialchars(print_r($e, true));
+        echo '</pre>';
+    }
 }
 
 echo '<script>' . $js . '</script>';
 
 echo '</body>';
+

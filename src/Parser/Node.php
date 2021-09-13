@@ -352,6 +352,19 @@ class Node implements JsonSerializable
     }
 
     /**
+     * @param string $key
+     * @param null $default
+     * @return mixed|null
+     */
+    public function getFromValue(string $key, $default = null)
+    {
+        if (array_key_exists($key, $this->getValue())) {
+            return $this->getValue()[$key];
+        }
+        return $default;
+    }
+
+    /**
      * @param mixed $value
      * @return $this
      */

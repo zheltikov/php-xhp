@@ -84,64 +84,48 @@ class ReflectionXHPAttribute
     // TODO: test memoization
     public function getValueClass(): string
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        $t = $this->getValueType();
 
-        return static::memoize(
-            $fn,
-            function (): string {
-                $t = $this->getValueType();
-
-                invariant(
-                    $t === XHPAttributeType::TYPE_OBJECT(),
-                    'Tried to get value class for attribute %s of type %s - needed OBJECT',
-                    $this->getName(),
-                    array_flip(XHPAttributeType::toArray())[$t->getValue()],
-                );
-
-                $v = $this->extraType;
-
-                invariant(
-                    is_string($v),
-                    'Class name for attribute %s is not a string',
-                    $this->getName(),
-                );
-
-                return $v;
-            }
+        invariant(
+            $t === XHPAttributeType::TYPE_OBJECT(),
+            'Tried to get value class for attribute %s of type %s - needed OBJECT',
+            $this->getName(),
+            array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
+
+        $v = $this->extraType;
+
+        invariant(
+            is_string($v),
+            'Class name for attribute %s is not a string',
+            $this->getName(),
+        );
+
+        return $v;
     }
 
     // TODO: test memoization
     public function getEnumValues(): array // keyset<string>
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        $t = $this->getValueType();
 
-        return static::memoize(
-            $fn,
-            function (): array {
-                $t = $this->getValueType();
-
-                invariant(
-                    $t === XHPAttributeType::TYPE_ENUM(),
-                    'Tried to get enum values for attribute %s of type %s - needed ENUM',
-                    $this->getName(),
-                    array_flip(XHPAttributeType::toArray())[$t->getValue()],
-                );
-
-                $v = $this->extraType;
-
-                invariant(
-                    is_iterable($v),
-                    'Class name for attribute %s is not an array',
-                    $this->getName(),
-                );
-
-                /* HH_FIXME[4110] not limited to arraykey */
-                return array_keys($v);
-            }
+        invariant(
+            $t === XHPAttributeType::TYPE_ENUM(),
+            'Tried to get enum values for attribute %s of type %s - needed ENUM',
+            $this->getName(),
+            array_flip(XHPAttributeType::toArray())[$t->getValue()],
         );
+
+        $v = $this->extraType;
+
+        invariant(
+            is_iterable($v),
+            'Class name for attribute %s is not an array',
+            $this->getName(),
+        );
+
+        /* HH_FIXME[4110] not limited to arraykey */
+        return array_keys($v);
     }
 
     /**
@@ -150,21 +134,12 @@ class ReflectionXHPAttribute
     // TODO: test memoization
     public static function isSpecial(string $attr): bool
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoize(
-            $fn,
-            function (string $attr): bool {
-                return Str::length($attr) >= 6
-                       && $attr[4] === '-'
-                       && C::contains_key(
-                        self::$specialAttributes,
-                        Str::slice($attr, 0, 4)
-                    );
-            },
-            $attr
-        );
+        return Str::length($attr) >= 6
+               && $attr[4] === '-'
+               && C::contains_key(
+                self::$specialAttributes,
+                Str::slice($attr, 0, 4)
+            );
     }
 
     public function __toString(): string

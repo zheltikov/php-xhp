@@ -3,6 +3,7 @@
 namespace Zheltikov\Xhp\Core;
 
 // <<__Sealed(primitive::class, element::class)>>
+use JsonSerializable;
 use ReflectionClass;
 use Zheltikov\Xhp\Exceptions\AttributeNotSupportedException;
 use Zheltikov\Xhp\Exceptions\AttributeRequiredException;
@@ -22,7 +23,7 @@ use Zheltikov\Memoize;
 
 use function Zheltikov\Invariant\{invariant, invariant_violation};
 
-abstract class Node implements XHPChild
+abstract class Node implements XHPChild, JsonSerializable
 {
     use Memoize\Helper;
 
@@ -377,20 +378,11 @@ abstract class Node implements XHPChild
     // TODO: test lsb memoization
     final public static function __xhpReflectionAttributes(): array // dict<string, ReflectionXHPAttribute>
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoizeLSB(
-            static::class,
-            $fn,
-            function (): array {
-                $decl = static::__xhpAttributeDeclaration();
-                return Dict::map_with_key(
-                    $decl,
-                    function ($name, $attr_decl) {
-                        return new ReflectionXHPAttribute($name, $attr_decl);
-                    }
-                );
+        $decl = static::__xhpAttributeDeclaration();
+        return Dict::map_with_key(
+            $decl,
+            function ($name, $attr_decl) {
+                return new ReflectionXHPAttribute($name, $attr_decl);
             }
         );
     }
@@ -413,18 +405,9 @@ abstract class Node implements XHPChild
     // TODO: test lsb memoization
     final public static function __xhpReflectionChildrenDeclaration(): ReflectionXHPChildrenDeclaration
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoizeLSB(
+        return new ReflectionXHPChildrenDeclaration(
             static::class,
-            $fn,
-            function (): ReflectionXHPChildrenDeclaration {
-                return new ReflectionXHPChildrenDeclaration(
-                    static::class,
-                    static::__legacySerializedXHPChildrenDeclaration(),
-                );
-            }
+            static::__legacySerializedXHPChildrenDeclaration(),
         );
     }
 
@@ -441,17 +424,8 @@ abstract class Node implements XHPChild
      */
     private static function emptyInstance(): self
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
-        return static::memoizeLSB(
-            static::class,
-            $fn,
-            function (): Node {
-                return (new ReflectionClass(static::class))
-                    ->newInstanceWithoutConstructor();
-            }
-        );
+        return (new ReflectionClass(static::class))
+            ->newInstanceWithoutConstructor();
     }
 
     final public function getAttributes(): array // dict<string, mixed>
@@ -974,5 +948,21 @@ abstract class Node implements XHPChild
 
         /* HH_FIXME[4281] stringish migration */
         return htmlspecialchars((string) $child);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'class' => static::class,
+            'attributes' => $this->attributes,
+            'children' => $this->children,
+            'context' => $this->context,
+            'source' => $this->source,
+        ];
     }
 }

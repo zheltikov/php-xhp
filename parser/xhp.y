@@ -19,19 +19,22 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME xhp_tag_body TOKEN_ANGLE_RIGHT
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($2);
                                           $$->appendChild($tag_name);
-                                          $closing_tag_name = $3->getValue();
-                                          if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
-                                              throw new \RuntimeException('Expected `closing_tag_name` not found!');
-                                          }
-                                          $closing_tag_name = $closing_tag_name['closing_tag_name'];
-                                          if ($closing_tag_name !== $2) {
-                                              throw new \RuntimeException(
-                                                  sprintf(
-                                                      'Closing tag name mismatch: <%s> and </%s>',
-                                                      $2,
-                                                      $closing_tag_name
-                                                  )
-                                              );
+                                          $self_closing = (bool) $3->getFromValue('self_closing');
+                                          if (!$self_closing) {
+                                              $closing_tag_name = $3->getValue();
+                                              if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
+                                                  throw new \RuntimeException('Expected `closing_tag_name` not found!');
+                                              }
+                                              $closing_tag_name = $closing_tag_name['closing_tag_name'];
+                                              if ($closing_tag_name !== $2) {
+                                                  throw new \RuntimeException(
+                                                      sprintf(
+                                                          'Closing tag name mismatch: <%s> and </%s>',
+                                                          $2,
+                                                          $closing_tag_name
+                                                      )
+                                                  );
+                                              }
                                           }
                                           $$->appendChild($3); }
         ;
@@ -39,6 +42,7 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME xhp_tag_body TOKEN_ANGLE_RIGHT
 xhp_tag_body : xhp_attributes optional_whitespace TOKEN_FORWARD_SLASH
                                         { $$ = new Node(Type::XHP_TAG_BODY());
                                           $$->setValue([
+                                              'self_closing' => true,
                                               'attributes' => $1,
                                           ]); }
 

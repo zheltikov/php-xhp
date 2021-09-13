@@ -207,25 +207,29 @@ class Xhp extends ParserAbstract
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($this->semStack[$stackPos-(4-2)]);
                                           $this->semValue->appendChild($tag_name);
-                                          $closing_tag_name = $this->semStack[$stackPos-(4-3)]->getValue();
-                                          if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
-                                              throw new \RuntimeException('Expected `closing_tag_name` not found!');
-                                          }
-                                          $closing_tag_name = $closing_tag_name['closing_tag_name'];
-                                          if ($closing_tag_name !== $this->semStack[$stackPos-(4-2)]) {
-                                              throw new \RuntimeException(
-                                                  sprintf(
-                                                      'Closing tag name mismatch: <%s> and </%s>',
-                                                      $this->semStack[$stackPos-(4-2)],
-                                                      $closing_tag_name
-                                                  )
-                                              );
+                                          $self_closing = (bool) $this->semStack[$stackPos-(4-3)]->getFromValue('self_closing');
+                                          if (!$self_closing) {
+                                              $closing_tag_name = $this->semStack[$stackPos-(4-3)]->getValue();
+                                              if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
+                                                  throw new \RuntimeException('Expected `closing_tag_name` not found!');
+                                              }
+                                              $closing_tag_name = $closing_tag_name['closing_tag_name'];
+                                              if ($closing_tag_name !== $this->semStack[$stackPos-(4-2)]) {
+                                                  throw new \RuntimeException(
+                                                      sprintf(
+                                                          'Closing tag name mismatch: <%s> and </%s>',
+                                                          $this->semStack[$stackPos-(4-2)],
+                                                          $closing_tag_name
+                                                      )
+                                                  );
+                                              }
                                           }
                                           $this->semValue->appendChild($this->semStack[$stackPos-(4-3)]);
             },
             3 => function ($stackPos) {
                  $this->semValue = new Node(Type::XHP_TAG_BODY());
                                           $this->semValue->setValue([
+                                              'self_closing' => true,
                                               'attributes' => $this->semStack[$stackPos-(3-1)],
                                           ]);
             },
