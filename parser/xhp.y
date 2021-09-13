@@ -119,6 +119,8 @@ xhp_text : TOKEN_XHP_TEXT               { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_TRUE                   { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_FALSE                  { $$ = new Node(Type::XHP_TEXT(), $1); }
          | TOKEN_FORWARD_SLASH          { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_EQUALS                 { $$ = new Node(Type::XHP_TEXT(), $1); }
+         | TOKEN_ANGLE_RIGHT            { $$ = new Node(Type::XHP_TEXT(), $1); }
          ;
 
 many_whitespace : many_whitespace TOKEN_WHITESPACE
