@@ -2,6 +2,7 @@
 
 ini_set('memory_limit', '2048M');
 
+use Zheltikov\Xhp\Core\ChildValidation;
 use Zheltikov\Xhp\Parser\Converter;
 use Zheltikov\Xhp\Parser\Lexer;
 use Zheltikov\Xhp\Parser\Node;
@@ -33,6 +34,9 @@ function xhp_parse(string $code): ?Node
 
     return $ast;
 }
+
+// TODO: remove later, after tests
+ChildValidation::disable();
 
 $input_xhp = (string) ($_REQUEST['input_xhp'] ?? "<test-tag></test-tag>");
 
@@ -172,9 +176,8 @@ if (!$parse_error) {
             json_encode($pre_id_2)
         );
 
-        echo '<pre>' . htmlspecialchars(
-                var_export($converted->toString(), true)
-            ) . '</pre>';
+        echo 'XHP-&gt;toString(): <br />';
+        echo '<textarea>' . htmlspecialchars($converted->toString()) . '</textarea>';
     } catch (Throwable $e) {
         echo '<pre class="error">';
         echo htmlspecialchars(print_r($e, true));
