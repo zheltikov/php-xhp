@@ -76,7 +76,7 @@ class Lexer
             '{' => Tokens::TOKEN_CURLY_START(),
             '}' => Tokens::TOKEN_CURLY_END(),
             // '\.\.\.' => Tokens::TOKEN_ELLIPSIS(),
-            // '=' => Tokens::TOKEN_EQUALS(),
+            '=' => Tokens::TOKEN_EQUALS(),
 
             '"([^"]*)"' => Tokens::TOKEN_STRING_DQ(),
             "'([^']*)'" => Tokens::TOKEN_STRING_SQ(),
@@ -171,12 +171,12 @@ class Lexer
         $offset = $token->getOffset();
         $before_token = substr($code, 0, $offset);
         // echo htmlspecialchars(json_encode($before_token)) . '<br />';
-        $normalized_newlines = preg_replace('/\\r\\n?/', "\n", $before_token);
-        $length = strlen($normalized_newlines);
+        // $normalized_newlines = preg_replace('/\\r\\n?/', "\n", $before_token);
+        $length = strlen($before_token); // $normalized_newlines);
         // echo htmlspecialchars(json_encode($normalized_newlines)) . '<br />';
         $line = 1;
         for ($i = 0; $i < $length; $i++) {
-            $char = $normalized_newlines[$i];
+            $char = $before_token[$i];
             // echo htmlspecialchars(json_encode('-->>' . $char)) . '<br />';
             if ($char === "\n") {
                 $line++;

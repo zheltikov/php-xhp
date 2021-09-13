@@ -18,6 +18,10 @@ use MyCLabs\Enum\Enum;
  * @method Type XHP_TEXT()
  * @method Type XHP_ENTITY()
  * @method Type INJECTED()
+ * @method Type ATTRIBUTES()
+ * @method Type ATTRIBUTE()
+ * @method Type ATTR_NAME()
+ * @method Type ATTR_VALUE()
  *
  */
 final class Type extends Enum
@@ -30,4 +34,8 @@ final class Type extends Enum
     private const XHP_TEXT = 'xhp_text';
     private const XHP_ENTITY = 'xhp_entity';
     private const INJECTED = 'injected';
+    private const ATTRIBUTES = 'attributes';
+    private const ATTRIBUTE = 'attribute';
+    private const ATTR_NAME = 'attr_name';
+    private const ATTR_VALUE = 'attr_value';
 }

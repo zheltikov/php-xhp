@@ -9,8 +9,7 @@ root : optional_whitespace xhp_tag optional_whitespace
                                         { $$ = $2; }
      ;
 
-xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME optional_whitespace xhp_tag_body
-          TOKEN_ANGLE_RIGHT
+xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME xhp_tag_body TOKEN_ANGLE_RIGHT
                                         { $$ = new Node(Type::XHP_TAG());
                                           $$->setValue([
                                               // TODO: how to determine the filename?
@@ -20,7 +19,7 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME optional_whitespace xhp_tag_body
                                           $tag_name = new Node(Type::XHP_TAG_NAME());
                                           $tag_name->setValue($2);
                                           $$->appendChild($tag_name);
-                                          $closing_tag_name = $4->getValue();
+                                          $closing_tag_name = $3->getValue();
                                           if (!array_key_exists('closing_tag_name', $closing_tag_name)) {
                                               throw new \RuntimeException('Expected `closing_tag_name` not found!');
                                           }
@@ -28,28 +27,53 @@ xhp_tag : TOKEN_ANGLE_LEFT TOKEN_TAG_NAME optional_whitespace xhp_tag_body
                                           if ($closing_tag_name !== $2) {
                                               throw new \RuntimeException(
                                                   sprintf(
-                                                      'Closing tag name mismatch: <%s>%s</%s>',
+                                                      'Closing tag name mismatch: <%s> and </%s>',
                                                       $2,
-                                                      $4->hasChildren()
-                                                      && $4->getChildAt(0)->hasChildren()
-                                                          ? '...' : '',
                                                       $closing_tag_name
                                                   )
                                               );
                                           }
-                                          $$->appendChild($4); }
+                                          $$->appendChild($3); }
         ;
 
-xhp_tag_body : TOKEN_FORWARD_SLASH      { $$ = new Node(Type::XHP_TAG_BODY()); }
-
-             | TOKEN_ANGLE_RIGHT xhp_children TOKEN_ANGLE_LEFT
-               TOKEN_FORWARD_SLASH TOKEN_TAG_NAME
+xhp_tag_body : xhp_attributes optional_whitespace TOKEN_FORWARD_SLASH
                                         { $$ = new Node(Type::XHP_TAG_BODY());
                                           $$->setValue([
-                                              'closing_tag_name' => $5,
+                                              'attributes' => $1,
+                                          ]); }
+
+             | xhp_attributes optional_whitespace TOKEN_ANGLE_RIGHT xhp_children
+               TOKEN_ANGLE_LEFT TOKEN_FORWARD_SLASH TOKEN_TAG_NAME
+                                        { $$ = new Node(Type::XHP_TAG_BODY());
+                                          $$->setValue([
+                                              'attributes' => $1,
+                                              'closing_tag_name' => $7,
                                           ]);
-                                          $$->appendChild($2); }
+                                          $$->appendChild($4); }
             ;
+
+xhp_attrs : /* empty */                 { $$ = new Node(Type::ATTRIBUTES()); }
+          | many_whitespace xhp_attributes
+                                        { $$ = $2; }
+          ;
+
+xhp_attributes : xhp_attributes many_whitespace xhp_attribute
+                                        { $$ = $1; $$->appendChild($3); }
+               | /* empty */            { $$ = new Node(Type::ATTRIBUTES()); }
+               ;
+
+xhp_attribute : TOKEN_TAG_NAME TOKEN_EQUALS TOKEN_STRING_DQ
+                                        { $$ = new Node(Type::ATTRIBUTE());
+                                          $$->setValue([
+                                              'name' => $1,
+                                              'value' => substr($3, 1, -1),
+                                          ]); }
+              | TOKEN_TAG_NAME          { $$ = new Node(Type::ATTRIBUTE());
+                                          $$->setValue([
+                                              'name' => $1,
+                                              'value' => null,
+                                          ]); }
+              ;
 
 xhp_children : xhp_children xhp_child   { $$ = $1; $$->appendChild($2); }
              | /* empty */              { $$ = new Node(Type::CHILD_LIST()); }
@@ -98,9 +122,6 @@ many_whitespace : many_whitespace TOKEN_WHITESPACE
                                           $$->setValue($1->getValue() . $2); }
                 | TOKEN_WHITESPACE  { $$ = new Node(Type::WHITESPACE(), $1); }
                 ;
-
-required_whitespace : many_whitespace   { $$ = $1; }
-                    ;
 
 optional_whitespace : /* empty */       { $$ = new Node(Type::WHITESPACE(), ''); }
                     | many_whitespace   { $$ = $1; }
