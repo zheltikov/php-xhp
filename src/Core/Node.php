@@ -738,10 +738,10 @@ abstract class Node implements XHPChild
     {
         $decl = self::__xhpReflectionChildrenDeclaration();
         $type = $decl->getType();
-        if ($type === XHPChildrenDeclarationType::ANY_CHILDREN()) {
+        if ($type->equals(XHPChildrenDeclarationType::ANY_CHILDREN())) {
             return;
         }
-        if ($type === XHPChildrenDeclarationType::NO_CHILDREN()) {
+        if ($type->equals(XHPChildrenDeclarationType::NO_CHILDREN())) {
             if ($this->children) {
                 throw new InvalidChildrenException($this, 0);
             } else {
