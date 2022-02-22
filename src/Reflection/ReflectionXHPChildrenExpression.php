@@ -33,11 +33,7 @@ class ReflectionXHPChildrenExpression
     // TODO: test memoization
     public function getType(): XHPChildrenExpressionType
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): XHPChildrenExpressionType {
                 return XHPChildrenExpressionType::from($this->data[0]);
             }
@@ -47,11 +43,7 @@ class ReflectionXHPChildrenExpression
     // TODO: test memoization
     public function getSubExpressions(): array // (ReflectionXHPChildrenExpression, ReflectionXHPChildrenExpression)
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): array {
                 $type = $this->getType();
                 invariant(
@@ -91,11 +83,7 @@ class ReflectionXHPChildrenExpression
     // TODO: test memoization
     public function getConstraintType(): XHPChildrenConstraintType
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): XHPChildrenConstraintType {
                 $type = $this->getType();
 
@@ -114,11 +102,7 @@ class ReflectionXHPChildrenExpression
     // TODO: test memoization
     public function getConstraintString(): string
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): string {
                 $type = $this->getConstraintType();
 
@@ -141,11 +125,7 @@ class ReflectionXHPChildrenExpression
     // TODO: test memoization
     public function getSubExpression(): ReflectionXHPChildrenExpression
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): ReflectionXHPChildrenExpression {
                 invariant(
                     $this->getConstraintType()->getValue() === XHPChildrenConstraintType::SUB_EXPR()->getValue(),

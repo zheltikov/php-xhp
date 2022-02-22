@@ -112,11 +112,7 @@ class ChildValidation
     // TODO: test memoization
     public static function any(): Any
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): Any {
                 return new Any();
             }
@@ -131,11 +127,7 @@ class ChildValidation
     // TODO: test memoization
     public static function category(string $c): Category
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (string $c): Category {
                 return new Category($c);
             },
@@ -146,11 +138,7 @@ class ChildValidation
     // TODO: test memoization
     public static function empty(): None
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): None {
                 return new None();
             }
