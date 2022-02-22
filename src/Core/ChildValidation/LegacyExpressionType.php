@@ -10,12 +10,12 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<LegacyExpressionType>
  *
- * @method LegacyExpressionType EXACTLY_ONE()
- * @method LegacyExpressionType ANY_QUANTITY()
- * @method LegacyExpressionType ZERO_OR_ONE()
- * @method LegacyExpressionType AT_LEAST_ONE()
- * @method LegacyExpressionType SEQUENCE()
- * @method LegacyExpressionType EITHER()
+ * @method static LegacyExpressionType EXACTLY_ONE()
+ * @method static LegacyExpressionType ANY_QUANTITY()
+ * @method static LegacyExpressionType ZERO_OR_ONE()
+ * @method static LegacyExpressionType AT_LEAST_ONE()
+ * @method static LegacyExpressionType SEQUENCE()
+ * @method static LegacyExpressionType EITHER()
  */
 class LegacyExpressionType extends Enum
 {

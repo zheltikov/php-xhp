@@ -10,11 +10,11 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<XHPChildrenConstraintType>
  *
- * @method XHPChildrenConstraintType ANY()
- * @method XHPChildrenConstraintType PCDATA()
- * @method XHPChildrenConstraintType ELEMENT()
- * @method XHPChildrenConstraintType CATEGORY()
- * @method XHPChildrenConstraintType SUB_EXPR()
+ * @method static XHPChildrenConstraintType ANY()
+ * @method static XHPChildrenConstraintType PCDATA()
+ * @method static XHPChildrenConstraintType ELEMENT()
+ * @method static XHPChildrenConstraintType CATEGORY()
+ * @method static XHPChildrenConstraintType SUB_EXPR()
  */
 final class XHPChildrenConstraintType extends Enum
 {

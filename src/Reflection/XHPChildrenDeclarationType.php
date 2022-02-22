@@ -10,9 +10,9 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<XHPChildrenDeclarationType>
  *
- * @method XHPChildrenDeclarationType NO_CHILDREN()
- * @method XHPChildrenDeclarationType ANY_CHILDREN()
- * @method XHPChildrenDeclarationType EXPRESSION()
+ * @method static XHPChildrenDeclarationType NO_CHILDREN()
+ * @method static XHPChildrenDeclarationType ANY_CHILDREN()
+ * @method static XHPChildrenDeclarationType EXPRESSION()
  */
 final class XHPChildrenDeclarationType extends Enum
 {

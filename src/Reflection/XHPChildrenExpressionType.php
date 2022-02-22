@@ -10,12 +10,12 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<XHPChildrenExpressionType>
  *
- * @method XHPChildrenExpressionType SINGLE()
- * @method XHPChildrenExpressionType ANY_NUMBER()
- * @method XHPChildrenExpressionType ZERO_OR_ONE()
- * @method XHPChildrenExpressionType ONE_OR_MORE()
- * @method XHPChildrenExpressionType SUB_EXPR_SEQUENCE()
- * @method XHPChildrenExpressionType SUB_EXPR_DISJUNCTION()
+ * @method static XHPChildrenExpressionType SINGLE()
+ * @method static XHPChildrenExpressionType ANY_NUMBER()
+ * @method static XHPChildrenExpressionType ZERO_OR_ONE()
+ * @method static XHPChildrenExpressionType ONE_OR_MORE()
+ * @method static XHPChildrenExpressionType SUB_EXPR_SEQUENCE()
+ * @method static XHPChildrenExpressionType SUB_EXPR_DISJUNCTION()
  */
 final class XHPChildrenExpressionType extends Enum
 {
