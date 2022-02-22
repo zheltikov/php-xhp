@@ -84,11 +84,7 @@ class ReflectionXHPAttribute
     // TODO: test memoization
     public function getValueClass(): string
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): string {
                 $t = $this->getValueType();
 
@@ -115,11 +111,7 @@ class ReflectionXHPAttribute
     // TODO: test memoization
     public function getEnumValues(): array // keyset<string>
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (): array {
                 $t = $this->getValueType();
 
@@ -150,15 +142,11 @@ class ReflectionXHPAttribute
     // TODO: test memoization
     public static function isSpecial(string $attr): bool
     {
-        /** @var callable|null $fn */
-        static $fn = null;
-
         return static::memoize(
-            $fn,
             function (string $attr): bool {
                 return Str::length($attr) >= 6
-                       && $attr[4] === '-'
-                       && C::contains_key(
+                    && $attr[4] === '-'
+                    && C::contains_key(
                         self::$specialAttributes,
                         Str::slice($attr, 0, 4)
                     );
