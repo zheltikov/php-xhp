@@ -1,5 +1,5 @@
 {
-  "version": "2.1.6",
+  "version": "2.2.0",
   "name": "zheltikov/php-xhp",
   "type": "library",
   "autoload": {
@@ -9,6 +9,7 @@
   },
   "require": {
     "php": ">=7.3",
+    "ext-intl": "*",
     "myclabs/php-enum": "^1.8",
     "zheltikov/php-invariant": "^1.0",
     "zheltikov/php-exceptions": "^1.0",
@@ -20,5 +21,15 @@
       "homepage": "https://github.com/zheltikov"
     }
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "regenerate-tag-map": "bin/regenerate-tag-map.php > src/Html/TagMap.php",
+    "update-entity-table": "bin/update-entity-table.php",
+    "generate-entity-table": "bin/generate-entity-table.php > src/Html/NamedEntityList.php"
+  },
+  "scripts-descriptions": {
+    "regenerate-tag-map": "Regenerate the PHP class with the HTML tap map",
+    "update-entity-table": "Update the JSON list of named character references",
+    "generate-entity-table": "Generate the helper PHP class containing the list of named character references"
+  }
 }
