@@ -765,8 +765,9 @@ abstract class Node implements XHPChild
      * @param int $index
      * @return array
      * (bool, int)
+     * final
      */
-    final private function validateChildrenExpression(
+    private function validateChildrenExpression(
         ReflectionXHPChildrenExpression $expr,
         int $index
     ): array {
@@ -842,8 +843,9 @@ abstract class Node implements XHPChild
      * @param int $index
      * @return array
      * (bool, int)
+     * final
      */
-    final private function validateChildrenRule(
+    private function validateChildrenRule(
         ReflectionXHPChildrenExpression $expr,
         int $index
     ): array {
