@@ -24,7 +24,7 @@
   "scripts": {
     "regenerate-tag-map": "bin/regenerate-tag-map.php > src/Html/TagMap.php",
     "update-entity-table": "bin/update-entity-table.php",
-    "generate-entity-table": "bin/generate-entity-table.php"
+    "generate-entity-table": "bin/generate-entity-table.php > src/Html/NamedEntityList.php"
   },
   "scripts-descriptions": {
     "regenerate-tag-map": "Regenerate the PHP class with the HTML tap map",
