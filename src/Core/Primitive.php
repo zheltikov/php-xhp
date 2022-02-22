@@ -24,7 +24,10 @@ abstract class Primitive extends Node
         return $result;
     }
 
-    final private function __flushElementChildren(): void
+    /**
+     * final
+     */
+    private function __flushElementChildren(): void
     {
         $children = $this->getChildren();
         $awaitables = [];
