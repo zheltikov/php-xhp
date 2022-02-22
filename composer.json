@@ -22,7 +22,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "regenerate-tag-map": "bin/regenerate-tag-map.php",
+    "regenerate-tag-map": "bin/regenerate-tag-map.php > src/Html/TagMap.php",
     "update-entity-table": "bin/update-entity-table.php",
     "generate-entity-table": "bin/generate-entity-table.php"
   },
