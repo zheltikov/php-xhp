@@ -118,57 +118,30 @@ abstract class Node implements XHPChild
         $this->init();
     }
 
+    /**
+     * @return mixed
+     */
     public function __get(string $name)
     {
-        // Attribute
-        if (C::contains_key($this->attributes, $name)) {
-            return $this->attributes[$name];
-        } elseif (!ReflectionXHPAttribute::isSpecial($name)) {
-            // Get the declaration
-            $decl = static::__xhpReflectionAttribute($name);
-
-            if ($decl->isRequired()) {
-                throw new AttributeRequiredException($this, $name);
-            } else {
-                return $decl->getDefaultValue();
-            }
-        } elseif ($name === 'attributes') {
-            return $this->attributes;
-        }
-
-        // Children
-        if ($name === 'children') {
-            return $this->getChildren();
-        }
-
-        // Context
-        if (C::contains_key($this->context, $name)) {
-            return $this->context[$name];
-        } elseif ($name === 'context') {
-            return $this->context;
-        }
-
-        return null;
+        return $this->getAttribute($name);
     }
 
+    /**
+     * @param mixed $value
+     */
     public function __set(string $name, $value): void
     {
-        // Attribute
-        if (C::contains_key($this->attributes, $name)) {
-            $this->setAttribute($name, $value);
-            return;
-        } elseif (!ReflectionXHPAttribute::isSpecial($name)) {
-            $this->setAttribute($name, $value);
-            return;
-        }
+        $this->setAttribute($name, $value);
+    }
 
-        // Context
-        if (C::contains_key($this->context, $name)) {
-            $this->setContext($name, $value);
-            return;
-        }
+    public function __isset(string $name): bool
+    {
+        return $this->isAttributeSet($name);
+    }
 
-        return;
+    public function __unset(string $name): void
+    {
+        $this->removeAttribute($name);
     }
 
     public function __toString(): string
