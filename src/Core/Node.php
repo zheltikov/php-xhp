@@ -74,7 +74,6 @@ abstract class Node implements XHPChild
      * @param array $attributes (KeyedTraversable<string, mixed>) map of attributes to values
      * @param array $children (Traversable<?\XHPChild>) list of children
      * @param mixed $debug_info (dynamic) will in the source when childValidation is enabled
-     * @throws \Zheltikov\Exceptions\InvariantException
      */
     final public function __construct(array $attributes = [], array $children = [], ...$debug_info)
     {
@@ -117,6 +116,64 @@ abstract class Node implements XHPChild
             }
         }
         $this->init();
+    }
+
+    public function __get(string $name)
+    {
+        // Attribute
+        if (C::contains_key($this->attributes, $name)) {
+            return $this->attributes[$name];
+        } elseif (!ReflectionXHPAttribute::isSpecial($name)) {
+            // Get the declaration
+            $decl = static::__xhpReflectionAttribute($name);
+
+            if ($decl->isRequired()) {
+                throw new AttributeRequiredException($this, $name);
+            } else {
+                return $decl->getDefaultValue();
+            }
+        } elseif ($name === 'attributes') {
+            return $this->attributes;
+        }
+
+        // Children
+        if ($name === 'children') {
+            return $this->getChildren();
+        }
+
+        // Context
+        if (C::contains_key($this->context, $name)) {
+            return $this->context[$name];
+        } elseif ($name === 'context') {
+            return $this->context;
+        }
+
+        return null;
+    }
+
+    public function __set(string $name, $value): void
+    {
+        // Attribute
+        if (C::contains_key($this->attributes, $name)) {
+            $this->setAttribute($name, $value);
+            return;
+        } elseif (!ReflectionXHPAttribute::isSpecial($name)) {
+            $this->setAttribute($name, $value);
+            return;
+        }
+
+        // Context
+        if (C::contains_key($this->context, $name)) {
+            $this->setContext($name, $value);
+            return;
+        }
+
+        return;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 
     abstract public function toString(): string;
@@ -357,12 +414,10 @@ abstract class Node implements XHPChild
 
             if ($decl === null) {
                 throw new AttributeNotSupportedException($this, $attr);
+            } elseif ($decl->isRequired()) {
+                throw new AttributeRequiredException($this, $attr);
             } else {
-                if ($decl->isRequired()) {
-                    throw new AttributeRequiredException($this, $attr);
-                } else {
-                    return $decl->getDefaultValue();
-                }
+                return $decl->getDefaultValue();
             }
         } else {
             return null;
