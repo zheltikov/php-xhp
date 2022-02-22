@@ -20,5 +20,15 @@
       "homepage": "https://github.com/zheltikov"
     }
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "regenerate-tag-map": "bin/regenerate-tag-map.php",
+    "update-entity-table": "bin/update-entity-table.php",
+    "generate-entity-table": "bin/generate-entity-table.php"
+  },
+  "scripts-descriptions": {
+    "regenerate-tag-map": "Regenerate the PHP class with the HTML tap map",
+    "update-entity-table": "Update the JSON list of named character references",
+    "generate-entity-table": "Generate the helper PHP class containing the list of named character references"
+  }
 }
