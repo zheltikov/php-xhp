@@ -10,11 +10,11 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<LegacyConstraintType>
  *
- * @method LegacyConstraintType ANY()
- * @method LegacyConstraintType PCDATA()
- * @method LegacyConstraintType CLASSNAME()
- * @method LegacyConstraintType CATEGORY()
- * @method LegacyConstraintType EXPRESSION()
+ * @method static LegacyConstraintType ANY()
+ * @method static LegacyConstraintType PCDATA()
+ * @method static LegacyConstraintType CLASSNAME()
+ * @method static LegacyConstraintType CATEGORY()
+ * @method static LegacyConstraintType EXPRESSION()
  */
 class LegacyConstraintType extends Enum
 {

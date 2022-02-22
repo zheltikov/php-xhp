@@ -10,14 +10,14 @@ use MyCLabs\Enum\Enum;
  *
  * @extends Enum<XHPAttributeType>
  *
- * @method XHPAttributeType TYPE_STRING()
- * @method XHPAttributeType TYPE_BOOL()
- * @method XHPAttributeType TYPE_INTEGER()
- * @method XHPAttributeType TYPE_ARRAY()
- * @method XHPAttributeType TYPE_OBJECT()
- * @method XHPAttributeType TYPE_VAR()
- * @method XHPAttributeType TYPE_ENUM()
- * @method XHPAttributeType TYPE_FLOAT()
+ * @method static XHPAttributeType TYPE_STRING()
+ * @method static XHPAttributeType TYPE_BOOL()
+ * @method static XHPAttributeType TYPE_INTEGER()
+ * @method static XHPAttributeType TYPE_ARRAY()
+ * @method static XHPAttributeType TYPE_OBJECT()
+ * @method static XHPAttributeType TYPE_VAR()
+ * @method static XHPAttributeType TYPE_ENUM()
+ * @method static XHPAttributeType TYPE_FLOAT()
  */
 final class XHPAttributeType extends Enum
 {
