@@ -34,7 +34,11 @@ class ReflectionXHPChildrenDeclaration
     // TODO: test memoization
     public function getType(): XHPChildrenDeclarationType
     {
+        /** @var callable|null $fn */
+        static $fn = null;
+
         return static::memoize(
+            $fn,
             function (): XHPChildrenDeclarationType {
                 if (is_iterable($this->data)) {
                     return XHPChildrenDeclarationType::EXPRESSION();
@@ -48,7 +52,11 @@ class ReflectionXHPChildrenDeclaration
     // TODO: test memoization
     public function getExpression(): ReflectionXHPChildrenExpression
     {
+        /** @var callable|null $fn */
+        static $fn = null;
+
         return static::memoize(
+            $fn,
             function (): ReflectionXHPChildrenExpression {
                 try {
                     // FIXME: create TypeAssertionException
