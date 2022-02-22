@@ -40,9 +40,11 @@ foreach ($entities as $entity => $info) {
     var_export($entity);
     echo ' => [\'codepoints\' => [';
     echo implode(', ', $info['codepoints']);
-    echo '], \'characters\' => ';
-    echo json_encode($info['characters']);
-    echo "],\n";
+    echo '], \'characters\' => "';
+    foreach ($info['codepoints'] as $codepoint) {
+        echo '\\u{' . dechex($codepoint) . '}';
+    }
+    echo "\"],\n";
 }
 
 echo <<<PHP
