@@ -405,8 +405,8 @@ abstract class Node implements XHPChild
     // TODO: test lsb memoization
     final public static function __xhpReflectionAttributes(): array // dict<string, ReflectionXHPAttribute>
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        /** @var callable[] $fn */
+        static $fn = [];
 
         return static::memoizeLSB(
             static::class,
@@ -441,8 +441,8 @@ abstract class Node implements XHPChild
     // TODO: test lsb memoization
     final public static function __xhpReflectionChildrenDeclaration(): ReflectionXHPChildrenDeclaration
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        /** @var callable[] $fn */
+        static $fn = [];
 
         return static::memoizeLSB(
             static::class,
@@ -469,8 +469,8 @@ abstract class Node implements XHPChild
      */
     private static function emptyInstance(): self
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        /** @var callable[] $fn */
+        static $fn = [];
 
         return static::memoizeLSB(
             static::class,
