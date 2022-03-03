@@ -1,5 +1,5 @@
 {
-  "version": "2.2.1",
+  "version": "2.2.2",
   "name": "zheltikov/php-xhp",
   "type": "library",
   "autoload": {
@@ -13,7 +13,7 @@
     "myclabs/php-enum": "^1.8",
     "zheltikov/php-invariant": "^1.0",
     "zheltikov/php-exceptions": "^1.0",
-    "zheltikov/php-memoize": "~1.3"
+    "zheltikov/php-memoize": "~1.4"
   },
   "authors": [
     {
