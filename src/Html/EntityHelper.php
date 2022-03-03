@@ -11,8 +11,8 @@ class EntityHelper
 
     public function checkEntity(string $entity): ?string
     {
-        /** @var callable|null $fn */
-        static $fn = null;
+        /** @var callable[] $fn */
+        static $fn = [];
 
         return static::memoizeLSB(
             static::class,
