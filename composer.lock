@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0ddd7a258e8f40fde3e0a326ff39b30",
+    "content-hash": "df2e167d6c6df5dfe43fc689d35c35f1",
     "packages": [
         {
             "name": "myclabs/php-enum",
@@ -134,12 +134,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Zheltikov\\Invariant\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Zheltikov\\Invariant\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -159,16 +159,16 @@
         },
         {
             "name": "zheltikov/php-memoize",
-            "version": "1.3.2",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zheltikov/php-memoize.git",
-                "reference": "9af5d088f4a7acc3076dd48bff73549ceea59ed9"
+                "reference": "e04b76720b483a98c1cd384432e59b8807422856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/9af5d088f4a7acc3076dd48bff73549ceea59ed9",
-                "reference": "9af5d088f4a7acc3076dd48bff73549ceea59ed9",
+                "url": "https://api.github.com/repos/zheltikov/php-memoize/zipball/e04b76720b483a98c1cd384432e59b8807422856",
+                "reference": "e04b76720b483a98c1cd384432e59b8807422856",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zheltikov/php-memoize/issues",
-                "source": "https://github.com/zheltikov/php-memoize/tree/1.3.2"
+                "source": "https://github.com/zheltikov/php-memoize/tree/1.4.0"
             },
-            "time": "2022-02-22T11:46:35+00:00"
+            "time": "2022-03-03T14:51:38+00:00"
         }
     ],
     "packages-dev": [],
